@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
     quizID: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     quizName: {
       type: DataTypes.TEXT,
@@ -15,11 +15,11 @@ module.exports = function (sequelize, DataTypes) {
     randomize: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: true,
     },
     accountID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     }
   });
   return Quiz;

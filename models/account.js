@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
     accountID: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     username: {
       type: DataTypes.STRING,

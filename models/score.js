@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
     scoreID: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     username: {
       type: DataTypes.STRING,
@@ -14,11 +14,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     score: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
     quizID: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     }
   });
   return Score;
