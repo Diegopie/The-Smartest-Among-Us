@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Diegopie/project.git"
@@ -15,5 +13,15 @@
   "bugs": {
     "url": "https://github.com/Diegopie/project/issues"
   },
-  "homepage": "https://github.com/Diegopie/project#readme"
+  "homepage": "https://github.com/Diegopie/project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2"
+  }
 }
