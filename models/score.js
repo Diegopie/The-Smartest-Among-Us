@@ -9,8 +9,8 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 12]
-      }
+        len: [1, 12],
+      },
     },
     score: {
       type: DataTypes.INTEGER,
@@ -19,7 +19,7 @@ module.exports = function (sequelize, DataTypes) {
     quizID: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    }
+    },
   });
   return Score;
 };
