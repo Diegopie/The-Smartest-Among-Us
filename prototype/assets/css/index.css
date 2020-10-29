@@ -1,0 +1,26 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cont {
+    background-color: #2b2b2b;
+    padding-bottom: 8%;
+}
+
+fieldset {
+    padding-top: 12%;
+}
+
+article {
+    margin-top: 12%;
+}
+
+header {
+    margin-bottom: 12%;
+}

@@ -1,0 +1,21 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cont {
+    background-color: #2b2b2b;
+}
+
+fieldset {
+    padding-top: 12%;
+}
+
+article {
+    margin-top: 12%;
+}
