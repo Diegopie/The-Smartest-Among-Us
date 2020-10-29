@@ -20,42 +20,38 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li><a class="dropdown-item" href=#>Play</a></li>
+        <li><a class="dropdown-item" href="./play.html">Play</a></li>
         <li><a class="dropdown-item" href="./Create.html">Create</a></li>
-        <li><a class="dropdown-item" href="./account.html">Account</a></li>
+        <li><a class="dropdown-item" href=#>Account</a></li>
       </ul>
     </div>
   </nav>
 
-  <header>
-    <section class="col cont">
-      <h2>Play</h2>
+  <header class="container">
+    <section class="row cont">
+      <h2 class="col-12">Account</h2>
+      <hr>
+      <h3 class="col-6" id="user">Username</h3>
+      <a class="col-6 btn btn-primary" id="logout">Logout</a>
     </section>
   </header>
 
   <main class="container">
+    <!-- Display User Quizzes -->
     <section class="row">
-      <article class="col-xl-5 card text-white bg-dark" style="width: 18rem;">
-        <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-        <div class="card-body">
-          <a href="#" class="btn btn-primary">Play Our Quizzes</a>
-          <p>Compete on a global leader board with our custom made quizzes</p>
-        </div>
+      <article class="cont col-12">
+        <h3><a href=#>Your Quiz 1</a></h3>
       </article>
-      <article class="col-xl-5 card text-white bg-dark" style="width: 18rem;">
-        <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-        <div class="card-body">
-          <a href="#" class="btn btn-primary">Play Random Quizzes</a>
-          <p>Choose from a category and play randomly generated quizzes</p>
-        </div>
+      <article class="cont col-12">
+        <h3><a href=#>Your Quiz 2</a></h3>
       </article>
-      <article class="col-xl-6 card text-white bg-dark" style="width: 18rem;">
-        <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-        <div class="card-body">
-          <a href="./create.html" class="btn btn-primary">Create</a>
-          <p>Make your own quizzes to share with your friends and compete in a private leader board</p>
-        </div>
+      <article class="cont col-12">
+        <h3><a href=#>Your Quiz 3</a></h3>
       </article>
+    </section>
+    <!-- Display Create Account If Not Logged In -->
+    <section class="row">
+      <a class="col-6 btn btn-primary" id="create">Create Account</a>
     </section>
   </main>
 

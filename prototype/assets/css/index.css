@@ -10,6 +10,7 @@ nav {
 
 .cont {
     background-color: #2b2b2b;
+    padding-bottom: 8%;
 }
 
 fieldset {
@@ -18,4 +19,8 @@ fieldset {
 
 article {
     margin-top: 12%;
+}
+
+header {
+    margin-bottom: 12%;
 }
