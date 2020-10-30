@@ -21,4 +21,4 @@ $("#cat").click((event) => {
 
 function apiCall(cat) {
   console.log("Make trivia api req using userCat: ", cat);
-};
+}
