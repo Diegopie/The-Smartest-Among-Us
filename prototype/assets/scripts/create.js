@@ -15,11 +15,10 @@ $("#cat").click((event) => {
   event.preventDefault();
   console.log(event.target.innerText);
   const userCat = event.target.innerText;
-  apiCall(userCat)
+  apiCall(userCat);
   $("#cat").addClass("hide");
-})
-
+});
 
 function apiCall(cat) {
   console.log("Make trivia api req using userCat: ", cat);
-}
+};
