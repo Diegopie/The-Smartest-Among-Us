@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   const Score = sequelize.define("Score", {
     scoreID: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },

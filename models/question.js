@@ -1,7 +1,11 @@
 module.exports = function (sequelize, DataTypes) {
   const Question = sequelize.define("Question", {
     quizID: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    questionNum: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     question: {
