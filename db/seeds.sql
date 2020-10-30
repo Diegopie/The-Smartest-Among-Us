@@ -19,13 +19,13 @@ VALUES (1, "question 1", "a correct answer", "wrong", "nope", "guess again")
 (1, "10", "true", "true", "true", "true");
 
 INSERT INTO Score (username, score, quizID)
-VALUES ("imposter", 10, )
-()
-()
-()
-()
-()
-()
-()
-()
-();
+VALUES ("imposter", 10, 1)
+("second place", 9, 1)
+("second second", 9, 1)
+("fourth", 8, 1)
+("fifth", 7, 1)
+("fifthy", 7, 1)
+("six", 6, 1)
+("sev", 4, 1)
+("ayt", 3, 1)
+("noine", 2, 1);
