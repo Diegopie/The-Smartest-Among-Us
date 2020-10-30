@@ -3,16 +3,15 @@ body {
     color: white;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-}
-
+/* Gives background color for section/article containers and padding between them */
 .cont {
     background-color: #2b2b2b;
     padding-bottom: 8%;
+    display: grid;
+    justify-content: center;
 }
 
+/* Create spacing between containers */
 fieldset {
     padding-top: 12%;
 }
@@ -23,4 +22,62 @@ article {
 
 header {
     margin-bottom: 12%;
+}
+
+/* For Buttons */
+.button {
+    background-color: #2b2b2b;
+    border: solid;
+    color: white;
+    border-radius: 8px;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+}
+
+.button:hover {
+    color: #1BEF0C;
+}
+
+/* For Hamburger Menu */
+.hamb {
+    background-color: white;
+}
+
+/* For Quiz and Dropdown Options */
+li a{
+    color: white;
+}
+
+li a:hover {
+    color: #1BEF0C;
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+li:hover {
+    color: #1BEF0C;
+    text-decoration: none;
+}
+
+/* Remove default href garb */
+.text {
+    color:white;
+    text-decoration: none;
+}
+
+.text:hover {
+    color: #1BEF0C;
+    text-decoration: none;
+}
+
+
+
+
+.hide {
+    display: none;
 }
