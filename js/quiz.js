@@ -12,28 +12,35 @@ exports.getTrivia = async function (options = {}) {
   // using methods to fill in parameters
   return new Promise(async (resolve, reject) => {
     try {
-      const maxCategories = await axios.get("https://opentdb.com/api_category.php");
-      const cateID = methods.getTriviaCategoryID(category, maxCategories.data.trivia_categories[maxCategories.data.trivia_categories.length - 1].id);
+      const maxCategories = await axios.get(
+        "https://opentdb.com/api_category.php"
+      );
+      const cateID = methods.getTriviaCategoryID(
+        category,
+        maxCategories.data.trivia_categories[
+          maxCategories.data.trivia_categories.length - 1
+        ].id
+      );
       const pamount = methods.getTriviaAmount(amount);
       const ptype = methods.getTriviaType(type);
       const pdifficulty = methods.getTriviaDifficulty(difficulty);
 
       const finalParams = {
-        amount: pamount
+        amount: pamount;
       }
 
       if (cateID !== "") {
-        finalParams.category = cateID
+        finalParams.category = cateID;
       }
       if (pdifficulty !== "") {
-        finalParams.difficulty = pdifficulty
+        finalParams.difficulty = pdifficulty;
       }
       if (ptype !== "") {
-        finalParams.type = ptype
+        finalParams.type = ptype;
       }
 
       const result = await axios.get("https://opentdb.com/api.php", {
-        params: finalParams
+        params: finalParams;
       });
 
       if (result.data.response_code !== 0) {
