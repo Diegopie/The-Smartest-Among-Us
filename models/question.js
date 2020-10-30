@@ -4,6 +4,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    questionNum: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     question: {
       type: DataTypes.TEXT,
       allowNull: false,

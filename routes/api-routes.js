@@ -20,15 +20,11 @@ module.exports = function (app) {
   //    accountID: 1
   //    questions: [
   //     {
+  //       questionNum: ,
   //       question: "some text",
   //       correctAnswer: "this one's right",
   //       wrongAnswers: ["wrong", "nope", "git out"]
   //     },
-  //     {
-  //       question: ,
-  //       correctAnswer: ,
-  //       wrongAnswers: []
-  //     }
   // ]
   // }
   // creating a quiz
@@ -40,24 +36,18 @@ module.exports = function (app) {
       accountID: req.body.accountID,
     }).then((result) => {
       quizID = result.quizID;
-      console.log(quizID);
-      console.log(result);
+      req.body.questions.forEach((entry) => {
+        db.Question.create({
+          quizID,
+          questionNum: entry.questionNum,
+          question: entry.question,
+          correctAnswer: entry.correctAnswer,
+          wrongAnswer: entry.wrongAnswers[0],
+          wrongAnswer2: entry.wrongAnswers[1],
+          wrongAnswer3: entry.wrongAnswers[2],
+        });
+      });
       res.json(result);
     });
-    // .then(
-    //   req.body.questions.forEach((entry) => {
-    //     db.Question.create({
-    //       quizID,
-    //       question: entry.question,
-    //       correctAnswer: entry.correctAnswer,
-    //       wrongAnswer: entry.wrongAnswers[0],
-    //       wrongAnswer2: entry.wrongAnswers[1],
-    //       wrongAnswer3: entry.wrongAnswers[2],
-    //     });
-    //   })
-    // )
-    // .then((result) => {
-    //   res.json(result);
-    // });
   });
 };
