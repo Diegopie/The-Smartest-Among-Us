@@ -26,8 +26,8 @@ exports.getTrivia = async function (options = {}) {
       const pdifficulty = methods.getTriviaDifficulty(difficulty);
 
       const finalParams = {
-        amount: pamount
-      }
+        amount: pamount,
+      };
 
       if (cateID !== "") {
         finalParams.category = cateID;
@@ -40,54 +40,67 @@ exports.getTrivia = async function (options = {}) {
       }
 
       const result = await axios.get("https://opentdb.com/api.php", {
-        params: finalParams;
+        params: finalParams,
       });
 
       if (result.data.response_code !== 0) {
-        reject(new Error("Response code " + result.data.response_code + ": " + methods.getReponseError(result.data.response_code)));
-      }
-      else {
-        filteredResult = JSON.parse(JSON.stringify(result.data.results)
-          .replace(/&quot;/g, "\\")
-          .replace(/&#039;/g, "`")
-          .replace(/&amp;/g, "&")
-          .replace(/&acute;/g, "`")
-          .replace(/&eacute;/g, "é")
-          .replace(/&oacute;/g, "ó")
-          .replace(/&pound;/g, "£")
-          .replace(/&aacute;/g, "á")
-          .replace(/&Aacute;/g, "Á")
-          .replace(/&ntilde;/g, "ñ")
-          .replace(/&rdquo;/g, "\\")
-          .replace(/&ouml;/g, "ö")
+        reject(
+          new Error(
+            "Response code " +
+              result.data.response_code +
+              ": " +
+              methods.getResponseError(result.data.response_code)
+          )
+        );
+      } else {
+        filteredResult = JSON.parse(
+          JSON.stringify(result.data.results)
+            .replace(/&quot;/g, "\\")
+            .replace(/&#039;/g, "`")
+            .replace(/&amp;/g, "&")
+            .replace(/&acute;/g, "`")
+            .replace(/&eacute;/g, "é")
+            .replace(/&oacute;/g, "ó")
+            .replace(/&pound;/g, "£")
+            .replace(/&aacute;/g, "á")
+            .replace(/&Aacute;/g, "Á")
+            .replace(/&ntilde;/g, "ñ")
+            .replace(/&rdquo;/g, "\\")
+            .replace(/&ouml;/g, "ö")
         );
         resolve(filteredResult);
       }
-
-    }
-    catch (err) {
+    } catch (err) {
       reject(err);
     }
   });
-}
+};
 
 exports.getCategories = async function () {
   const results = await axios.get("https://opentdb.com/api_category.php");
 
   return results.data.trivia_categories;
-}
+};
 
 exports.getQuestionCount = function (category) {
   return new Promise(async (resolve, reject) => {
     try {
-      const maxCategories = await axios.get("https://opentdb.com/api_category.php");
-      const cateID = methods.getTriviaCategoryID(category, maxCategories.data.trivia_categories[maxCategories.data.trivia_categories.length - 1].id);
-      const questionCount = await axios.get(`https://opentdb.com/api_count.php?category=${cateID}`);
+      const maxCategories = await axios.get(
+        "https://opentdb.com/api_category.php"
+      );
+      const cateID = methods.getTriviaCategoryID(
+        category,
+        maxCategories.data.trivia_categories[
+          maxCategories.data.trivia_categories.length - 1
+        ].id
+      );
+      const questionCount = await axios.get(
+        `https://opentdb.com/api_count.php?category=${cateID}`
+      );
 
       resolve(questionCount.data.category_question_count);
-    }
-    catch (err) {
+    } catch (err) {
       reject(err);
     }
   });
-}
+};
