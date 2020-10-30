@@ -4,7 +4,7 @@ const methods = require('./methods.js');
 
 // parameters
 exports.getTrivia = async function (options = {}) {
-  amount = options.amount !== undefined ? options.amount : 1;
+  amount = options.amount !== undefined ? options.amount : 10;
   difficulty = options.difficulty !== undefined ? options.difficulty : 'medium';
   category = options.category !== undefined ? options.category : 'any';
   type = options.type !== undefined ? options.type : 'multiple';
