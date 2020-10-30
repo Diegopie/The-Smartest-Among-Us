@@ -26,7 +26,7 @@ exports.getTrivia = async function (options = {}) {
       const pdifficulty = methods.getTriviaDifficulty(difficulty);
 
       const finalParams = {
-        amount: pamount;
+        amount: pamount
       }
 
       if (cateID !== "") {
