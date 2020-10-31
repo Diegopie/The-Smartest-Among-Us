@@ -6,46 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-  <link rel="stylesheet" href="./assets/css/index.css">
-  <title>The Smartest Among Us - Create</title>
+  <link rel="stylesheet" href="./assets/styles/index.css">
+  <title>The Smartest Among Us</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <h1><a class="navbar-brand" href="./index.html">The Smartest Among Us</a></h1>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <nav class="navbar navbar-expand-lg">
+    <a href="/">
+      <img src="assets/img/home-icon.png" alt="The Smartest Among Us">
+    </a>
+    <button class="navbar-toggler hamb" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li><a class="dropdown-item" href="./play.html">Play</a></li>
-        <li><a class="dropdown-item" href=#>Create</a></li>
-        <li><a class="dropdown-item" href=#>Account</a></li>
+        <li><a class="" href="/play">Play</a></li>
+        <li><a class="" href=#>Create</a></li>
+        <li><a class="" href="/account">Account</a></li>
       </ul>
     </div>
   </nav>
+
   <header>
     <section class="col cont">
-      <h2>Play</h2>
+      <h2>Create</h2>
     </section>
   </header>
-  <main class="container">
-    <section class="row">
-      <form class="col">
-        <fieldset class="cont">
-          <article>
-            <h3>Name Your Quiz</h3>
+  <main>
+    <section>
+      <form>
+        <!-- For Quiz Name and Choose Auto -->
+        <fieldset class="container cont">
+          <article class ="row">
+            <h3 class="col-12">Name Your Quiz</h3>
             <!-- <label for="qname">Name Your Quiz</label>  This needs to display above but idfk how to do that  https://stackoverflow.com/questions/6046110/styling-form-with-label-above-inputs-->
             <input type="text" id="qname" name="qname">
           </article>
-          <article>
-            <h3>Would You Like to Auto Populate Your Quiz</h3>
-            <a class="btn btn-primary" id="yes">Yes</a>
-            <a class="btn btn-primary" id="no">No</a>
+          <article class ="row" id="auto">
+            <h3 class="col-12">Would You Like to Auto Populate Your Quiz</h3>
+            <button class="button" id="yes">Yes</button>
+            <button class="button" id="no">No</button>
+          </article>
+          <article class="hide" id="settings">
+            <article>
+              <h3>Choose A Category</h3>
+              <button class="cat button">Art</button>
+              <button class="cat button">Film</button>
+              <button class="cat button">Games</button>
+              <button class="cat button">Sports</button>
+              <button class="cat button">Anime</button>
+              <button class="cat button">Books</button>
+              <button class="cat button">Music</button>
+              <button class="cat button">Math</button>
+            </article>
+            <article>
+              <h3>Choose A Difficulty</h3>
+              <button class="dif button">Easy</button>
+              <button class="dif button">Medium</button>
+              <button class="dif button">Hard</button>
+            </article>
+              <button id="sub" class="button">Submit</button>
           </article>
         </fieldset>
+        <!-- For Questions -->
         <fieldset>
           <article class="cont">
             <h3>Question 1</h3>
@@ -157,6 +181,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
+  <script src="./assets/scripts/create.js"></script>
 </body>
 
 </html>
