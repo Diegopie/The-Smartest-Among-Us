@@ -4,7 +4,7 @@ let userCat;
 let userDif;
 // ** Store API Res
 const quizRes = [];
-const parsedQuiz = [];
+let randomize = Boolean;
 
 // * Functions
 // ** Test API Res
@@ -17,61 +17,21 @@ function testAPI() {
     // console.log(res.results);
     quizRes.push(res.results);
     // console.log(quizRes);
-    parseRes();
+    renderQuiz();
   });
 }
 
-// ** Parse API Res and Store in parsedQuiz
-function parseRes() {
-  for (let i = 0; i < quizRes[0].length; i++) {
-    // *** Variables
-    const curQ = quizRes[0][i];
-    const curA = [];
-    let correctA;
-
-    // *** Sort Questions into a Single Array of curA
-    curA.push(curQ.correct_answer);
-    // Loop through incorrect_answers res to add each index to curA;
-    for (let j = 0; j < curQ.incorrect_answers.length; j++) {
-      curA.push(curQ.incorrect_answers[j]);
-    }
-    // console.log(curA);
-
-    // *** Randomize the array
-    shuffleArray(curA);
-    // console.log(curA);
-
-    // *** Check Where Correct Answer is in the Array
-    curA.forEach((item, v) => {
-      if (item === curQ.correct_answer) {
-        // console.log(v);
-        correctA = v;
-        return v;
-      }
-    });
-
-    // *** Create Parsed Object and Push to parsedQuiz
-    const curObj = {
-      question: curQ.question,
-      answers: curA,
-      correct: correctA,
-    };
-    parsedQuiz.push(curObj);
-    // console.log(parsedQuiz);
-  }
-  renderQuiz();
-}
 // ** Display parsedQuiz to the Screen
 function renderQuiz() {
   // *** Variables
   for (let i = 0; i < quizRes[0].length; i++) {
-    let resPath = quizRes[0][i];
-    let domPath = $(".question")[i].children;
-    console.log($(".question"));
-    console.dir($(".question")[i].children);
+    const resPath = quizRes[0][i];
+    const domPath = $(".question")[i].children;
+    // console.log($(".question"));
+    // console.dir($(".question")[i].children);
     // $(".question")[i].value = resPath[i].question;
     // ** Update Question
-    console.log(domPath[1]);
+    // console.log(domPath[1]);
     domPath[1].value = resPath.question;
     // Update Correct Answer
     domPath[3].value = resPath.correct_answer;
@@ -81,24 +41,83 @@ function renderQuiz() {
     domPath[7].value = resPath.incorrect_answers[2];
   }
 }
-// testAPI();
-// ** Randomize array in-place using Durstenfeld shuffle algorithm
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+
+// ** Store Questions In Ong for Our API
+function parseUser() {
+  const questionNum = 1;
+  // Get Quiz Name
+  const quizName = $("#qname")[0].value;
+  // console.log(quizName);
+  // Get Account ID
+  // Questions Array
+  const questions = [];
+  for (let i = 0; i < 10; i++) {
+    const domPath = $(".question")[i].children;
+    // console.dir(domPath[1]);
+    // Get Question
+    const question = domPath[1].value;
+    // console.log(question);
+    // Get Correct
+    const correct = domPath[3].value;
+    // console.log(correct);
+    // Get Incorrect
+    const wrong = [domPath[5].value, domPath[6].value, domPath[7].value];
+    // console.log(wrong);
+    const curQuest = {
+      questionNum: questionNum,
+      question: question,
+      correctAnswer: correct,
+      wrongAnswers: wrong,
+    };
+    questions.push(curQuest);
   }
+  const apiObj = {
+    quizName: quizName,
+    randomize: randomize,
+    accountID: 1,
+    questions: questions,
+  };
+  console.log(apiObj);
 }
+
+// parseUser();
+// creating a quiz
+// POST data structure from front end
+// const newQuiz = {
+//   quizName: "whatever",
+//   randomize: true,
+//   accountID: 1,
+//   questions: [
+//     {
+//       questionNum: 1,
+//       question: "some text",
+//       correctAnswer: "this one's right",
+//       wrongAnswers: ["wrong", "nope", "git out"],
+//     },
+//   ],
+// };
 
 // * Click Listeners
 // ** Display Catagories on Yes
-$("#yes").click((event) => {
+$("#randyes").click((event) => {
+  event.preventDefault();
+  $("#rand").addClass("hide");
+  randomize = true;
+});
+// ** Hide Buttons on No
+$("#randno").click((event) => {
+  event.preventDefault();
+  $("#rand").addClass("hide");
+  randomize = false;
+});
+// ** Display Catagories on Yes
+$("#autoyes").click((event) => {
   event.preventDefault();
   $("#auto").addClass("hide");
   $("#settings").removeClass("hide");
 });
 // ** Hide Buttons on No
-$("#no").click((event) => {
+$("#autono").click((event) => {
   event.preventDefault();
   $("#auto").addClass("hide");
 });
@@ -119,4 +138,9 @@ $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
   testAPI();
+});
+
+$("#api").click((event) => {
+  event.preventDefault();
+  parseUser();
 });
