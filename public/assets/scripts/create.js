@@ -4,7 +4,7 @@ let userCat;
 let userDif;
 // ** Store API Res
 const quizRes = [];
-const apiQuiz = [];
+const parsedQuiz = [];
 
 // * Functions
 // ** Test API Res
@@ -21,6 +21,46 @@ function testAPI() {
   });
 }
 
+// ** Parse API Res and Store in parsedQuiz
+function parseRes() {
+  for (let i = 0; i < quizRes[0].length; i++) {
+    // *** Variables
+    const curQ = quizRes[0][i];
+    const curA = [];
+    let correctA;
+
+    // *** Sort Questions into a Single Array of curA
+    curA.push(curQ.correct_answer);
+    // Loop through incorrect_answers res to add each index to curA;
+    for (let j = 0; j < curQ.incorrect_answers.length; j++) {
+      curA.push(curQ.incorrect_answers[j]);
+    }
+    // console.log(curA);
+
+    // *** Randomize the array
+    shuffleArray(curA);
+    // console.log(curA);
+
+    // *** Check Where Correct Answer is in the Array
+    curA.forEach((item, v) => {
+      if (item === curQ.correct_answer) {
+        // console.log(v);
+        correctA = v;
+        return v;
+      }
+    });
+
+    // *** Create Parsed Object and Push to parsedQuiz
+    const curObj = {
+      question: curQ.question,
+      answers: curA,
+      correct: correctA,
+    };
+    parsedQuiz.push(curObj);
+    // console.log(parsedQuiz);
+  }
+  renderQuiz();
+}
 // ** Display parsedQuiz to the Screen
 function renderQuiz() {
   // *** Variables
@@ -39,6 +79,14 @@ function renderQuiz() {
     domPath[5].value = resPath.incorrect_answers[0];
     domPath[6].value = resPath.incorrect_answers[1];
     domPath[7].value = resPath.incorrect_answers[2];
+  }
+}
+// testAPI();
+// ** Randomize array in-place using Durstenfeld shuffle algorithm
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
