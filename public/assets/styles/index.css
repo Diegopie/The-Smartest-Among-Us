@@ -3,18 +3,6 @@ body {
     color: white;
 }
 
-main {
-  background-color: transparent;
-}
-
-section { 
-  background-color: transparent;
-}
-
-form {
-  background-color: transparent;
-}
-
 /* Gives background color for section/article containers and padding between them */
 .cont {
     background-color: #2b2b2b;
@@ -27,7 +15,6 @@ form {
 /* Create spacing between containers */
 fieldset {
     padding-top: 12%;
-    background-color: transparent;
 }
 
 article {
@@ -55,13 +42,9 @@ header {
 }
 
 /* For Hamburger Menu */
-/* .hamb {
+.hamb {
     background-color: white;
 }
-
-.navbar-toggler-icon {
-  background-image: greenyellow;
-} */
 
 /* For Quiz and Dropdown Options */
 li a{
