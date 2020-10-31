@@ -2,13 +2,23 @@ body {
     background-color: black;
     color: white;
 }
-
+.row {
+    flex-direction: column;
+}
 /* Gives background color for section/article containers and padding between them */
-.cont {
-    background-color: #2b2b2b;
+.cont1 {
+    /*background-color: #2b2b2b; */
     padding-bottom: 8%;
     display: grid;
     justify-content: center;
+
+  margin: 10px auto;
+  width: 50%;
+  border: 3px solid #1BEF0C;
+  padding: 10px;
+  text-align: center;
+  border-radius: 25px;
+  
 }
 
 /* Create spacing between containers */
@@ -76,8 +86,112 @@ li:hover {
 }
 
 
-
-
 .hide {
     display: none;
 }
+
+
+.opener p{
+        height: 5em;
+        position: relative; 
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%) 
+}
+
+     .opener {
+        color:#1BEF0C;
+        padding-top: 10em;
+        border-radius: 25px;
+        border: 2px solid #1bef0c;
+        padding: 20px; 
+        width: 300px;
+        height: 150px; 
+     }
+
+     .create {
+        color:#1BEF0C;
+        padding-top: 10em;
+        border-radius: 25px;
+        border: 2px solid #1bef0c;
+        padding: 20px; 
+        width: 300px;
+        height: 20em;
+            position: relative;
+            margin: 0;  
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%) 
+     }
+     .name {
+         text-align: center;
+         margin-top: -150px;
+         
+     }
+     #qname {
+        background: none repeat scroll 0 0 #1bef0c;
+        border-color: #1bef0c #FFFFFF; 
+        border-radius: 10px 10px 10px 10px;
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: 1px 1px 3px #333333;
+        color: black;
+        cursor: pointer;
+        padding: 5px;
+        
+        text-shadow: 1px 1px 1px #000000;
+     }
+
+     .inputname {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+     }
+
+     #auto {
+         text-align: center;
+     }
+
+     .flex-button{
+         display: flex;
+         
+     }
+     .jc-center {
+         justify-content: center;
+     
+
+     }
+
+     button#yes {
+         margin-right: 20px;
+         justify-content: center;
+         align-items: center;
+         position: relative;
+     }
+     button#no {
+         display: inline-block;
+         justify-content: center;
+         align-items: center;
+         position: relative;
+     }
+     /*
+     #autopop {
+        height: 100px;
+        position: relative;
+        border: 3px solid green;
+        margin: 0;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+     } */
+
+   
