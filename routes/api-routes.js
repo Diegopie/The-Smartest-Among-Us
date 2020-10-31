@@ -33,6 +33,17 @@ module.exports = function (app) {
     });
   });
 
+  // get quiz questions from quizID
+  app.get("api/quiz/:quizID", (req, res) => {
+    db.Question.findAll({
+      where: {
+        quizID: req.params.quizID,
+      },
+    }).then((result) => {
+      res.json(result);
+    });
+  });
+
   // creating a quiz
   // POST data structure from front end
   // const newQuiz = {

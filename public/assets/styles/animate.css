@@ -1,0 +1,51 @@
+/* just need 3 divs at the top of the body
+  <div id="background"></div>
+  <div id="midground"></div>
+  <div id="foreground"></div>
+*/
+
+@keyframes STAR-MOVE {
+	from {
+		background-position: 0% 50%
+	}
+	to { 
+		background-position: 1300% 50%
+	}
+}
+
+/* images are just pngs with transparent backgrounds and dots for stars */
+#background {
+	background: black url(../img/background.png) repeat 5% 5%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	z-index: -3;
+	
+	animation-name: STAR-MOVE;
+	animation-duration: 200s;
+	animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#midground {
+	background: url(../img/midground.png) repeat 20% 20%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	z-index: -2;
+	
+	animation-name: STAR-MOVE;
+	animation-duration: 100s;
+	animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+#foreground {
+	background: url(../img/foreground.png) repeat 35% 35%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	z-index: -1;
+	
+	animation-name: STAR-MOVE;
+	animation-duration: 50s;
+	animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
