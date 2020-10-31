@@ -3,80 +3,79 @@
 let userCat;
 let userDif;
 // ** Store API Res
-let quizRes = [];
-let parsedQuiz = [];
+const quizRes = [];
+const parsedQuiz = [];
 
 // * Functions
 // ** Test API Res
-function testAPI () {
-  const url = "https://opentdb.com/api.php?amount=10&type=multiple"
+function testAPI() {
+  const url = "https://opentdb.com/api.php?amount=10&type=multiple";
   $.ajax({
     url: url,
-    method: "GET"
-  }).then (function(res) {
-        // console.log(res.results);
+    method: "GET",
+  }).then((res) => {
+    // console.log(res.results);
     quizRes.push(res.results);
-        // console.log(quizRes);
-    parseRes()
-  })
+    // console.log(quizRes);
+    parseRes();
+  });
 }
 
 // ** Parse API Res and Store in parsedQuiz
-function parseRes () {
+function parseRes() {
   for (let i = 0; i < quizRes[0].length; i++) {
     // *** Variables
-    let curQ = quizRes[0][i];
-    const curA = []
+    const curQ = quizRes[0][i];
+    const curA = [];
     let correctA;
 
     // *** Sort Questions into a Single Array of curA
-    curA.push(curQ.correct_answer)
+    curA.push(curQ.correct_answer);
     // Loop through incorrect_answers res to add each index to curA;
     for (let j = 0; j < curQ.incorrect_answers.length; j++) {
-      curA.push(curQ.incorrect_answers[j])
+      curA.push(curQ.incorrect_answers[j]);
     }
-        // console.log(curA);
+    // console.log(curA);
 
     // *** Randomize the array
     shuffleArray(curA);
-        // console.log(curA);
+    // console.log(curA);
 
     // *** Check Where Correct Answer is in the Array
-    curA.forEach(function(item, v){
-      if (item == curQ.correct_answer) {
-            // console.log(v);
+    curA.forEach((item, v) => {
+      if (item === curQ.correct_answer) {
+        // console.log(v);
         correctA = v;
-        return v
+        return v;
       }
     });
 
     // *** Create Parsed Object and Push to parsedQuiz
-    let curObj = {
+    const curObj = {
       question: curQ.question,
       answers: curA,
       correct: correctA,
     };
-        
-    parsedQuiz.push(curObj)
-        // console.log(parsedQuiz);
-  };
-  renderQuiz()
-};
+    parsedQuiz.push(curObj);
+    // console.log(parsedQuiz);
+  }
+  renderQuiz();
+}
 // ** Display parsedQuiz to the Screen
 function renderQuiz() {
   // *** Variables
   for (let i = 0; i < 1; i++) {
-    console.dir($("#q"+i));
-    $("#q"+i).addClass("Fuck")
-    $("#q1").addClass("Fuck")
+    console.dir($("#q" + i));
+    $("#q" + i).addClass("Fuck");
+    $("#q1").addClass("Fuck");
   }
 }
 testAPI();
-// ** Randomize array in-place using Durstenfeld shuffle algorithm 
+// ** Randomize array in-place using Durstenfeld shuffle algorithm
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
@@ -96,25 +95,17 @@ $("#no").click((event) => {
 $(".cat").click((event) => {
   event.preventDefault();
   userCat = event.target.innerText;
-      console.log(userCat);
+  console.log(userCat);
 });
 // ** Store User Difficulty
 $(".dif").click((event) => {
   event.preventDefault();
   userDif = event.target.innerText;
-      console.log(userDif);
+  console.log(userDif);
 });
 
 $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
-  testAPI()
+  testAPI();
 });
-
-
-
-
-
-
-
-

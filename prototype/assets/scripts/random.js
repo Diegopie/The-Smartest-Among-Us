@@ -3,105 +3,106 @@
 let userCat;
 let userDif;
 // ** Store API Res
-let quizRes = [];
-let parsedQuiz = [];
-    // console.log(quizRes[0].length);
-
+const quizRes = [];
+const parsedQuiz = [];
+// console.log(quizRes[0].length);
 
 // * Functions
 // ** Test API Res
-function testAPI () {
-  const url = "https://opentdb.com/api.php?amount=10&type=multiple"
+function testAPI() {
+  const url = "https://opentdb.com/api.php?amount=10&type=multiple";
   $.ajax({
     url: url,
-    method: "GET"
-  }).then (function(res) {
-        // console.log(res.results);
+    method: "GET",
+  }).then((res) => {
+    // console.log(res.results);
     quizRes.push(res.results);
-        // console.log(quizRes);
-    parseRes()
-  })
+    // console.log(quizRes);
+    parseRes();
+  });
 }
 // ** Parse API Res and Store in parsedQuiz
-function parseRes () {
+function parseRes() {
   for (let i = 0; i < quizRes[0].length; i++) {
     // *** Variables
-    let curQ = quizRes[0][i];
-    const curA = []
+    const curQ = quizRes[0][i];
+    const curA = [];
     let correctA;
 
     // *** Sort Questions into a Single Array of curA
-    curA.push(curQ.correct_answer)
+    curA.push(curQ.correct_answer);
     // Loop through incorrect_answers res to add each index to curA;
     for (let j = 0; j < curQ.incorrect_answers.length; j++) {
-      curA.push(curQ.incorrect_answers[j])
+      curA.push(curQ.incorrect_answers[j]);
     }
-        // console.log(curA);
+    // console.log(curA);
 
     // *** Randomize the array
     shuffleArray(curA);
-        // console.log(curA);
+    // console.log(curA);
 
     // *** Check Where Correct Answer is in the Array
-    curA.forEach(function(item, v){
-      if (item == curQ.correct_answer) {
-            // console.log(v);
+    curA.forEach((item, v) => {
+      if (item === curQ.correct_answer) {
+        // console.log(v);
         correctA = v;
-        return v
+        return v;
       }
     });
 
     // *** Create Parsed Object and Push to parsedQuiz
-    let curObj = {
+    const curObj = {
       question: curQ.question,
       answers: curA,
       correct: correctA,
     };
-        
-    parsedQuiz.push(curObj)
-        // console.log(parsedQuiz);
-  };
-  // renderQuiz()
-  renderQuizBetter();
-};
-
-function renderQuiz() {
-  // *** Variables
-  let domQues = $("#quiz")[0].children
-      // console.dir(domQues);
-      // console.log(parsedQuiz);
-  // *** Loop Through parsedQuiz To Update DOM
-  for (let i = 0; i < parsedQuiz.length; i++) {
-        // console.log("-- Quest --");
-    // **** Update Question DOM Element
-    let curQPath = domQues[i].children[0];
-    curQPath.innerText = parsedQuiz[i].question;
-    // **** Update Each li Answer in the DOM
-    let curAnsAr = domQues[i].children[1].children.length
-    for (let j = 0; j < curAnsAr; j++) {
-          // console.log("-- Ans --");
-      let curAnsPath = domQues[i].children[1].children[j];
-          // console.log(curAnsPath);
-      curAnsPath.innerText = parsedQuiz[i].answers[j];
-    }
+    parsedQuiz.push(curObj);
+    // console.log(parsedQuiz);
   }
-  $("#quiz").removeClass("hide")
+  // renderQuiz();
+  renderQuizBetter();
 }
+
+// function renderQuiz() {
+//   // *** Variables
+//   let domQues = $("#quiz")[0].children;
+//   // console.dir(domQues);
+//   // console.log(parsedQuiz);
+//   // *** Loop Through parsedQuiz To Update DOM
+//   for (let i = 0; i < parsedQuiz.length; i++) {
+//     // console.log("-- Quest --");
+//     // **** Update Question DOM Element
+//     let curQPath = domQues[i].children[0];
+//     curQPath.innerText = parsedQuiz[i].question;
+//     // **** Update Each li Answer in the DOM
+//     let curAnsAr = domQues[i].children[1].children.length
+//     for (let j = 0; j < curAnsAr; j++) {
+//           // console.log("-- Ans --");
+//       let curAnsPath = domQues[i].children[1].children[j];
+//           // console.log(curAnsPath);
+//       curAnsPath.innerText = parsedQuiz[i].answers[j];
+//     }
+//   }
+//   $("#quiz").removeClass("hide");
+// }
 
 let curQuest = 0;
 function renderQuizBetter() {
   // *** Bring in Updated Value of curQuest, This Will Be Used for parsedQuiz Index
-  curQuest
-  console.log("current question indexc: ",curQuest);
+  curQuest;
+  console.log("current question index: ", curQuest);
   // *** Variables to Create Quiz DOM
-  let curQaArr = parsedQuiz[curQuest]
-  let qaContain = $("<article>").addClass("cont qa");
-  let question = $("<h3>").text(curQaArr.question);
-  let answers = $("<ul>").addClass("check").attr("id", "answers");
+  const curQaArr = parsedQuiz[curQuest];
+  const qaContain = $("<article>").addClass("cont qa");
+  const question = $("<h3>").text(curQaArr.question);
+  const answers = $("<ul>").addClass("check").attr("id", "answers");
   // *** Append Elements to Each Other then To DOM
   qaContain.append(question, answers);
   for (let i = 0; i < curQaArr.answers.length; i++) {
-    let curAns = $("<li>").text(curQaArr.answers[i]).attr("value", i).addClass("ans");
+    const curAns = $("<li>")
+      .text(curQaArr.answers[i])
+      .attr("value", i)
+      .addClass("ans");
     answers.append(curAns);
   }
   $("#quiz").append(qaContain);
@@ -112,44 +113,44 @@ function renderQuizBetter() {
     // disable click listener if user has already clicked
     if ($("#answers").hasClass("check")) {
       // check correct/wrong answer
-      let userSelect = event.target.attributes[0].value;
-      if (userSelect == curQaArr.correct) {
-        $(event.target).css("background-color", "green")
+      const userSelect = event.target.attributes[0].value;
+      if (userSelect === curQaArr.correct) {
+        $(event.target).css("background-color", "green");
         $("#answers").removeClass("check");
         makeButt("Correct!");
       } else {
-        $(event.target).css("background-color", "red")
-        $("#answers").removeClass("check")
+        $(event.target).css("background-color", "red");
+        $("#answers").removeClass("check");
         makeButt("Wrong!");
       }
     } else {
       console.log($("#answers"));
       console.log("fuck you");
-      return
+      return;
     }
-  })
+  });
 }
-testAPI()
+testAPI();
 // renderQuizBetter();
 
 function makeButt(value) {
-  let buttCont = $("<article>").addClass("cont");
-  let result = $("<h3>").text(value);
-  let butt = $("<button>").addClass("button nxt").text("Next");
+  const buttCont = $("<article>").addClass("cont");
+  const result = $("<h3>").text(value);
+  const butt = $("<button>").addClass("button nxt").text("Next");
   buttCont.append(result, butt);
   $(".qa").append(buttCont);
-  curQuest++
+  curQuest++;
   $(".nxt").click((event) => {
     event.preventDefault();
     renderQuizBetter();
-  })
+  });
 }
 
-// ** Randomize array in-place using Durstenfeld shuffle algorithm 
+// ** Randomize array in-place using Durstenfeld shuffle algorithm
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
@@ -158,18 +159,17 @@ function shuffleArray(array) {
 $(".cat").click((event) => {
   event.preventDefault();
   userCat = event.target.innerText;
-      console.log(userCat);
+  console.log(userCat);
 });
 // ** Store User Difficulty
 $(".dif").click((event) => {
   event.preventDefault();
   userDif = event.target.innerText;
-      console.log(userDif);
+  console.log(userDif);
 });
 
 $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
-  testAPI()
+  testAPI();
 });
-
