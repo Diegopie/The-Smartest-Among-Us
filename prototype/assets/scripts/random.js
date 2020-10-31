@@ -61,7 +61,8 @@ function parseRes () {
     parsedQuiz.push(curObj)
         // console.log(parsedQuiz);
   };
-  renderQuiz()
+  // renderQuiz()
+  renderQuizBetter();
 };
 
 function renderQuiz() {
@@ -87,12 +88,62 @@ function renderQuiz() {
   $("#quiz").removeClass("hide")
 }
 
+let curQuest = 0;
 function renderQuizBetter() {
-
+  // *** Bring in Updated Value of curQuest, This Will Be Used for parsedQuiz Index
+  curQuest
+  console.log("current question indexc: ",curQuest);
+  // *** Variables to Create Quiz DOM
+  let curQaArr = parsedQuiz[curQuest]
+  let qaContain = $("<article>").addClass("cont qa");
+  let question = $("<h3>").text(curQaArr.question);
+  let answers = $("<ul>").addClass("check").attr("id", "answers");
+  // *** Append Elements to Each Other then To DOM
+  qaContain.append(question, answers);
+  for (let i = 0; i < curQaArr.answers.length; i++) {
+    let curAns = $("<li>").text(curQaArr.answers[i]).attr("value", i).addClass("ans");
+    answers.append(curAns);
+  }
+  $("#quiz").append(qaContain);
+  // makeButt("Fuck Me")
+  // *** Click Listener to Check Correct Answer
+  console.log(curQaArr.correct);
+  $(".ans").click((event) => {
+    // disable click listener if user has already clicked
+    if ($("#answers").hasClass("check")) {
+      // check correct/wrong answer
+      let userSelect = event.target.attributes[0].value;
+      if (userSelect == curQaArr.correct) {
+        $(event.target).css("background-color", "green")
+        $("#answers").removeClass("check");
+        makeButt("Correct!");
+      } else {
+        $(event.target).css("background-color", "red")
+        $("#answers").removeClass("check")
+        makeButt("Wrong!");
+      }
+    } else {
+      console.log($("#answers"));
+      console.log("fuck you");
+      return
+    }
+  })
 }
+testAPI()
+// renderQuizBetter();
 
-
-
+function makeButt(value) {
+  let buttCont = $("<article>").addClass("cont");
+  let result = $("<h3>").text(value);
+  let butt = $("<button>").addClass("button nxt").text("Next");
+  buttCont.append(result, butt);
+  $(".qa").append(buttCont);
+  curQuest++
+  $(".nxt").click((event) => {
+    event.preventDefault();
+    renderQuizBetter();
+  })
+}
 
 // ** Randomize array in-place using Durstenfeld shuffle algorithm 
 function shuffleArray(array) {
@@ -109,7 +160,7 @@ $(".cat").click((event) => {
   userCat = event.target.innerText;
       console.log(userCat);
 });
-
+// ** Store User Difficulty
 $(".dif").click((event) => {
   event.preventDefault();
   userDif = event.target.innerText;
