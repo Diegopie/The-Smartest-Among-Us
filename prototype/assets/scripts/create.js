@@ -65,9 +65,10 @@ function parseRes() {
 function renderQuiz() {
   // *** Variables
   for (let i = 0; i < 1; i++) {
-    console.dir($("#q" + i));
-    $("#q" + i).addClass("Fuck");
-    $("#q1").addClass("Fuck");
+    console.dir($(".question"));
+    $(".question")[i].innerText = "Fuck";
+    // $(".question")[i].placeholder = "Fuck";
+    console.dir($(".question")[i]);
   }
 }
 testAPI();
