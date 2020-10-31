@@ -3,17 +3,31 @@ body {
     color: white;
 }
 
+main {
+  background-color: transparent;
+}
+
+section { 
+  background-color: transparent;
+}
+
+form {
+  background-color: transparent;
+}
+
 /* Gives background color for section/article containers and padding between them */
 .cont {
     background-color: #2b2b2b;
     padding-bottom: 8%;
     display: grid;
     justify-content: center;
+    align-items: center;
 }
 
 /* Create spacing between containers */
 fieldset {
     padding-top: 12%;
+    background-color: transparent;
 }
 
 article {
@@ -41,9 +55,13 @@ header {
 }
 
 /* For Hamburger Menu */
-.hamb {
+/* .hamb {
     background-color: white;
 }
+
+.navbar-toggler-icon {
+  background-image: greenyellow;
+} */
 
 /* For Quiz and Dropdown Options */
 li a{
@@ -75,7 +93,13 @@ li:hover {
     text-decoration: none;
 }
 
+.row {
+  justify-content: center;
+}
 
+h3 {
+  text-align: center;
+}
 
 
 .hide {

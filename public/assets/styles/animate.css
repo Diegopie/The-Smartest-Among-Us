@@ -15,7 +15,8 @@
 
 /* images are just pngs with transparent backgrounds and dots for stars */
 #background {
-	background: black url(../img/background.png) repeat 5% 5%;
+  background: black url(../img/background.png) repeat 5% 5%;
+  background-attachment: fixed;
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
 	z-index: -3;
@@ -27,7 +28,8 @@
 }
 
 #midground {
-	background: url(../img/midground.png) repeat 20% 20%;
+  background: url(../img/midground.png) repeat 20% 20%;
+  background-attachment: fixed;
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
 	z-index: -2;
@@ -39,7 +41,8 @@
 }
 
 #foreground {
-	background: url(../img/foreground.png) repeat 35% 35%;
+  background: url(../img/foreground.png) repeat 35% 35%;
+  background-attachment: fixed;
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
 	z-index: -1;
