@@ -11,11 +11,24 @@ module.exports = function (app) {
     });
   });
 
+  // return admin (our saved) quizzes
+  // this assumes that "admin" is the first account saved,
+  // we'll need to initialize the JAWS database with that account
+  app.get("/api/admin", (req, res) => {
+    db.Quiz.findAll({
+      where: {
+        accountID: "1",
+      },
+    }).then((results) => {
+      return res.json(results);
+    });
+  });
+
   // return all quizzes owned by this user
   app.get("/api/:accountId", (req, res) => {
     db.Quiz.findAll({
       where: {
-        accountId: req.params.accountId,
+        accountID: req.params.accountId,
       },
     }).then((result) => {
       res.json(result);
