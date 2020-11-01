@@ -14,6 +14,10 @@ module.exports = function (app) {
   app.get("/play", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/play.html"));
   });
+  // play-random
+  app.get("/play/random", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/play-random.html"));
+  });
   // create
   app.get("/create", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/create.html"));
