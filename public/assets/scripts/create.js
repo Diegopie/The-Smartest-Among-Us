@@ -2,8 +2,8 @@
 // ** Store User Selection for API Req
 let userCat;
 let userDif;
-// ** Store API Res
 const quizRes = [];
+// ** Store API Res
 let randomize = Boolean;
 
 // * Functions
@@ -14,100 +14,90 @@ function testAPI() {
     url: url,
     method: "GET",
   }).then((res) => {
-    // console.log(res.results);
+    // Push res to quizRes then run renderQuiz to update DOM
     quizRes.push(res.results);
-    // console.log(quizRes);
     renderQuiz();
   });
 }
 
 // ** Display parsedQuiz to the Screen
 function renderQuiz() {
-  // *** Variables
+  // *** Loop through the Length of the quizRes array
   for (let i = 0; i < quizRes[0].length; i++) {
     const resPath = quizRes[0][i];
     const domPath = $(".question")[i].children;
-    // console.log($(".question"));
     // console.dir($(".question")[i].children);
-    // $(".question")[i].value = resPath[i].question;
-    // ** Update Question
-    // console.log(domPath[1]);
+    // *** Update Question
     domPath[1].value = resPath.question;
-    // Update Correct Answer
+    // *** Update Correct Answer
     domPath[3].value = resPath.correct_answer;
-    // Update Incorrect Answer
+    // *** Update Incorrect Answer
     domPath[5].value = resPath.incorrect_answers[0];
     domPath[6].value = resPath.incorrect_answers[1];
     domPath[7].value = resPath.incorrect_answers[2];
   }
+  // Show Update DOM Elements
+  $("#quiz-cont").removeClass("hide");
+  $("#api").removeClass("hide");
 }
-
+console.dir($("#quiz-cont")[0].children.length);
 // ** Store Questions In Ong for Our API
 function parseUser() {
-  const questionNum = 1;
+  // *** Variables
+  // Checks how many question containers are on the dom
+  const quizLength = $("#quiz-cont")[0].children.length;
+  // Api requires questionNumber, this will increment by one during a for loop
+  let questionNum = 1;
+  // *** Store DOM Elements
   // Get Quiz Name
   const quizName = $("#qname")[0].value;
-  // console.log(quizName);
-  // Get Account ID
-  // Questions Array
+  // Get Account ID??
+  // *** Get All Questions Containers
+  // Objects created in for loop will be pushed here
   const questions = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < quizLength; i++) {
     const domPath = $(".question")[i].children;
-    // console.dir(domPath[1]);
     // Get Question
     const question = domPath[1].value;
-    // console.log(question);
     // Get Correct
     const correct = domPath[3].value;
-    // console.log(correct);
     // Get Incorrect
     const wrong = [domPath[5].value, domPath[6].value, domPath[7].value];
-    // console.log(wrong);
+    // Create question object
     const curQuest = {
       questionNum: questionNum,
       question: question,
       correctAnswer: correct,
       wrongAnswers: wrong,
     };
+    // Push to questions array and increment questionNum
     questions.push(curQuest);
+    questionNum++;
   }
+  // *** Create Object for Our Server API
   const apiObj = {
     quizName: quizName,
     randomize: randomize,
     accountID: 1,
     questions: questions,
   };
+  // ONCE we are server connected, we can pass this object to an API Req
   console.log(apiObj);
 }
 
-// parseUser();
-// creating a quiz
-// POST data structure from front end
-// const newQuiz = {
-//   quizName: "whatever",
-//   randomize: true,
-//   accountID: 1,
-//   questions: [
-//     {
-//       questionNum: 1,
-//       question: "some text",
-//       correctAnswer: "this one's right",
-//       wrongAnswers: ["wrong", "nope", "git out"],
-//     },
-//   ],
-// };
-
 // * Click Listeners
-// ** Display Catagories on Yes
+// ** Set Randomize to True
 $("#randyes").click((event) => {
   event.preventDefault();
   $("#rand").addClass("hide");
+  $("#auto").removeClass("hide");
   randomize = true;
 });
-// ** Hide Buttons on No
+// ** Set Randomize to False
 $("#randno").click((event) => {
   event.preventDefault();
   $("#rand").addClass("hide");
+  $("#auto").removeClass("hide");
   randomize = false;
 });
 // ** Display Catagories on Yes
@@ -116,10 +106,12 @@ $("#autoyes").click((event) => {
   $("#auto").addClass("hide");
   $("#settings").removeClass("hide");
 });
-// ** Hide Buttons on No
+// ** Hide Buttons and Display Questions Containers on No
 $("#autono").click((event) => {
   event.preventDefault();
   $("#auto").addClass("hide");
+  $("#quiz-api").removeClass("hide");
+  $("#quiz-cont").removeClass("hide");
 });
 // ** Store the Category A User Clicks
 $(".cat").click((event) => {
@@ -133,13 +125,13 @@ $(".dif").click((event) => {
   userDif = event.target.innerText;
   console.log(userDif);
 });
-
+// Make Trivia API Req
 $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
   testAPI();
 });
-
+// Make Server API Req
 $("#api").click((event) => {
   event.preventDefault();
   parseUser();
