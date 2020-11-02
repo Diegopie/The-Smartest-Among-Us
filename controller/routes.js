@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-// 6-20: html routes 
+// 6-20: html routes
 router.get("/", (req, res) => {
   res.render("index");
 });
