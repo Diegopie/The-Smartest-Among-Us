@@ -31,17 +31,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     wrongAnswer2: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1],
-      },
+      allowNull: true,
     },
     wrongAnswer3: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1],
-      },
+      allowNull: true,
     },
   });
   return Question;
