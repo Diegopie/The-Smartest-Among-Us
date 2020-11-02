@@ -17,14 +17,16 @@ router.get("/playglobal", (req, res) => {
       accountID: "1",
     },
   }).then((results) => {
+    // const hbsObj = {
+    //   quizzes: results,
+    // };
+    const data = [];
+    results.forEach((result) => {
+      data.push(result.dataValues)
+    });
     const hbsObj = {
-      quizzes: results,
+      quizzes: data,
     };
-    // const names = [];
-    // results.forEach((result) => {
-    //   console.log(result.quizName);
-    //   names.push(result.quizName);
-    // });
     // console.log(results);
     res.render("playglobal", hbsObj);
   });
