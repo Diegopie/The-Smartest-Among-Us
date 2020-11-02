@@ -5,7 +5,7 @@
       <h2 class="">Account</h2>
     </article>
     <article class="row">
-      <h3 class="" id="user">Username</h3>
+      <h3 class="col-12" id="user">Username</h3>
       <button class="button" id="Logout">Logout</button>
     </article>
   </section>
@@ -14,15 +14,9 @@
 <main class="container">
   <!-- Display User Quizzes -->
   <section class="row">
-    <article class="cont col-12">
-      <h3><a class="text" href=#>Your Quiz 1</a></h3>
-    </article>
-    <article class="cont col-12">
-      <h3><a class="text" href=#>Your Quiz 2</a></h3>
-    </article>
-    <article class="cont col-12">
-      <h3><a class="text" href=#>Your Quiz 3</a></h3>
-    </article>
+    {{#each quizzes}}
+      {{> quizName}}
+    {{/each}}
   </section>
   <!-- Display Create Account If Not Logged In -->
   <section class="row">

@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-// 6-20: html routes
 router.get("/", (req, res) => {
+  res.render("index");
+});
+router.get("", (req, res) => {
   res.render("index");
 });
 
@@ -11,6 +13,9 @@ router.get("/play", (req, res) => {
   res.render("play");
 });
 
+// play global quizzes i.e., built-in quizzes
+// this assumes that "admin" is the first account saved,
+// we'll need to initialize the JAWS database with that account
 router.get("/playglobal", (req, res) => {
   db.Quiz.findAll({
     where: {
@@ -22,13 +27,13 @@ router.get("/playglobal", (req, res) => {
     // };
     const data = [];
     results.forEach((result) => {
-      data.push(result.dataValues)
+      data.push(result.dataValues);
     });
     const hbsObj = {
       quizzes: data,
     };
     // console.log(results);
-    res.render("playglobal", hbsObj);
+    res.render("quizzes", hbsObj);
   });
 });
 
@@ -51,21 +56,21 @@ router.post("/api/user", (req, res) => {
   });
 });
 
-// return admin (our saved) quizzes
-// this assumes that "admin" is the first account saved,
-// we'll need to initialize the JAWS database with that account
-router.get("/api/admin", (req, res) => {
-  
-});
-
 // return all quizzes owned by this user
-router.get("/api/:accountId", (req, res) => {
+router.get("/:accountId", (req, res) => {
   db.Quiz.findAll({
     where: {
       accountID: req.params.accountId,
     },
-  }).then((result) => {
-    res.json(result);
+  }).then((results) => {
+    const data = [];
+    results.forEach((result) => {
+      data.push(result.dataValues);
+    });
+    const hbsObj = {
+      quizzes: data,
+    };
+    res.render("quizzes", hbsObj);
   });
 });
 
