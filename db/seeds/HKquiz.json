@@ -1,0 +1,107 @@
+{
+  "quizName": "Hollow Knight",
+  "randomize": true,
+  "accountID": 1,
+  "questions": [
+      {
+          "questionNum": 1,
+          "question": "How many nailmasters are there?",
+          "correctAnswer": "3",
+          "wrongAnswers": [
+              "2",
+              "1",
+              "4"
+          ]
+      },
+      {
+          "questionNum": 2,
+          "question": "To which Dreamer was Quirrel apprenticed?",
+          "correctAnswer": "Monomon",
+          "wrongAnswers": [
+              "Lurien",
+              "Herrah",
+              ""
+          ]
+      },
+      {
+          "questionNum": 3,
+          "question": "Who is the daughter of the Pale King and Herrah the Beast?",
+          "correctAnswer": "Hornet",
+          "wrongAnswers": [
+              "Tiso",
+              "Quirrel",
+              "Zote the Mighty"
+          ]
+      },
+      {
+          "questionNum": 4,
+          "question": "How many opportunities do you have to let Zote die?",
+          "correctAnswer": "2",
+          "wrongAnswers": [
+              "4",
+              "1",
+              "0"
+          ]
+      },
+      {
+          "questionNum": 5,
+          "question": "What is the Pure Completion achievement for?",
+          "correctAnswer": "Achieve 112% completion",
+          "wrongAnswers": [
+              "ascending the Pantheon of Hallownest",
+              "Aiding the Herald in moving on",
+              "collecting 2400 Essence and hearing the Seer's final words"
+          ]
+      },
+      {
+          "questionNum": 6,
+          "question": "Which NPC is associated with two conflicting achievements?",
+          "correctAnswer": "Zote",
+          "wrongAnswers": [
+              "Hornet",
+              "Quirrel",
+              "Cloth"
+          ]
+      },
+      {
+          "questionNum": 7,
+          "question": "What is the final boss of the game?",
+          "correctAnswer": "Absolute Radiance",
+          "wrongAnswers": [
+              "The Godseeker (Pale King)",
+              "Pure Vessel",
+              "Nightmare King Grimm"
+          ]
+      },
+      {
+          "questionNum": 8,
+          "question": "Which additional content pack was released last?",
+          "correctAnswer": "Godmaster",
+          "wrongAnswers": [
+              "Hidden Dreams",
+              "The Grimm Troupe",
+              "Lifeblood"
+          ]
+      },
+      {
+          "questionNum": 9,
+          "question": "Which NPC from the original is the main character in the sequel Silksong?",
+          "correctAnswer": "Hornet",
+          "wrongAnswers": [
+              "Zote the Mighty",
+              "Quirrel",
+              "The Hollow Knight"
+          ]
+      },
+      {
+          "questionNum": 10,
+          "question": "Who is Hornet's half-sibling?",
+          "correctAnswer": "The Knight",
+          "wrongAnswers": [
+              "Zote the Mighty",
+              "Cloth",
+              "Quirrel"
+          ]
+      }
+  ]
+}
