@@ -1,9 +1,9 @@
 module.exports = function (sequelize, DataTypes) {
   const Question = sequelize.define("Question", {
-    quizID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    // quizID: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
     questionNum: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -38,5 +38,11 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true,
     },
   });
+  Question.associate = (models) => {
+    Question.belongsTo(models.Quiz, {
+      foreignKey: "quizID",
+      targetKey: "quizID",
+    });
+  };
   return Question;
 };

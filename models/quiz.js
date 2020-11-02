@@ -28,6 +28,15 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: "accountID",
       targetKey: "accountID",
     });
+    Quiz.hasMany(models.Question, {
+      foreignKey: "quizID",
+      sourceKey: "quizID",
+    });
+    Quiz.hasMany(models.Score, {
+      foreignKey: "quizID",
+      sourceKey: "quizID",
+    });
   };
+
   return Quiz;
 };
