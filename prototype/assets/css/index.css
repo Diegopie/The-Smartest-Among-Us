@@ -181,6 +181,10 @@ li:hover {
          align-items: center;
          position: relative;
      }
+
+     #cat {
+         flex-wrap: wrap;
+     }
      /*
      #autopop {
         height: 100px;
