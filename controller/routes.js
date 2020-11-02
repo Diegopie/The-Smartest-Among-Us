@@ -12,7 +12,22 @@ router.get("/play", (req, res) => {
 });
 
 router.get("/playglobal", (req, res) => {
-  res.render("playglobal");
+  db.Quiz.findAll({
+    where: {
+      accountID: "1",
+    },
+  }).then((results) => {
+    const hbsObj = {
+      quizzes: results,
+    };
+    // const names = [];
+    // results.forEach((result) => {
+    //   console.log(result.quizName);
+    //   names.push(result.quizName);
+    // });
+    // console.log(results);
+    res.render("playglobal", hbsObj);
+  });
 });
 
 router.get("/account", (req, res) => {
@@ -38,13 +53,7 @@ router.post("/api/user", (req, res) => {
 // this assumes that "admin" is the first account saved,
 // we'll need to initialize the JAWS database with that account
 router.get("/api/admin", (req, res) => {
-  db.Quiz.findAll({
-    where: {
-      accountID: "1",
-    },
-  }).then((results) => {
-    res.json(results);
-  });
+  
 });
 
 // return all quizzes owned by this user
