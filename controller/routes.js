@@ -38,30 +38,37 @@ router.get("/playglobal", (req, res) => {
 });
 
 router.get("/users/:accountID", (req, res) => {
-  db.Account.findOne({
+  db.Quiz.findAll({
     where: {
       accountID: req.params.accountID,
-    },
-  }).then((user) => {
-    user = user.dataValues;
-    console.log(user);
-    const hbsObj = {
-      username: user.username,
-      quizzes: [],
-    };
-    db.Quiz.findAll({
-      where: {
-        accountID: req.params.accountID,
-      },
-    }).then((results) => {
-      results.forEach((result) => {
-        hbsObj.quizzes.push(result.dataValues);
-      });
-    });
-    res.render("account", hbsObj);
-  });
-  // res.render("account");
+    }
+  })
 });
+// router.get("/users/:accountID", (req, res) => {
+//   db.Account.findOne({
+//     where: {
+//       accountID: req.params.accountID,
+//     },
+//   }).then((user) => {
+//     user = user.dataValues;
+//     console.log(user);
+//     const hbsObj = {
+//       username: user.username,
+//       quizzes: [],
+//     };
+//     db.Quiz.findAll({
+//       where: {
+//         accountID: req.params.accountID,
+//       },
+//     }).then((results) => {
+//       results.forEach((result) => {
+//         hbsObj.quizzes.push(result.dataValues);
+//       });
+//     });
+//     res.render("account", hbsObj);
+//   });
+//   // res.render("account");
+// });
 
 router.get("/create", (req, res) => {
   res.render("create");

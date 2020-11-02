@@ -17,10 +17,17 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: true,
     },
-    accountID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    // accountID: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
   });
+
+  Quiz.associate = (models) => {
+    Quiz.belongsTo(models.Account, {
+      foreignKey: "accountID",
+      targetKey: "accountID",
+    });
+  };
   return Quiz;
 };
