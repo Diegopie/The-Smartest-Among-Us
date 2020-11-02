@@ -20,6 +20,10 @@ module.exports = function (sequelize, DataTypes) {
     // accountID: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,
+    //   references: {
+    //     model: "Accounts",
+    //     key: "accountID",
+    //   },
     // },
   });
 

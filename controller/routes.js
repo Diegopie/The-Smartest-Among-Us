@@ -37,12 +37,27 @@ router.get("/playglobal", (req, res) => {
   });
 });
 
-router.get("/users/:accountID", (req, res) => {
-  db.Quiz.findAll({
+// display all quizzes from a specific account
+// (allows for easy sharing of user-created content)
+// shareable link is https://the-smartest-amoung-us.herokuapp.com/account=[username]
+router.get("/account=:username", (req, res) => {
+  db.Account.findOne({
     where: {
-      accountID: req.params.accountID,
-    }
-  })
+      username: req.params.username,
+    },
+    include: [db.Quiz],
+  }).then((results) => {
+    console.log(results.Quizzes);
+    // const hbsObj = {
+    //   username: results[0].dataValues.Account.dataValues.username,
+    //   quizzes: [],
+    // };
+    // results.forEach((result) => {
+    //   result = result.dataValues;
+    //   hbsObj.quizzes.push(result);
+    // });
+    // res.render("user", hbsObj);
+  });
 });
 // router.get("/users/:accountID", (req, res) => {
 //   db.Account.findOne({

@@ -1,0 +1,18 @@
+<!-- Header -->
+<header>
+  <section class="container cont">
+    <article class="row">
+      <h2 class="col-12" id="user">{{ username }}'s Quizzes</h2>
+    </article>
+  </section>
+</header>
+<!-- Page Content -->
+<main class="container">
+  <!-- Display User Quizzes -->
+  <section class="row">
+    {{#each quizzes}}
+      {{> quizName}}
+    {{/each}}
+  </section>
+  <!-- Display Create Account If Not Logged In -->
+</main>
