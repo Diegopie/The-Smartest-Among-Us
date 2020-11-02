@@ -11,6 +11,10 @@ router.get("/play", (req, res) => {
   res.render("play");
 });
 
+router.get("/playglobal", (req, res) => {
+  res.render("playglobal");
+});
+
 router.get("/account", (req, res) => {
   res.render("account");
 });
