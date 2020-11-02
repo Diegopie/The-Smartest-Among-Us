@@ -8,21 +8,8 @@ let quizRes;
 // ** Store API Res
 
 // * Functions
-// ** Test API Res
-function testAPI() {
-  const url =
-    "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-  $.ajax({
-    url: url,
-    method: "GET",
-  }).then((res) => {
-    // Push res to quizRes then run renderQuiz to update DOM
-    quizRes = res.results;
-    renderQuiz();
-  });
-}
 
-// makeQuesCont(2);
+makeQuesCont(10);
 // ** Create Question Containers
 function makeQuesCont(value) {
   for (let i = 0; i < value; i++) {
@@ -49,6 +36,22 @@ function makeQuesCont(value) {
     // *** Append to DOM
     $("#quiz-cont").append(qCont);
   }
+  testAPI();
+}
+
+// ** Test API Res
+function testAPI() {
+  const url =
+    // "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
+    "https://opentdb.com/api.php?amount=" + 10 + "&type=multiple";
+  $.ajax({
+    url: url,
+    method: "GET",
+  }).then((res) => {
+    // Push res to quizRes then run renderQuiz to update DOM
+    quizRes = res.results;
+    renderQuiz();
+  });
 }
 
 // ** Display parsedQuiz to the Screen
@@ -72,6 +75,20 @@ function renderQuiz() {
   $("#api").removeClass("hide");
 }
 
+function updateQuesTitles() {
+  // *** Variables
+  const quizLength = $("#quiz-cont")[0].children.length;
+  console.log(quizLength);
+  let questionNum = 1;
+  for (let i = 0; i < quizLength; i++) {
+    const domPath = $(".question")[i].children;
+    // console.log(domPath);
+    // console.log(domPath[0].textContent);
+    //
+    domPath[0].textContent = "Question " + questionNum;
+    questionNum++;
+  }
+}
 
 // ** Store Questions In Obj for Our API
 function parseUser() {
@@ -184,4 +201,5 @@ $(".q-rmv").click((event) => {
   event.preventDefault();
   // console.dir(event.target.parentElement);
   event.target.parentElement.remove();
+  updateQuesTitles();
 });
