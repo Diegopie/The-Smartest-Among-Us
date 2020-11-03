@@ -92,3 +92,7 @@ p {
 .hide {
     display: none;
 }
+
+.valid {
+    background-color: red;
+}

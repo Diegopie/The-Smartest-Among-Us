@@ -1,4 +1,6 @@
 // * Global Variables
+// ** Checks If Validator Ran
+let valCheck = Boolean;
 // ** Store User Selections
 let strQuestions;
 let randomize = Boolean;
@@ -51,7 +53,7 @@ function makeQuesCont(value) {
 function testAPI() {
   const url =
     "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-  // "https://opentdb.com/api.php?amount=" + 10 + "&type=multiple";
+  // "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
   $.ajax({
     url: url,
     method: "GET",
@@ -100,7 +102,17 @@ function updateQuesTitles() {
     questionNum++;
   }
 }
-
+function validator(elem) {
+  const valPath = elem.value;
+  if (valPath === "") {
+    $(elem).addClass("valid");
+    elem.placeholder = "This cannot be empty :(";
+    valCheck = true;
+  }
+}
+// console.dir($("#qname"));
+// $("#qname")[0].placeholder = "This cannot be empty :(";
+// $("#qname").addClass("valid");
 // ** Store Questions In Obj for Our API
 function parseUser() {
   // *** Variables
@@ -110,7 +122,12 @@ function parseUser() {
   let questionNum = 1;
   // *** Store DOM Elements
   // Get Quiz Name
-  const quizName = $("#qname")[0].value;
+  const quizName = $("#qname")[0];
+  if (quizName.value === "") {
+    quizName.placeholder = "This cannot be empty :(";
+    $(quizName).addClass("valid");
+    valCheck = true;
+  }
   // GET ACCOUNT ID??
   // *** Get All Questions Containers
   // Objects created in for loop will be pushed here
@@ -119,25 +136,34 @@ function parseUser() {
     const domPath = $(".question")[i].children;
     // console.log(domPath);
     // Get Question
-    const question = domPath[2].value;
+    const question = domPath[2];
+    validator(question);
     // Get Correct
-    const correct = domPath[4].value;
+    const correct = domPath[4];
+    validator(correct);
     // Get Incorrect
+    validator(domPath[6]);
+    validator(domPath[7]);
+    validator(domPath[8]);
     const wrong = [domPath[6].value, domPath[7].value, domPath[8].value];
     // Create question object
     const curQuest = {
       questionNum: questionNum,
-      question: question,
-      correctAnswer: correct,
+      question: question.value,
+      correctAnswer: correct.value,
       wrongAnswers: wrong,
     };
     // Push to questions array and increment questionNum
     questions.push(curQuest);
     questionNum++;
   }
+  if (valCheck) {
+    window.alert("Get rekt");
+    return;
+  }
   // *** Create Object for Our Server API
   const apiObj = {
-    quizName: quizName,
+    quizName: quizName.value,
     randomize: randomize,
     accountID: 1,
     questions: questions,
