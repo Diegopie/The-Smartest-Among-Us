@@ -108,10 +108,15 @@ h2 {
   text-align: center;
 }
 
-/* input, label {
-  display: block;
-} */
+p {
+    text-align: center;
+  }
+
 
 .hide {
-  display: none;
+    display: none;
+}
+
+.valid {
+    background-color: red;
 }

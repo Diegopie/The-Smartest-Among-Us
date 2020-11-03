@@ -3,7 +3,22 @@ let score = 0;
 let curQuest = 0;
 // ** Store User Selection for API Req
 let userCat;
+const catValue = {
+  Art: 25,
+  Film: 11,
+  Games: 15,
+  Sports: 21,
+  Anime: 31,
+  Books: 10,
+  Music: 12,
+  Math: 19,
+};
 let userDif;
+const difValue = {
+  Easy: "easy",
+  Medium: "medium",
+  Hard: "hard",
+};
 // ** Store API Res
 const quizRes = [];
 // I originally pushed the trivia api res to quizRes, rather than setting it equal to a variable like with trivia API. This meant I had to add [0] anytime I wanted to use the api res but this caused issus when I was trying to store quizRes in local storage and play the same quiz. It would keep adding an empty index. I solved it by doing what I should have from the start and sending trivAPi (stores api.res) so local storage, so it would behave the same way as doing an actual api call. It just more effort than I want to put in to fix it
@@ -25,8 +40,26 @@ function checkLocal() {
   parseRes();
 }
 // ** Test API Res
-function testAPI() {
-  const url = "https://opentdb.com/api.php?amount=3&type=multiple";
+// function testAPI() {
+//   const url = "https://opentdb.com/api.php?amount=3&type=multiple";
+//   $.ajax({
+//     url: url,
+//     method: "GET",
+//   }).then((res) => {
+//     // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
+//     trivApi = res.results;
+//     quizRes.push(res.results);
+//     parseRes();
+//   });
+// }
+// Test API Res with Category and Difficulty
+function testSelect() {
+  const url =
+    "https://opentdb.com/api.php?amount=10&category=" +
+    catValue[userCat] +
+    "&difficulty=" +
+    difValue[userDif] +
+    "&type=multiple";
   $.ajax({
     url: url,
     method: "GET",
@@ -222,7 +255,8 @@ $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
   $("#scr").removeClass("hide");
-  testAPI();
+  // testAPI();
+  testSelect();
 });
 
 // * Code I wrote but don't want to delete 😅
