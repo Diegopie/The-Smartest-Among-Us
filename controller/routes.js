@@ -2,25 +2,37 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+// working
 router.get("/", (req, res) => {
   res.render("index");
 });
+
+// working
 router.get("", (req, res) => {
   res.render("index");
 });
 
+// working
 router.get("/play", (req, res) => {
   res.render("play");
 });
 
+// working
 router.get("/playRandom", (req, res) => {
   res.render("play-random");
 });
 
+// working
 router.get("/account", (req, res) => {
   res.render("account");
 });
 
+// working
+router.get("/create", (req, res) => {
+  res.render("create");
+});
+
+// working
 // play global quizzes i.e., built-in quizzes
 // this assumes that "admin" is the first User saved,
 // we'll need to initialize the JAWS database with that User
@@ -30,9 +42,6 @@ router.get("/playGlobal", (req, res) => {
       accountID: "1",
     },
   }).then((results) => {
-    // const hbsObj = {
-    //   quizzes: results,
-    // };
     const data = [];
     results.forEach((result) => {
       data.push(result.dataValues);
@@ -40,11 +49,11 @@ router.get("/playGlobal", (req, res) => {
     const hbsObj = {
       quizzes: data,
     };
-    // console.log(results);
     res.render("quizzes", hbsObj);
   });
 });
 
+// working
 // display all quizzes from a specific User
 // (allows for easy sharing of user-created content)
 // shareable link is https://the-smartest-amoung-us.herokuapp.com/account=[username]
@@ -66,43 +75,27 @@ router.get("/account=:username", (req, res) => {
       console.log(quiz);
       hbsObj.quizzes.push(quiz);
     });
-    res.render("User", hbsObj);
+    res.render("user", hbsObj);
   });
 });
 
-router.get("/create", (req, res) => {
-  res.render("create");
-});
-
+// ****************************
+// **** working in Postman ****
+// ****************************
 // *** api routes ***
 // create new user User entry
 router.post("/api/user", (req, res) => {
   db.User.create({
     username: req.body.username,
-    adminKey: req.body.adminKey,
+    password: req.body.password,
   }).then((result) => {
     res.json(result);
   });
 });
 
-// return all quizzes owned by this user
-router.get("/api/user/:UserId", (req, res) => {
-  db.Quiz.findAll({
-    where: {
-      accountID: req.params.UserId,
-    },
-  }).then((results) => {
-    const data = [];
-    results.forEach((result) => {
-      data.push(result.dataValues);
-    });
-    const hbsObj = {
-      quizzes: data,
-    };
-    res.json(hbsObj);
-  });
-});
-
+// ****************************
+// **** working in Postman ****
+// ****************************
 // get quiz from quizID
 router.get("/api/quiz/:quizID", (req, res) => {
   db.Quiz.findOne({
@@ -114,15 +107,31 @@ router.get("/api/quiz/:quizID", (req, res) => {
   });
 });
 
+// ****************************
+// **** working in Postman ****
+// ****************************
 // get quiz questions from quizID
-router.get("api/questions/:quizID", (req, res) => {
+router.get("/api/questions/:quizID", (req, res) => {
   db.Question.findAll({
     where: {
       quizID: req.params.quizID,
     },
-  }).then((result) => {
-    console.log(result);
-    res.json(result);
+    include: [db.Quiz],
+  }).then((questions) => {
+    const questionArr = [];
+    questions.forEach((question) => {
+      const qObj = {};
+      question = question.dataValues;
+      qObj.correct_answer = question.correctAnswer;
+      qObj.incorrect_answers = [];
+      qObj.incorrect_answers.push(question.wrongAnswer);
+      qObj.incorrect_answers.push(question.wrongAnswer2);
+      qObj.incorrect_answers.push(question.wrongAnswer3);
+      qObj.question = question.question;
+      questionArr.push(qObj);
+    });
+    console.log(questionArr);
+    res.json(questionArr);
   });
 });
 
@@ -131,7 +140,7 @@ router.get("api/questions/:quizID", (req, res) => {
 // const newQuiz = {
 //   quizName: "whatever",
 //   randomize: true,
-//   UserID: 1,
+//   accountID: 1,
 //   questions: [
 //     {
 //       questionNum: 1,
@@ -141,13 +150,17 @@ router.get("api/questions/:quizID", (req, res) => {
 //     },
 //   ],
 // };
+
+// ****************************
+// **** working in Postman ****
+// ****************************
 // creating a quiz
 router.post("/api/quiz", (req, res) => {
   let quizID;
   db.Quiz.create({
     quizName: req.body.quizName,
     randomize: req.body.randomize,
-    accountID: req.body.UserID,
+    accountID: req.body.accountID,
   }).then((result) => {
     quizID = result.quizID;
     req.body.questions.forEach((entry) => {
@@ -190,3 +203,21 @@ router.get("api/hiScores/:quizID", (req, res) => {
 });
 
 module.exports = router;
+
+// // return all quizzes owned by this user
+// router.get("/api/user/:UserId", (req, res) => {
+//   db.Quiz.findAll({
+//     where: {
+//       accountID: req.params.UserId,
+//     },
+//   }).then((results) => {
+//     const data = [];
+//     results.forEach((result) => {
+//       data.push(result.dataValues);
+//     });
+//     const hbsObj = {
+//       quizzes: data,
+//     };
+//     res.json(hbsObj);
+//   });
+// });
