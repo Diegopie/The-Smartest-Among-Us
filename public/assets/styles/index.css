@@ -44,7 +44,7 @@ header {
 }
 
 .button:hover {
-  color: #1BEF0C;
+  color: #1BEF0C !important;
 }
 
 /* For Hamburger Menu */
@@ -101,6 +101,10 @@ li:hover {
 justify-content: center;
 }
 
+.bg-dark {
+  background-color: #2b2b2b !important;
+}
+
 h3 {
 text-align: center;
 }
@@ -111,7 +115,6 @@ h2 {
 p {
     text-align: center;
   }
-
 
 .hide {
     display: none;
