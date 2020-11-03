@@ -1,4 +1,6 @@
 // * Global Variables
+// ** Checks If Validator Ran
+let valCheck = Boolean;
 // ** Store User Selections
 let strQuestions;
 let randomize = Boolean;
@@ -45,16 +47,13 @@ function makeQuesCont(value) {
     event.target.parentElement.remove();
     updateQuesTitles();
   });
-  testAPI();
 }
 
 // ** Test API Res
-makeQuesCont(2);
-
 function testAPI() {
   const url =
-    // "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-  "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
+    "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
+  // "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
   $.ajax({
     url: url,
     method: "GET",
@@ -108,7 +107,7 @@ function validator(elem) {
   if (valPath === "") {
     $(elem).addClass("valid");
     elem.placeholder = "This cannot be empty :(";
-    console.log(elem);
+    valCheck = true;
   }
 }
 // console.dir($("#qname"));
@@ -123,7 +122,12 @@ function parseUser() {
   let questionNum = 1;
   // *** Store DOM Elements
   // Get Quiz Name
-  const quizName = $("#qname")[0].value;
+  const quizName = $("#qname")[0];
+  if (quizName.value === "") {
+    quizName.placeholder = "This cannot be empty :(";
+    $(quizName).addClass("valid");
+    valCheck = true;
+  }
   // GET ACCOUNT ID??
   // *** Get All Questions Containers
   // Objects created in for loop will be pushed here
@@ -138,6 +142,9 @@ function parseUser() {
     const correct = domPath[4];
     validator(correct);
     // Get Incorrect
+    validator(domPath[6]);
+    validator(domPath[7]);
+    validator(domPath[8]);
     const wrong = [domPath[6].value, domPath[7].value, domPath[8].value];
     // Create question object
     const curQuest = {
@@ -150,9 +157,13 @@ function parseUser() {
     questions.push(curQuest);
     questionNum++;
   }
+  if (valCheck) {
+    window.alert("Get rekt");
+    return;
+  }
   // *** Create Object for Our Server API
   const apiObj = {
-    quizName: quizName,
+    quizName: quizName.value,
     randomize: randomize,
     accountID: 1,
     questions: questions,
