@@ -55,8 +55,8 @@ exports.getTrivia = async function (options = {}) {
       } else {
         filteredResult = JSON.parse(
           JSON.stringify(result.data.results)
-            .replace(/&quot;/g, "\\")
-            .replace(/&#039;/g, "`")
+            .replace(/&quot;/g, "\\'")
+            .replace(/&#039;/g, "'")
             .replace(/&amp;/g, "&")
             .replace(/&acute;/g, "`")
             .replace(/&eacute;/g, "é")
@@ -65,7 +65,7 @@ exports.getTrivia = async function (options = {}) {
             .replace(/&aacute;/g, "á")
             .replace(/&Aacute;/g, "Á")
             .replace(/&ntilde;/g, "ñ")
-            .replace(/&rdquo;/g, "\\")
+            .replace(/&rdquo;/g, "\\'")
             .replace(/&ouml;/g, "ö")
         );
         resolve(filteredResult);
