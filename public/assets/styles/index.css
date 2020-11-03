@@ -12,23 +12,32 @@ header {
 /* Gives background color for section/article containers and padding between them */
 .cont {
   /* width: 100%; */
+  margin-top: 10%;
   background-color: #2b2b2b;
   padding: 1rem;
-  margin: 0;
   display: flex;
   justify-content: center;
-  align-items: space-around;
+  align-items: center;
   /* justify-self: center; */
 }
 
 /* Create spacing between containers */
+header {
+  margin-bottom: 12%;
+}
+
 /* fieldset {
-  padding-top: 12%;
+  padding-top: 8%;
+  margin-bottom: 8%;
 } */
 
 /* article {
-  margin-top: 12%;
+  margin-top: 10%;
 } */
+
+.spacer {
+  margin-top: 12px;
+}
 
 
 /* For Buttons */
@@ -44,6 +53,20 @@ header {
 }
 
 .button:hover {
+  color: #1BEF0C !important;
+}
+.q-rmv {
+  background-color: #2b2b2b;
+  border: solid;
+  color: white;
+  border-radius: 8px;
+  padding: 2px 18px 2px 12px;
+  text-align: center;
+  display: inline-block;
+  margin: 3px 1px;
+}
+
+.q-rmv:hover {
   color: #1BEF0C !important;
 }
 

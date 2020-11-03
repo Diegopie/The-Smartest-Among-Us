@@ -5,20 +5,18 @@
   </header>
   <main>
     <section>
-      <form>
+      <form class="container">
         <!-- For Quiz Name and Choose Auto -->
-        <fieldset class="container cont">
-          <article class="row">
-            {{!-- <h3 class="col-12">Name Your Quiz</h3> --}}
-            <label for="qname">Name Your Quiz</label>  
-            <!-- This needs to display above but idfk how to do that  https://stackoverflow.com/questions/6046110/styling-form-with-label-above-inputs-->
+        <fieldset class="row cont">
+          <article class="col-12">
+            <h3 class="">Name Your Quiz</h3>
             <input class="col-12" type="text" id="qname" name="qname">
           </article>
-          <article class ="row" id="amnt">
-            <h3 class="col-12">How Many Questions Would You Like to Start With?</h3>
-            <p>You can add or remove questions later.</p>
-            <select id="amnt-val">
-              <option selected disabled>Questions</option>
+          <article class="col-12 spacer" id="amnt">
+            <h3 class="spacer">How Many Questions Would You Like to Start With?</h3>
+            <p>You can add or remove questions later</p>
+            <select class="col-5" id="amnt-val">
+              {{!-- <option selected disabled>Questions</option> --}}
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -30,47 +28,55 @@
               <option>09</option>
               <option>10</option>
             </select>
-            <button class="button" id="amnt-sbt">Yes</button>
+            <button class="button col-6" id="amnt-sbt">Yes</button>
           </article>
-          <article class ="row hide" id="rand">
-            <h3 class="col-12">Would You Like Your Quiz to Be Played in a Random Order?</h3>
+          <article class ="spacer hide" id="rand">
+            <h3 class="spacer">Would You Like Your Quiz to Be Played in a Random Order?</h3>
             <p>We'll shuffle your quiz every time it's played for a fresh experience every time!</p>
-            <button class="button" id="randyes">Yes</button>
-            <button class="button" id="randno">No</button>
+            <article class="row">
+              <button class="button" id="randyes">Yes</button>
+              <button class="button" id="randno">No</button>
+            </article>
           </article>
-          <article class ="row hide" id="auto">
-            <h3 class="col-12">Would You Like to Auto Populate Your Quiz</h3>
+          <article class ="spacer hide" id="auto">
+            <h3 class="spacer">Would You Like to Auto Populate Your Quiz</h3>
             <p>Choose from category and difficulty to instantly create questions and answers for your quiz!</p>
-            <button class="button" id="autoyes">Yes</button>
-            <button class="button" id="autono">No</button>
+            <article class="row">
+              <button class="button" id="autoyes">Yes</button>
+              <button class="button" id="autono">No</button>
+            </article>
           </article>
-          <article class="hide" id="settings">
-            <article>
+          <article class="spacer hide" id="settings">
+            <article class="row">
               <h3>Choose A Category</h3>
-              <button class="cat button">Art</button>
-              <button class="cat button">Film</button>
-              <button class="cat button">Games</button>
-              <button class="cat button">Sports</button>
-              <button class="cat button">Anime</button>
-              <button class="cat button">Books</button>
-              <button class="cat button">Music</button>
-              <button class="cat button">Math</button>
+              <button class="col-4 cat button">Art</button>
+              <button class="col-4 cat button">Film</button>
+              <button class="col-4 cat button">Games</button>
+              <button class="col-4 cat button">Sports</button>
+              <button class="col-4 cat button">Anime</button>
+              <button class="col-4 cat button">Books</button>
+              <button class="col-4 cat button">Music</button>
+              <button class="col-4 cat button">Math</button>
             </article>
-            <article>
+            <article class="row spacer">
               <h3>Choose A Difficulty</h3>
-              <button class="dif button">Easy</button>
-              <button class="dif button">Medium</button>
-              <button class="dif button">Hard</button>
+              <button class="col-4 dif button">Easy</button>
+              <button class="col-4 dif button">Medium</button>
+              <button class="col-4 dif button">Hard</button>
             </article>
-            <button id="sub" class="button">Submit</button>
+            <article class="spacer row">
+              <button id="sub" class="button">Submit</button>
+            </article>
           </article>
         </fieldset>
         <!-- For Questions -->
         <fieldset id="quiz-cont" class="hide">
           
         </fieldset>
-        <button id="new-btn" class="button hide">Add A New Question</button>
-        <button id="api" class="button hide">Submit</button>
+        <article class="row spacer hide" id="btns">
+          <button id="new-btn" class="button">Add A New Question</button>
+          <button id="api" class="button">Submit</button>
+        </article>
       </form>
     </section>
   </main>

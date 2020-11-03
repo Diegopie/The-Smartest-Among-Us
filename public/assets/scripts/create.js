@@ -10,8 +10,6 @@ $(() => {
   // ** Store API Res
   let quizRes;
 
-  console.log($("#quiz-cont")[0].children.length);
-
   // * Functions
   // ** Create Question Containers Based Off User Selection
   function makeQuesCont(value) {
@@ -19,9 +17,11 @@ $(() => {
     for (let i = 0; i < value; i++) {
       // *** Create Elements
       const qNum = $("#quiz-cont")[0].children.length + 1;
-      const qCont = $("<article>").addClass("cont question");
-      const qTitle = $("<h3>").text("Question " + qNum);
-      const btn = $("<button>").addClass("button q-rmv").text("Remove");
+      const qCont = $("<article>").addClass("row cont question");
+      const qTitle = $("<h3>")
+        .text("Question " + qNum)
+        .addClass("col-8");
+      const btn = $("<button>").addClass("col-1 q-rmv").text("X");
       const qInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
       const corTitle = $("<h3>").text("Correct Answer");
       const cInpt = $("<input>").attr({
@@ -84,8 +84,7 @@ $(() => {
     }
     // *** Display Quiz Container, New Q Container Button, and Submit Button
     $("#quiz-cont").removeClass("hide");
-    $("#new-btn").removeClass("hide");
-    $("#api").removeClass("hide");
+    $("#btns").removeClass("hide");
   }
 
   // ** Update the Question Number When a User Deletes a Question Container
@@ -111,9 +110,7 @@ $(() => {
       valCheck = true;
     }
   }
-  // console.dir($("#qname"));
-  // $("#qname")[0].placeholder = "This cannot be empty :(";
-  // $("#qname").addClass("valid");
+
   // ** Store Questions In Obj for Our API
   function parseUser() {
     // *** Variables
