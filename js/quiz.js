@@ -56,7 +56,7 @@ exports.getTrivia = async function (options = {}) {
         filteredResult = JSON.parse(
           JSON.stringify(result.data.results)
             .replace(/&quot;/g, "\\")
-            .replace(/&#039;/g, "`")
+            .replace(/&#039;/g, "w")
             .replace(/&amp;/g, "&")
             .replace(/&acute;/g, "`")
             .replace(/&eacute;/g, "é")

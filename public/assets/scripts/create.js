@@ -19,7 +19,24 @@ function testAPI() {
     renderQuiz();
   });
 }
-
+// Test API Res with Category and Difficulty
+// function testCatDifAPI() {
+//   const url =
+//     "https://opentdb.com/api.php?amount=10&category=" +
+//     userCat +
+//     "&difficulty=" +
+//     userDif +
+//     "&type=multiple";
+//   $.ajax({
+//     url: url,
+//     method: "GET",
+//   }).then((res) => {
+//     // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
+//     trivApi = res.results;
+//     quizRes.push(res.results);
+//     // parseRes();
+//   });
+// }
 // ** Display parsedQuiz to the Screen
 function renderQuiz() {
   // *** Loop through the Length of the quizRes array
@@ -130,6 +147,7 @@ $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
   testAPI();
+  // testCatDifAPI();
 });
 // Make Server API Req
 $("#api").click((event) => {
