@@ -5,11 +5,24 @@ let valCheck = Boolean;
 let strQuestions;
 let randomize = Boolean;
 let userCat;
+const catValue = {
+  Art: 25,
+  Film: 11,
+  Games: 15,
+  Sports: 21,
+  Anime: 31,
+  Books: 10,
+  Music: 12,
+  Math: 19,
+};
 let userDif;
+const difValue = {
+  Easy: "easy",
+  Medium: "medium",
+  Hard: "hard",
+};
 // ** Store API Res
 let quizRes;
-
-console.log($("#quiz-cont")[0].children.length);
 
 // * Functions
 // ** Create Question Containers Based Off User Selection
@@ -59,6 +72,26 @@ function testAPI() {
     method: "GET",
   }).then((res) => {
     // Push res to quizRes then run renderQuiz to update DOM
+    quizRes = res.results;
+    renderQuiz();
+  });
+}
+function testSelect() {
+  const url =
+    "https://opentdb.com/api.php?amount=" +
+    strQuestions +
+    "&category=" +
+    catValue[userCat] +
+    "&difficulty=" +
+    difValue[userDif] +
+    "&type=multiple";
+  console.log(url);
+  $.ajax({
+    url: url,
+    method: "GET",
+  }).then((res) => {
+    console.log(res);
+    console.log(res.results);
     quizRes = res.results;
     renderQuiz();
   });
@@ -116,6 +149,7 @@ function validator(elem) {
 // ** Store Questions In Obj for Our API
 function parseUser() {
   // *** Variables
+  valCheck = false;
   // Checks how many question containers are on the dom
   const quizLength = $("#quiz-cont")[0].children.length;
   // Api requires questionNumber, this will increment by one during a for loop
@@ -169,6 +203,9 @@ function parseUser() {
     questions: questions,
   };
   // ONCE WE ARE SERVER CONNECTED, WE CAN PASS THIS OBJECT TO AN API REQ
+  $.post("/api/quiz", apiObj).then(() => {
+    console.log("work??");
+  });
   console.log("-- Obj for API --");
   console.log(apiObj);
 }
@@ -226,7 +263,8 @@ $(".dif").click((event) => {
 $("#sub").click((event) => {
   event.preventDefault();
   $("#settings").addClass("hide");
-  testAPI();
+  // testAPI();
+  testSelect();
 });
 // Make Server API Req
 $("#api").click((event) => {

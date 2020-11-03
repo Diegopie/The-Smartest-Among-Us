@@ -66,6 +66,7 @@ function testSelect() {
   }).then((res) => {
     // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
     trivApi = res.results;
+    console.log(res.results);
     quizRes.push(res.results);
     parseRes();
   });
@@ -102,12 +103,13 @@ function parseRes() {
       correct: correctA,
     };
     parsedQuiz.push(curObj);
-    // console.log(parsedQuiz);
+    console.log(parsedQuiz);
   }
   // *** With parsedQuiz Fully Populated, render data to DOM
   renderQuizBetter();
 }
 
+// ** Render Quiz to DOM
 function renderQuizBetter() {
   // *** Bring in Updated Value of curQuest, This Will Be Used for parsedQuiz Index
   curQuest;
