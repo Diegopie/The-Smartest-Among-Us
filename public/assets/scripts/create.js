@@ -4,20 +4,21 @@ let strQuestions;
 let randomize = Boolean;
 let userCat;
 let userDif;
-let quizRes;
 // ** Store API Res
+let quizRes;
+
+console.log($("#quiz-cont")[0].children.length);
 
 // * Functions
-
-makeQuesCont(10);
-// ** Create Question Containers
+// ** Create Question Containers Based Off User Selection
 function makeQuesCont(value) {
+  // Loop For As Many Times The User Wants To Create A Question
   for (let i = 0; i < value; i++) {
     // *** Create Elements
-    const qNum = i + 1;
+    const qNum = $("#quiz-cont")[0].children.length + 1;
     const qCont = $("<article>").addClass("cont question");
     const qTitle = $("<h3>").text("Question " + qNum);
-    const btn = $("<button>").addClass("button q-rmv").text("X");
+    const btn = $("<button>").addClass("button q-rmv").text("Remove");
     const qInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
     const corTitle = $("<h3>").text("Correct Answer");
     const cInpt = $("<input>").attr({
@@ -25,7 +26,9 @@ function makeQuesCont(value) {
       name: "q" + qNum + "-crt",
     });
     const inTitle = $("<h3>").text("Imposter Answers");
+    // *** Append to qCont
     qCont.append(qTitle, btn, qInpt, corTitle, cInpt, inTitle);
+    // *** Loop to Create the Three Imposter Question Elements and Append to qCont
     for (let j = 1; j < 4; j++) {
       const iInpt = $("<input>").attr({
         type: "text",
@@ -36,14 +39,19 @@ function makeQuesCont(value) {
     // *** Append to DOM
     $("#quiz-cont").append(qCont);
   }
-  testAPI();
+  $(".q-rmv").click((event) => {
+    event.preventDefault();
+    // console.dir(event.target.parentElement);
+    event.target.parentElement.remove();
+    updateQuesTitles();
+  });
 }
 
 // ** Test API Res
 function testAPI() {
   const url =
-    // "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-    "https://opentdb.com/api.php?amount=" + 10 + "&type=multiple";
+    "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
+  // "https://opentdb.com/api.php?amount=" + 10 + "&type=multiple";
   $.ajax({
     url: url,
     method: "GET",
@@ -54,10 +62,11 @@ function testAPI() {
   });
 }
 
-// ** Display parsedQuiz to the Screen
+// ** Display API Res to DOM (This depends on children elements. Any adding additional elements to the makeQuestCont() will break this!)
 function renderQuiz() {
   // *** Loop through the Length of the quizRes array
   for (let i = 0; i < quizRes.length; i++) {
+    // ** Variables
     const resPath = quizRes[i];
     const domPath = $(".question")[i].children;
     // console.dir(domPath);
@@ -70,21 +79,23 @@ function renderQuiz() {
     domPath[7].value = resPath.incorrect_answers[1];
     domPath[8].value = resPath.incorrect_answers[2];
   }
-  // Show Update DOM Elements
+  // *** Display Quiz Container, New Q Container Button, and Submit Button
   $("#quiz-cont").removeClass("hide");
+  $("#new-btn").removeClass("hide");
   $("#api").removeClass("hide");
 }
 
+// ** Update the Question Number When a User Deletes a Question Container
 function updateQuesTitles() {
   // *** Variables
   const quizLength = $("#quiz-cont")[0].children.length;
-  console.log(quizLength);
+  // console.log(quizLength);
   let questionNum = 1;
+  // *** Loop Through the Amount of Question Containers Currently on the DOM and Update Them From 1
   for (let i = 0; i < quizLength; i++) {
     const domPath = $(".question")[i].children;
     // console.log(domPath);
     // console.log(domPath[0].textContent);
-    //
     domPath[0].textContent = "Question " + questionNum;
     questionNum++;
   }
@@ -131,13 +142,13 @@ function parseUser() {
     accountID: 1,
     questions: questions,
   };
-  // ONCE we are server connected, we can pass this object to an API Req
+  // ONCE WE ARE SERVER CONNECTED, WE CAN PASS THIS OBJECT TO AN API REQ
   console.log("-- Obj for API --");
   console.log(apiObj);
 }
 
 // * Click Listeners
-// ** Store How Many Questions To Render
+// ** Create and Append Question Containers Based On User Selection
 $("#amnt-sbt").click((event) => {
   event.preventDefault();
   strQuestions = parseInt($("#amnt-val").val());
@@ -196,10 +207,8 @@ $("#api").click((event) => {
   event.preventDefault();
   parseUser();
 });
-
-$(".q-rmv").click((event) => {
+// Add A New Question Container
+$("#new-btn").click((event) => {
   event.preventDefault();
-  // console.dir(event.target.parentElement);
-  event.target.parentElement.remove();
-  updateQuesTitles();
+  makeQuesCont(1);
 });
