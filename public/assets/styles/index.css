@@ -1,93 +1,147 @@
 body {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
+  margin: 0px;
+  padding: 0px;
 }
+/* 
+header {
+  display: flex;
+} */
 
 /* Gives background color for section/article containers and padding between them */
 .cont {
-    background-color: #2b2b2b;
-    padding-bottom: 8%;
-    display: grid;
-    justify-content: center;
-    align-items: center;
+  /* width: 100%; */
+  margin-top: 10%;
+  background-color: #2b2b2b;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* justify-self: center; */
 }
 
 /* Create spacing between containers */
-fieldset {
-    padding-top: 12%;
-}
-
-article {
-    margin-top: 12%;
-}
-
 header {
-    margin-bottom: 12%;
+  margin-bottom: 12%;
 }
+
+/* fieldset {
+  padding-top: 8%;
+  margin-bottom: 8%;
+} */
+
+/* article {
+  margin-top: 10%;
+} */
+
+.spacer {
+  margin-top: 12px;
+}
+
 
 /* For Buttons */
 .button {
-    background-color: #2b2b2b;
-    border: solid;
-    color: white;
-    border-radius: 8px;
-    padding: 15px 32px;
-    text-align: center;
-    display: inline-block;
-    margin: 4px 2px;
+  background-color: #2b2b2b;
+  border: solid;
+  color: white;
+  border-radius: 8px;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  margin: 4px 2px;
 }
 
 .button:hover {
-    color: #1BEF0C;
+  color: #1BEF0C !important;
+}
+.q-rmv {
+  background-color: #2b2b2b;
+  border: solid;
+  color: white;
+  border-radius: 8px;
+  padding: 2px 18px 2px 12px;
+  text-align: center;
+  display: inline-block;
+  margin: 3px 1px;
+}
+
+.q-rmv:hover {
+  color: #1BEF0C !important;
 }
 
 /* For Hamburger Menu */
-/* .hamb {
-    background-color: white;
-} */
+#hamburger {
+  color: white;
+}
+#hamburger:hover {
+color: #1BEF0C;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+background-color: #2b2b2b;
+}
+.dropdown-item {
+color: white;
+}
+.dropdown-item:hover {
+background-color: #2b2b2b;
+color: #1BEF0C;
+}
 
 /* For Quiz and Dropdown Options */
+ul {
+  padding-left: 0px;
+}
+
 li a{
-    color: white;
+  color: white;
 }
 
 li a:hover {
-    color: #1BEF0C;
-    text-decoration: none;
+  color: #1BEF0C;
+  text-decoration: none;
 }
 
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 li:hover {
-    color: #1BEF0C;
-    text-decoration: none;
+  color: #1BEF0C;
+  text-decoration: none;
 }
 
 /* Remove default href garb */
 .text {
-    color:white;
-    text-decoration: none;
+  color:white;
+  text-decoration: none;
 }
 
 .text:hover {
-    color: #1BEF0C;
-    text-decoration: none;
+  color: #1BEF0C;
+  text-decoration: none;
 }
 
 .row {
-  justify-content: center;
+justify-content: center;
+}
+
+.bg-dark {
+  background-color: #2b2b2b !important;
 }
 
 h3 {
+text-align: center;
+}
+h2 {
   text-align: center;
 }
 
 p {
     text-align: center;
   }
-
 
 .hide {
     display: none;

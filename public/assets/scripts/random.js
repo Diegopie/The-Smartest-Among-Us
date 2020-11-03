@@ -68,6 +68,7 @@ function testSelect() {
     trivApi = res.results;
     console.log(res.results);
     quizRes.push(res.results);
+    console.log(quizRes);
     parseRes();
   });
 }
@@ -121,7 +122,7 @@ function renderQuizBetter() {
   }
   // *** Variables to Create Quiz DOM
   const curQaArr = parsedQuiz[curQuest];
-  const qaContain = $("<article>").addClass("cont qa");
+  const qaContain = $("<article>").addClass("row cont qa");
   const question = $("<h3>").text(curQaArr.question);
   const answers = $("<ul>").addClass("check").attr("id", "answers");
   // *** This Will Be Sent to makeButt to display the correct answer if the user is wrong
@@ -195,16 +196,17 @@ function saveQuiz() {
   // Update Final Score
   $("#scr")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
-  const saveCont = $("<section>").addClass("cont sv-cont");
+  const saveCont = $("<section>").addClass("row cont sv-cont");
   // *** Containers for Text and Append to saveCont
-  const titlesCont = $("<article>");
+  const titlesCont = $("<article>").addClass("col-12");
   const title = $("<h3>").text("Would You Like to Save This Quiz?");
   const p = $("<p>").text(
     "If you're not logged in, you must do so or create an account"
   );
-  saveCont.append(titlesCont, title, p);
+  titlesCont.append(title, p);
+  saveCont.append(titlesCont);
   // *** Create Container for Buttons and Append to saveCont
-  const submCont = $("<article>");
+  const submCont = $("<article>").addClass("row");
   const butYes = $("<button>").addClass("button sv-yes").text("Yes");
   const butNo = $("<button>").addClass("button sv-again").text("Play Again");
   const butPlay = $("<button>").addClass("button sv-play").text("Play Another");
