@@ -122,13 +122,17 @@ function renderQuizBetter() {
   }
   // *** Variables to Create Quiz DOM
   const curQaArr = parsedQuiz[curQuest];
-  const qaContain = $("<article>").addClass("row cont qa");
+  const contain = $("<article>").addClass("row cont qa");
+  const queAnsCont = $("<article>").addClass("col-7 col-md-4");
   const question = $("<h3>").text(curQaArr.question);
+  const ansCont = $("<div>").addClass("row");
   const answers = $("<ul>").addClass("check").attr("id", "answers");
   // *** This Will Be Sent to makeButt to display the correct answer if the user is wrong
   const correctAns = curQaArr.answers[curQaArr.correct];
   // *** Append Elements to Each Other then to DOM
-  qaContain.append(question, answers);
+  ansCont.append(answers);
+  queAnsCont.append(question, ansCont);
+  contain.append(queAnsCont);
   for (let i = 0; i < curQaArr.answers.length; i++) {
     const curAns = $("<li>")
       // .text(curQaArr.answers[i])
@@ -143,7 +147,7 @@ function renderQuizBetter() {
     curAns.append(aTag);
     answers.append(curAns);
   }
-  $("#quiz").append(qaContain);
+  $("#quiz").append(contain);
   // *** Click Listener to Check Correct Answer
   console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {
@@ -171,16 +175,22 @@ function renderQuizBetter() {
 // ** Creates a Button That Shows Users Info and Can Load the Next Question
 function makeButt(value, answ) {
   // *** Append A Button To DOM
-  const buttCont = $("<article>").addClass("cont").attr("id", "nxtBtn");
+  const nextCont = $("<article>")
+    .addClass("col-7 col-md-4")
+    .attr("id", "nxtBtn");
   const result = $("<h3>").text(value);
+  const buttCont = $("<div>").addClass("row");
   const butt = $("<button>").addClass("button nxt").text("Next");
-  buttCont.append(result, butt);
-  $(".qa").append(buttCont);
+  buttCont.append(butt);
+  nextCont.append(result, buttCont);
+  $(".qa").append(nextCont);
   // *** If User is Wrong, Display the Correct Answer
   if (answ !== undefined) {
+    const corCon = $("<article>").addClass("col-7 col-md-4");
     const corTitle = $("<h4>").text("Correct Answer:");
     const corAns = $("<h5>").addClass("cor-ans").text(answ);
-    $(".qa").append(corTitle, corAns);
+    corCon.append(corTitle, corAns);
+    $(".qa").append(corCon);
   }
   // Increase the Value of curQuest So Next Question Will Load When User Clicks
   curQuest++;
