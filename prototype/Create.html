@@ -43,16 +43,10 @@
             <!-- <label for="qname">Name Your Quiz</label>  This needs to display above but idfk how to do that  https://stackoverflow.com/questions/6046110/styling-form-with-label-above-inputs-->
             <input type="text" id="qname" name="qname">
           </article>
-          
-          <article class ="row" id="rand">
-            <h3 class="col-12">Would You Like Your Quiz to Be Played in a Random Order?</h3>
-            <button class="button" id="randyes">Yes</button>
-            <button class="button" id="randno">No</button>
-          </article>
-          <article class ="row hide" id="auto">
+          <article class ="row" id="auto">
             <h3 class="col-12">Would You Like to Auto Populate Your Quiz</h3>
-            <button class="button" id="autoyes">Yes</button>
-            <button class="button" id="autono">No</button>
+            <button class="button" id="yes">Yes</button>
+            <button class="button" id="no">No</button>
           </article>
           <article class="hide" id="settings">
             <article>
@@ -76,10 +70,10 @@
           </article>
         </fieldset>
         <!-- For Questions -->
-        <fieldset id="quiz-cont" class="hide">
-          <article class="cont question">
+        <fieldset>
+          <article class="cont">
             <h3>Question 1</h3>
-            <input type="text" name="q1">
+            <input type="text" id="q1" name="q1">
             <h3>Correct Answer</h3>
             <input type="text" id="q1-crt" name="q1-crt">
             <h3>Imposter Answers</h3>
@@ -87,9 +81,9 @@
             <input type="text" id="q1-wrg2" name="q1-wrg2">
             <input type="text" id="q1-wrg3" name="q1-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 2</h3>
-            <input type="text" name="q2">
+            <input type="text" id="q2" name="q2">
             <h3>Correct Answer</h3>
             <input type="text" id="q2-crt" name="q2-crt">
             <h3>Imposter Answers</h3>
@@ -97,9 +91,9 @@
             <input type="text" id="q2-wrg2" name="q2-wrg2">
             <input type="text" id="q2-wrg3" name="q2-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 3</h3>
-            <input type="text" name="q3">
+            <input type="text" id="q3" name="q3">
             <h3>Correct Answer</h3>
             <input type="text" id="q3-crt" name="q3-crt">
             <h3>Imposter Answers</h3>
@@ -107,9 +101,9 @@
             <input type="text" id="q3-wrg2" name="q3-wrg2">
             <input type="text" id="q3-wrg3" name="q3-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 4</h3>
-            <input type="text" name="q4">
+            <input type="text" id="q4" name="q4">
             <h3>Correct Answer</h3>
             <input type="text" id="q4-crt" name="q4-crt">
             <h3>Imposter Answers</h3>
@@ -117,9 +111,9 @@
             <input type="text" id="q4-wrg2" name="q4-wrg2">
             <input type="text" id="q4-wrg3" name="q4-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 5</h3>
-            <input type="text" name="q5">
+            <input type="text" id="q5" name="q5">
             <h3>Correct Answer</h3>
             <input type="text" id="q5-crt" name="q5-crt">
             <h3>Imposter Answers</h3>
@@ -127,9 +121,9 @@
             <input type="text" id="q5-wrg2" name="q5-wrg2">
             <input type="text" id="q5-wrg3" name="q5-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 6</h3>
-            <input type="text" name="q6">
+            <input type="text" id="q6" name="q6">
             <h3>Correct Answer</h3>
             <input type="text" id="q6-crt" name="q6-crt">
             <h3>Imposter Answers</h3>
@@ -137,9 +131,9 @@
             <input type="text" id="q6-wrg2" name="q6-wrg2">
             <input type="text" id="q6-wrg3" name="q6-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 7</h3>
-            <input type="text" name="q7">
+            <input type="text" id="q7" name="q7">
             <h3>Correct Answer</h3>
             <input type="text" id="q7-crt" name="q7-crt">
             <h3>Imposter Answers</h3>
@@ -147,9 +141,9 @@
             <input type="text" id="q7-wrg2" name="q7-wrg2">
             <input type="text" id="q7-wrg3" name="q7-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 8</h3>
-            <input type="text" name="q8">
+            <input type="text" id="q8" name="q8">
             <h3>Correct Answer</h3>
             <input type="text" id="q8-crt" name="q8-crt">
             <h3>Imposter Answers</h3>
@@ -157,9 +151,9 @@
             <input type="text" id="q8-wrg2" name="q8-wrg2">
             <input type="text" id="q8-wrg3" name="q8-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 9</h3>
-            <input type="text" name="q9">
+            <input type="text" id="q9" name="q9">
             <h3>Correct Answer</h3>
             <input type="text" id="q9-crt" name="q9-crt">
             <h3>Imposter Answers</h3>
@@ -167,9 +161,9 @@
             <input type="text" id="q9-wrg2" name="q9-wrg2">
             <input type="text" id="q9-wrg3" name="q9-wrg3">
           </article>
-          <article class="cont question">
+          <article class="cont">
             <h3>Question 10</h3>
-            <input type="text" name="q10">
+            <input type="text" id="q10" name="q10">
             <h3>Correct Answer</h3>
             <input type="text" id="q10-crt" name="q10-crt">
             <h3>Imposter Answers</h3>
@@ -178,7 +172,6 @@
             <input type="text" id="q10-wrg3" name="q10-wrg3">
           </article>
         </fieldset>
-        <button id="api" class="button hide">Submit</button>
       </form>
     </section>
   </main>

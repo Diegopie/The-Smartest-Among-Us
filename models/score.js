@@ -16,10 +16,16 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    quizID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+    // quizID: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
   });
+  Score.associate = (models) => {
+    Score.belongsTo(models.Quiz, {
+      foreignKey: "quizID",
+      targetKey: "quizID",
+    });
+  };
   return Score;
 };

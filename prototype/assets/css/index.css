@@ -9,10 +9,12 @@ body {
     padding-bottom: 8%;
     display: grid;
     justify-content: center;
-    align-items: center;
 }
 
 /* Create spacing between containers */
+fieldset {
+    padding-top: 12%;
+}
 
 article {
     margin-top: 12%;
@@ -73,13 +75,7 @@ li:hover {
     text-decoration: none;
 }
 
-.row {
-    justify-content: center;
-  }
-  
-  h3 {
-    text-align: center;
-  }
+
 
 
 .hide {

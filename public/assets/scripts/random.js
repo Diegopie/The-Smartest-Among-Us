@@ -67,6 +67,7 @@ function testSelect() {
     // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
     trivApi = res.results;
     quizRes.push(res.results);
+    console.log(quizRes);
     parseRes();
   });
 }
@@ -193,16 +194,17 @@ function saveQuiz() {
   // Update Final Score
   $("#scr")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
-  const saveCont = $("<section>").addClass("cont sv-cont");
+  const saveCont = $("<section>").addClass("row cont sv-cont");
   // *** Containers for Text and Append to saveCont
-  const titlesCont = $("<article>");
+  const titlesCont = $("<article>").addClass("col-12");
   const title = $("<h3>").text("Would You Like to Save This Quiz?");
   const p = $("<p>").text(
     "If you're not logged in, you must do so or create an account"
   );
-  saveCont.append(titlesCont, title, p);
+  titlesCont.append(title, p);
+  saveCont.append(titlesCont);
   // *** Create Container for Buttons and Append to saveCont
-  const submCont = $("<article>");
+  const submCont = $("<article>").addClass("row");
   const butYes = $("<button>").addClass("button sv-yes").text("Yes");
   const butNo = $("<button>").addClass("button sv-again").text("Play Again");
   const butPlay = $("<button>").addClass("button sv-play").text("Play Another");
