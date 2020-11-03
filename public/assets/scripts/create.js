@@ -45,13 +45,16 @@ function makeQuesCont(value) {
     event.target.parentElement.remove();
     updateQuesTitles();
   });
+  testAPI();
 }
 
 // ** Test API Res
+makeQuesCont(2);
+
 function testAPI() {
   const url =
-    "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-  // "https://opentdb.com/api.php?amount=" + 10 + "&type=multiple";
+    // "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
+  "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
   $.ajax({
     url: url,
     method: "GET",
@@ -100,7 +103,17 @@ function updateQuesTitles() {
     questionNum++;
   }
 }
-
+function validator(elem) {
+  const valPath = elem.value;
+  if (valPath === "") {
+    $(elem).addClass("valid");
+    elem.placeholder = "This cannot be empty :(";
+    console.log(elem);
+  }
+}
+// console.dir($("#qname"));
+// $("#qname")[0].placeholder = "This cannot be empty :(";
+// $("#qname").addClass("valid");
 // ** Store Questions In Obj for Our API
 function parseUser() {
   // *** Variables
@@ -119,16 +132,18 @@ function parseUser() {
     const domPath = $(".question")[i].children;
     // console.log(domPath);
     // Get Question
-    const question = domPath[2].value;
+    const question = domPath[2];
+    validator(question);
     // Get Correct
-    const correct = domPath[4].value;
+    const correct = domPath[4];
+    validator(correct);
     // Get Incorrect
     const wrong = [domPath[6].value, domPath[7].value, domPath[8].value];
     // Create question object
     const curQuest = {
       questionNum: questionNum,
-      question: question,
-      correctAnswer: correct,
+      question: question.value,
+      correctAnswer: correct.value,
       wrongAnswers: wrong,
     };
     // Push to questions array and increment questionNum
