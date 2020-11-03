@@ -1,14 +1,16 @@
 <!-- Header -->
-<header>
-  <section class="container cont">
-    <article class="row">
-      <h2 class="">Account</h2>
+<header class="container-fluid cont">
+  <div class="row">
+    <h2 class="col-12">Account</h2>
+    <h3 class="col-12" id="user">{{ username }}</h3>
+  </div>
+    {{!-- <article class="row">
+      
     </article>
     <article class="row">
-      <h3 class="col-12" id="user">{{ username }}</h3>
+      
       <button class="button" id="Logout">Logout</button>
-    </article>
-  </section>
+    </article> --}}
 </header>
 <!-- Page Content -->
 <main class="container">
@@ -19,7 +21,7 @@
     {{/each}}
   </section>
   <!-- Display Create Account If Not Logged In -->
-  <section class="row">
+  {{!-- <section class="row">
     <button class="col-6 button"><a class="text" href="./cre-account.html">Create Account</a></button>
-  </section>
+  </section> --}}
 </main>
