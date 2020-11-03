@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Quiz.associate = (models) => {
-    Quiz.belongsTo(models.Account, {
+    Quiz.belongsTo(models.User, {
       foreignKey: "accountID",
       targetKey: "accountID",
     });

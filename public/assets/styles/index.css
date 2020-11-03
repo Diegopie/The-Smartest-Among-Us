@@ -108,6 +108,9 @@ h2 {
   text-align: center;
 }
 
+/* input, label {
+  display: block;
+} */
 
 .hide {
   display: none;

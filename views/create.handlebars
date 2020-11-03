@@ -1,147 +1,80 @@
 <header>
-  <section class="col cont">
-    <h2>Create</h2>
-  </section>
-</header>
-<main>
-  <section>
-    <form>
-      <!-- For Quiz Name and Choose Auto -->
-      <fieldset class="container cont">
-        <article class="row">
-          <h3 class="col-12">Name Your Quiz</h3>
-          <!-- <label for="qname">Name Your Quiz</label>  This needs to display above but idfk how to do that  https://stackoverflow.com/questions/6046110/styling-form-with-label-above-inputs-->
-          <input type="text" id="qname" name="qname">
-        </article>
-        <article class="row" id="auto">
-          <h3 class="col-12">Would You Like to Auto Populate Your Quiz</h3>
-          <button class="button" id="yes">Yes</button>
-          <button class="button" id="no">No</button>
-        </article>
-        <article class="hide" id="settings">
-          <article>
-            <h3>Choose A Category</h3>
-            <button class="cat button">Art</button>
-            <button class="cat button">Film</button>
-            <button class="cat button">Games</button>
-            <button class="cat button">Sports</button>
-            <button class="cat button">Anime</button>
-            <button class="cat button">Books</button>
-            <button class="cat button">Music</button>
-            <button class="cat button">Math</button>
+    <section class="col cont">
+      <h2>Create</h2>
+    </section>
+  </header>
+  <main>
+    <section>
+      <form>
+        <!-- For Quiz Name and Choose Auto -->
+        <fieldset class="container cont">
+          <article class="row">
+            {{!-- <h3 class="col-12">Name Your Quiz</h3> --}}
+            <label for="qname">Name Your Quiz</label>  
+            <!-- This needs to display above but idfk how to do that  https://stackoverflow.com/questions/6046110/styling-form-with-label-above-inputs-->
+            <input class="col-12" type="text" id="qname" name="qname">
           </article>
-          <article>
-            <h3>Choose A Difficulty</h3>
-            <button class="dif button">Easy</button>
-            <button class="dif button">Medium</button>
-            <button class="dif button">Hard</button>
+          <article class ="row" id="amnt">
+            <h3 class="col-12">How Many Questions Would You Like to Start With?</h3>
+            <p>You can add or remove questions later.</p>
+            <select id="amnt-val">
+              <option selected disabled>Questions</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+            </select>
+            <button class="button" id="amnt-sbt">Yes</button>
           </article>
-          <button id="sub" class="button">Submit</button>
-        </article>
-      </fieldset>
-      <!-- For Questions -->
-      <fieldset>
-        <article class="cont">
-          <h3>Question 1</h3>
-          <input type="text" id="q1" name="q1">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q1-crt" name="q1-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q1-wrg1" name="q1-wrg1">
-          <input type="text" id="q1-wrg2" name="q1-wrg2">
-          <input type="text" id="q1-wrg3" name="q1-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 2</h3>
-          <input type="text" id="q2" name="q2">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q2-crt" name="q2-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q2-wrg1" name="q2-wrg1">
-          <input type="text" id="q2-wrg2" name="q2-wrg2">
-          <input type="text" id="q2-wrg3" name="q2-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 3</h3>
-          <input type="text" id="q3" name="q3">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q3-crt" name="q3-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q3-wrg1" name="q3-wrg1">
-          <input type="text" id="q3-wrg2" name="q3-wrg2">
-          <input type="text" id="q3-wrg3" name="q3-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 4</h3>
-          <input type="text" id="q4" name="q4">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q4-crt" name="q4-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q4-wrg1" name="q4-wrg1">
-          <input type="text" id="q4-wrg2" name="q4-wrg2">
-          <input type="text" id="q4-wrg3" name="q4-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 5</h3>
-          <input type="text" id="q5" name="q5">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q5-crt" name="q5-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q5-wrg1" name="q5-wrg1">
-          <input type="text" id="q5-wrg2" name="q5-wrg2">
-          <input type="text" id="q5-wrg3" name="q5-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 6</h3>
-          <input type="text" id="q6" name="q6">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q6-crt" name="q6-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q6-wrg1" name="q6-wrg1">
-          <input type="text" id="q6-wrg2" name="q6-wrg2">
-          <input type="text" id="q6-wrg3" name="q6-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 7</h3>
-          <input type="text" id="q7" name="q7">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q7-crt" name="q7-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q7-wrg1" name="q7-wrg1">
-          <input type="text" id="q7-wrg2" name="q7-wrg2">
-          <input type="text" id="q7-wrg3" name="q7-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 8</h3>
-          <input type="text" id="q8" name="q8">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q8-crt" name="q8-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q8-wrg1" name="q8-wrg1">
-          <input type="text" id="q8-wrg2" name="q8-wrg2">
-          <input type="text" id="q8-wrg3" name="q8-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 9</h3>
-          <input type="text" id="q9" name="q9">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q9-crt" name="q9-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q9-wrg1" name="q9-wrg1">
-          <input type="text" id="q9-wrg2" name="q9-wrg2">
-          <input type="text" id="q9-wrg3" name="q9-wrg3">
-        </article>
-        <article class="cont">
-          <h3>Question 10</h3>
-          <input type="text" id="q10" name="q10">
-          <h3>Correct Answer</h3>
-          <input type="text" id="q10-crt" name="q10-crt">
-          <h3>Imposter Answers</h3>
-          <input type="text" id="q10-wrg1" name="q10-wrg1">
-          <input type="text" id="q10-wrg2" name="q10-wrg2">
-          <input type="text" id="q10-wrg3" name="q10-wrg3">
-        </article>
-      </fieldset>
-    </form>
-  </section>
-</main>
+          <article class ="row hide" id="rand">
+            <h3 class="col-12">Would You Like Your Quiz to Be Played in a Random Order?</h3>
+            <p>We'll shuffle your quiz every time it's played for a fresh experience every time!</p>
+            <button class="button" id="randyes">Yes</button>
+            <button class="button" id="randno">No</button>
+          </article>
+          <article class ="row hide" id="auto">
+            <h3 class="col-12">Would You Like to Auto Populate Your Quiz</h3>
+            <p>Choose from category and difficulty to instantly create questions and answers for your quiz!</p>
+            <button class="button" id="autoyes">Yes</button>
+            <button class="button" id="autono">No</button>
+          </article>
+          <article class="hide" id="settings">
+            <article>
+              <h3>Choose A Category</h3>
+              <button class="cat button">Art</button>
+              <button class="cat button">Film</button>
+              <button class="cat button">Games</button>
+              <button class="cat button">Sports</button>
+              <button class="cat button">Anime</button>
+              <button class="cat button">Books</button>
+              <button class="cat button">Music</button>
+              <button class="cat button">Math</button>
+            </article>
+            <article>
+              <h3>Choose A Difficulty</h3>
+              <button class="dif button">Easy</button>
+              <button class="dif button">Medium</button>
+              <button class="dif button">Hard</button>
+            </article>
+            <button id="sub" class="button">Submit</button>
+          </article>
+        </fieldset>
+        <!-- For Questions -->
+        <fieldset id="quiz-cont" class="hide">
+          
+        </fieldset>
+        <button id="new-btn" class="button hide">Add A New Question</button>
+        <button id="api" class="button hide">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="assets/scripts/create.js"></script>

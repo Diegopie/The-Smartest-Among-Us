@@ -13,14 +13,18 @@ router.get("/play", (req, res) => {
   res.render("play");
 });
 
+router.get("/playRandom", (req, res) => {
+  res.render("play-random");
+});
+
 router.get("/account", (req, res) => {
   res.render("account");
 });
 
 // play global quizzes i.e., built-in quizzes
-// this assumes that "admin" is the first account saved,
-// we'll need to initialize the JAWS database with that account
-router.get("/playglobal", (req, res) => {
+// this assumes that "admin" is the first User saved,
+// we'll need to initialize the JAWS database with that User
+router.get("/playGlobal", (req, res) => {
   db.Quiz.findAll({
     where: {
       accountID: "1",
@@ -41,11 +45,11 @@ router.get("/playglobal", (req, res) => {
   });
 });
 
-// display all quizzes from a specific account
+// display all quizzes from a specific User
 // (allows for easy sharing of user-created content)
 // shareable link is https://the-smartest-amoung-us.herokuapp.com/account=[username]
-router.get("/:username", (req, res) => {
-  db.Account.findOne({
+router.get("/account=:username", (req, res) => {
+  db.User.findOne({
     where: {
       username: req.params.username,
     },
@@ -62,53 +66,18 @@ router.get("/:username", (req, res) => {
       console.log(quiz);
       hbsObj.quizzes.push(quiz);
     });
-    res.render("account", hbsObj);
+    res.render("User", hbsObj);
   });
-  // console.log(results.Quizzes);
-  // const hbsObj = {
-  //   username: req.params.username,
-  //   quizzes: [],
-  // };
-  // results.forEach((result) => {
-  //   result = result.dataValues;
-  //   hbsObj.quizzes.push(result);
-  // });
-  // res.render("user", hbsObj);
 });
-// router.get("/users/:accountID", (req, res) => {
-//   db.Account.findOne({
-//     where: {
-//       accountID: req.params.accountID,
-//     },
-//   }).then((user) => {
-//     user = user.dataValues;
-//     console.log(user);
-//     const hbsObj = {
-//       username: user.username,
-//       quizzes: [],
-//     };
-//     db.Quiz.findAll({
-//       where: {
-//         accountID: req.params.accountID,
-//       },
-//     }).then((results) => {
-//       results.forEach((result) => {
-//         hbsObj.quizzes.push(result.dataValues);
-//       });
-//     });
-//     res.render("account", hbsObj);
-//   });
-//   // res.render("account");
-// });
 
 router.get("/create", (req, res) => {
   res.render("create");
 });
 
 // *** api routes ***
-// create new user account entry
+// create new user User entry
 router.post("/api/user", (req, res) => {
-  db.Account.create({
+  db.User.create({
     username: req.body.username,
     adminKey: req.body.adminKey,
   }).then((result) => {
@@ -117,10 +86,10 @@ router.post("/api/user", (req, res) => {
 });
 
 // return all quizzes owned by this user
-router.get("/:accountId", (req, res) => {
+router.get("/api/user/:UserId", (req, res) => {
   db.Quiz.findAll({
     where: {
-      accountID: req.params.accountId,
+      accountID: req.params.UserId,
     },
   }).then((results) => {
     const data = [];
@@ -130,12 +99,12 @@ router.get("/:accountId", (req, res) => {
     const hbsObj = {
       quizzes: data,
     };
-    res.render("quizzes", hbsObj);
+    res.json(hbsObj);
   });
 });
 
 // get quiz from quizID
-router.get("/api/:quizID", (req, res) => {
+router.get("/api/quiz/:quizID", (req, res) => {
   db.Quiz.findOne({
     where: {
       quizID: req.params.quizID,
@@ -146,12 +115,13 @@ router.get("/api/:quizID", (req, res) => {
 });
 
 // get quiz questions from quizID
-router.get("api/quiz/:quizID", (req, res) => {
+router.get("api/questions/:quizID", (req, res) => {
   db.Question.findAll({
     where: {
       quizID: req.params.quizID,
     },
   }).then((result) => {
+    console.log(result);
     res.json(result);
   });
 });
@@ -161,7 +131,7 @@ router.get("api/quiz/:quizID", (req, res) => {
 // const newQuiz = {
 //   quizName: "whatever",
 //   randomize: true,
-//   accountID: 1,
+//   UserID: 1,
 //   questions: [
 //     {
 //       questionNum: 1,
@@ -177,7 +147,7 @@ router.post("/api/quiz", (req, res) => {
   db.Quiz.create({
     quizName: req.body.quizName,
     randomize: req.body.randomize,
-    accountID: req.body.accountID,
+    accountID: req.body.UserID,
   }).then((result) => {
     quizID = result.quizID;
     req.body.questions.forEach((entry) => {
