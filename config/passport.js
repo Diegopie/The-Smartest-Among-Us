@@ -14,7 +14,7 @@ passport.use(
     (email, password, done) => {
       db.User.findOne({
         where: {
-          email: email,
+          username: email,
         },
       }).then((dbUser) => {
         // If there's no user with the given email
