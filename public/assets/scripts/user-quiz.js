@@ -24,26 +24,6 @@ function checkLocal() {
   parseRes();
 }
 
-// Test API Res with Category and Difficulty
-function testSelect() {
-  const url =
-    "https://opentdb.com/api.php?amount=10&category=" +
-    catValue[userCat] +
-    "&difficulty=" +
-    difValue[userDif] +
-    "&type=multiple";
-  $.ajax({
-    url: url,
-    method: "GET",
-  }).then((res) => {
-    // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
-    trivApi = res.results;
-    console.log(res.results);
-    quizRes.push(res.results);
-    console.log(quizRes);
-    parseRes();
-  });
-}
 // ** Parse API Res To Work Better With Updating the DOM and Store in parsedQuiz
 function parseRes() {
   // *** Loop Through All Questions in QuizRes
@@ -178,38 +158,17 @@ function saveQuiz() {
   // Update Final Score
   $("#scr")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
-  const saveCont = $("<section>").addClass("row cont sv-cont");
-  // *** Containers for Text and Append to saveCont
-  const titlesCont = $("<article>").addClass("col-12");
-  const title = $("<h3>").text("Would You Like to Save This Quiz?");
-  const p = $("<p>").text(
-    "If you're not logged in, you must do so or create an account"
-  );
-  titlesCont.append(title, p);
-  saveCont.append(titlesCont);
-  // *** Create Container for Buttons and Append to saveCont
-  const submCont = $("<article>").addClass("row");
-  const butYes = $("<button>").addClass("button sv-yes").text("Yes");
-  const butNo = $("<button>").addClass("button sv-again").text("Play Again");
-  const butPlay = $("<button>").addClass("button sv-play").text("Play Another");
-  submCont.append(butYes, butNo, butPlay);
-  saveCont.append(submCont);
+  const plyAgnCont = $("<section>").addClass("row cont sv-cont");
+  // *** Create Container for Buttons and Append to plyAgnCont
+  const btnCont = $("<article>").addClass("row");
+  const butNo = $("<button>").addClass("button ply-again").text("Play Again");
+  btnCont.append(butNo);
+  plyAgnCont.append(btnCont);
   // *** Append New Elements to DOM
-  $("#quiz").append(saveCont);
+  $("#quiz").append(plyAgnCont);
   // *** Click Listeners for New Button
-  // ?? Save Quiz Will Either Require a Login or Creating Account, data can be saved to local storage or sent to the db
-  $(".sv-yes").click((event) => {
-    event.preventDefault();
-    localStorage.setItem("saved-quiz", JSON.stringify(trivApi));
-  });
   // Quiz Is Stored In Local Storage to Play Again
-  $(".sv-again").click((event) => {
-    event.preventDefault();
-    localStorage.setItem("saved-quiz", JSON.stringify(trivApi));
-    location.reload();
-  });
-  // Page Reload To Create A New Quiz
-  $(".sv-play").click((event) => {
+  $(".ply-again").click((event) => {
     event.preventDefault();
     location.reload();
   });
@@ -232,31 +191,6 @@ $("#play").click((event) => {
   // testAPI();
   testSelect();
 });
-
-// * Code I wrote but don't want to delete 😅
-// ** v1 of rendering a quiz, the html was coded with 10 q containers
-// function renderQuiz() {
-//   // *** Variables
-//   let domQues = $("#quiz")[0].children;
-//   // console.dir(domQues);
-//   // console.log(parsedQuiz);
-//   // *** Loop Through parsedQuiz To Update DOM
-//   for (let i = 0; i < parsedQuiz.length; i++) {
-//     // console.log("-- Quest --");
-//     // **** Update Question DOM Element
-//     let curQPath = domQues[i].children[0];
-//     curQPath.innerText = parsedQuiz[i].question;
-//     // **** Update Each li Answer in the DOM
-//     let curAnsAr = domQues[i].children[1].children.length
-//     for (let j = 0; j < curAnsAr; j++) {
-//           // console.log("-- Ans --");
-//       let curAnsPath = domQues[i].children[1].children[j];
-//           // console.log(curAnsPath);
-//       curAnsPath.innerText = parsedQuiz[i].answers[j];
-//     }
-//   }
-//   $("#quiz").removeClass("hide");
-// }
 
 // USE THIS FOR THE PLAY SCRIPT 😂
 // const testHigh = [
