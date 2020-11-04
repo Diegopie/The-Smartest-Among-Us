@@ -5,9 +5,26 @@
   </header>
   <main class="container">
     <section id="settings" class="row cont hide">
+      <h3 class="col-12">Choose A Category</h3>
+      <article id="cat" class="row">
+        <button class="col-4 cat button">Art</button>
+        <button class="col-4 cat button">Film</button>
+        <button class="col-4 cat button">Games</button>
+        <button class="col-4 cat button">Sports</button>
+        <button class="col-4 cat button">Anime</button>
+        <button class="col-4 cat button">Books</button>
+        <button class="col-4 cat button">Music</button>
+        <button class="col-4 cat button">Math</button>
+      </article>
+      <h3 class="col-12 spacer">Choose A Difficulty</h3>
+      <article class="row">
+        <button class="col-4 dif button">Easy</button>
+        <button class="col-4 dif button">Medium</button>
+        <button class="col-4 dif button">Hard</button>
+      </article>
       <article class="col-12 spacer">
         <div class="row">
-          <button id="sub" class="row button">Play</button>
+          <button id="sub" class="row button">Submit</button>
         </div>
       </article>
     </section>
@@ -15,7 +32,7 @@
       <article id="scr" class="cont col-12 hide">
         <h3>Score: <span id="score">0</span></h3>
       </article>
-      <article id="quiz" class="">
+      <article id="quiz" class="hide">
 
 
         {{!-- This is the hard coded version of what the js will make for responsive testing --}}

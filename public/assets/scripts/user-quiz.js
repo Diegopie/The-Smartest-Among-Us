@@ -1,6 +1,8 @@
 // * Global Variables
 let score = 0;
 let curQuest = 0;
+let quizID;
+let highScores;
 
 // ** Store API Res
 
@@ -12,28 +14,39 @@ const parsedQuiz = [];
 // * Functions
 // ** Check Local Storage If User Wanted to Play a Quiz Again
 
-checkLocal();
-function checkLocal() {
-  const localQuiz = JSON.parse(localStorage.getItem("saved-quiz"));
-  // Display Settings elements if local storage is empty
-  if (localQuiz === null) {
-    $("#settings").removeClass("hide");
-    return;
-  }
-  quizRes.push(localQuiz);
-  localStorage.removeItem("saved-quiz");
-  parseRes();
+
+function getScores() {
+  $.get("/api/hiScores/" + quizID).then((res) => {
+    // console.log(res);
+    if (res[0] === undefined) {
+      highScores = {
+        username: "Be the fist to add a score!",
+        score: "",
+      };
+      return;
+    }
+    const parsedHigh = [];
+    for (let i = 0; i < res.length; i++) {
+      const newObj = {
+        username: res[i].username,
+        score: res[i].score,
+      };
+      parsedHigh.push(newObj);
+    }
+    highScores = parsedHigh;
+  });
 }
 
 // ** Make GET Req Based on User Selection and Push Res to quizRes[]
-function renderQuiz(id, name) {
+function getQuiz(id, name) {
   $("#btns").empty();
   $("#rubbish").text("'s");
   $("#title").text(name + " quiz");
   const url = `/api/questions/${id}`;
   $.get(url).then((res) => {
-    console.log(res);
+    // console.log(res);
     quizRes.push(res);
+    parseRes();
   });
 }
 
@@ -69,7 +82,7 @@ function parseRes() {
       correct: correctA,
     };
     parsedQuiz.push(curObj);
-    console.log(parsedQuiz);
+    // console.log(parsedQuiz);
   }
   // *** With parsedQuiz Fully Populated, render data to DOM
   renderQuizBetter();
@@ -82,7 +95,7 @@ function renderQuizBetter() {
   // console.log("current question index: ", curQuest);
   // *** Check If No More Questions Remain then Display UI Prompt in saveQuiz()
   if (curQuest === parsedQuiz.length) {
-    saveQuiz();
+    makeHigh();
     return;
   }
   // *** Variables to Create Quiz DOM
@@ -113,6 +126,7 @@ function renderQuizBetter() {
     answers.append(curAns);
   }
   $("#quiz").append(contain);
+  $("#play-cont").removeClass("hide");
   // *** Click Listener to Check Correct Answer
   console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {
@@ -152,9 +166,11 @@ function makeButt(value, answ) {
   // *** If User is Wrong, Display the Correct Answer
   if (answ !== undefined) {
     const corCon = $("<article>").addClass("col-7 col-md-4");
-    const corTitle = $("<h4>").text("Correct Answer:");
-    const corAns = $("<h5>").addClass("cor-ans").text(answ);
-    corCon.append(corTitle, corAns);
+    const corTitle = $("<h4>").addClass("spacer").text("Correct Answer:");
+    const corAnsCont = $("<div>").addClass("row");
+    const corAns = $("<h5>").addClass("col cor-ans").text(answ);
+    corAnsCont.append(corAns);
+    corCon.append(corTitle, corAnsCont);
     $(".qa").append(corCon);
   }
   // Increase the Value of curQuest So Next Question Will Load When User Clicks
@@ -169,9 +185,9 @@ function makeButt(value, answ) {
 // ** Prompt User If They WAnt to Play Again or Save the Quiz
 function saveQuiz() {
   // Update Final Score
-  $("#scr")[0].children[0].textContent = "Final Score: " + score;
+  $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
-  const plyAgnCont = $("<section>").addClass("row cont sv-cont");
+  const plyAgnCont = $("<section>").addClass("row sv-cont");
   // *** Create Container for Buttons and Append to plyAgnCont
   const btnCont = $("<article>").addClass("row");
   const butNo = $("<button>").addClass("button ply-again").text("Play Again");
@@ -196,44 +212,84 @@ function shuffleArray(array) {
 }
 
 // * Click Listeners
+$(".quizStart").on("click", (event) => {
+  event.preventDefault();
+  quizID = event.target.getAttribute("data-id");
+  const quizName = event.target.getAttribute("data-name");
+  // console.log(quizID);
+  getScores();
+  getQuiz(quizID, quizName);
+});
 
 $("#play").click((event) => {
   event.preventDefault();
-  $("#settings").addClass("hide");
-  $("#scr").removeClass("hide");
-  // testAPI();
-  testSelect();
+  console.log("fuck you");
+  $("#quiz").removeClass("hide");
+  $("#play-cont").addClass("hide");
 });
 
-$(".quizStart").on("click", (event) => {
-  event.preventDefault();
-  const quizID = event.target.getAttribute("data-id");
-  const quizName = event.target.getAttribute("data-name");
-  // console.log(quizID);
-  renderQuiz(quizID, quizName);
-});
-console.log("fuck");
+function makeHigh() {
+  const highCont = $("<section>").addClass("row cont high");
+  const article = $("<article>").addClass("");
+  const title = $("<h3>").addClass("spacer").text("High Scores");
+  const div = $("<div>").addClass("row");
+  article.append(title, div);
+  highCont.append(article);
+  const ul = $("<ul>").addClass("");
+  for (let i = 0; i < highScores.length; i++) {
+    const li = $("<li>").text(
+      highScores[i].username + ": " + highScores[i].score
+    );
+    ul.append(li);
+  }
+  div.append(ul);
 
-// USE THIS FOR THE PLAY SCRIPT 😂
-// const testHigh = [
-//   {
-//     username: "Hello",
-//     score: 30,
-//   },
-//   {
-//     username: "Biitch",
-//     score: 100,
-//   },
-// ];
+  const subHighCont = $("<article>");
+  const inp = $("<input>").attr({
+    id: "high-val",
+    type: "text",
+    placeholder: "Enter a name to Save!",
+  });
+
+  const butt = $("<button>").addClass("button sv-high").text("Save");
+  // <input type="text" id="q1" name="q1"></input>
+  subHighCont.append(inp, butt);
+  highCont.append(subHighCont);
+  $("#main").append(highCont);
+  saveQuiz();
+  // $("#quiz").append(highCont);
+  $(".sv-high").click((event) => {
+    event.preventDefault();
+    const userName = $("#high-val")[0].value.trim();
+    console.log($("#high-val"));
+    if (userName === "") {
+      window.alert("Get rekt");
+      return;
+    }
+    const scoreAPI = {
+      username: userName,
+      score: score,
+      quizID: quizID,
+    }
+    console.log(scoreAPI);
+    $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
+      window.alert("Great Success");
+    });
+  });
+}
+
+// makeHigh();
 // function makeHigh(check) {
-//   const highCont = $("<section>").addClass("cont");
-//   const titlesCont = $("<article>");
-//   const title = $("<h3>").text("High Scores");
-//   highCont.append(titlesCont, title);
-//   const table = $("<table>").addClass("cont");
+//   const highCont = $("<section>").addClass("row cont");
+//   const article = $("<article>").addClass("");
+//   const title = $("<h3>").addClass("spacer").text("High Scores");
+//   const div = $("<div>").addClass("col-12");
+//   article.append(title, div);
+//   highCont.append(article);
+//   const table = $("<table>").addClass("row cont");
 //   for (let i = 0; i < testHigh.length; i++) {
-//     const tr = $("<tr>");
-//     const user = $("<th>").text(testHigh[i].username);
+//     const tr = $("<tr>").addClass("col-12");
+//     const user = $("<th>").text(testHigh[i].username + " :");
 //     console.log(user);
 //     const score = $("<th>").text(testHigh[i].score);
 //     console.log(score);
@@ -241,14 +297,15 @@ console.log("fuck");
 //     console.log(tr);
 //     table.append(tr);
 //   }
-//   highCont.append(table);
-//   if (check === "yes") {
-//     let subHighCont = $("<article>");
-//     let inp = $("<input>").attr("type", "text").text("Enter a Username to Save!");
-//     let butt = $("<button>").addClass("button").text("Submit");
-//     // <input type="text" id="q1" name="q1"></input>
-//     subHighCont.append(inp, butt);
-//     highCont.append(subHighCont);
-//   }
-//   $("#quiz").append(highCont);
+//   div.append(table);
+//   // if (check === "yes") {
+//   //   let subHighCont = $("<article>");
+//   //   let inp = $("<input>").attr("type", "text").text("Enter a Username to Save!");
+//   //   let butt = $("<button>").addClass("button").text("Submit");
+//   //   // <input type="text" id="q1" name="q1"></input>
+//   //   subHighCont.append(inp, butt);
+//   //   highCont.append(subHighCont);
+//   // }
+//   $("#main").append(highCont);
+//   // $("#quiz").append(highCont);
 // }

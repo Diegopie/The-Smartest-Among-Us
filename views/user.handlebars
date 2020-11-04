@@ -8,18 +8,23 @@
   </section>
 </header>
 <!-- Page Content -->
-<main class="container">
+<main id="main"class="container">
   <!-- Display User Quizzes -->
   <section class="row" id="btns">
     {{#each quizzes}}
     {{> quizName}}
     {{/each}}
-    <article id="scr" class="cont col-12 hide">
+  </section>
+  <section id="play-cont" class="row hide">
+    <button  id="play" class="button">Play</button>
+  </section>
+  <section id="quiz" class="row ">
+    <article id="score-cont" class="cont col-12">
       <h3>Score: <span id="score">0</span></h3>
     </article>
-    <article id="quiz" class="">
-    </article>
   </section>
+
+
   <!-- Display Create Account If Not Logged In -->
 </main>
 

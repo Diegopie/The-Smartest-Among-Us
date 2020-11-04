@@ -143,6 +143,7 @@ function renderQuizBetter() {
     answers.append(curAns);
   }
   $("#quiz").append(contain);
+  $("#quiz").removeClass("hide")
   // *** Click Listener to Check Correct Answer
   console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {
@@ -184,7 +185,7 @@ function makeButt(value, answ) {
     const corCon = $("<article>").addClass("col-7 col-md-4");
     const corTitle = $("<h4>").addClass("spacer").text("Correct Answer:");
     const corAnsCont = $("<div>").addClass("row");
-    const corAns = $("<h5>").addClass("cor-ans").text(answ);
+    const corAns = $("<h5>").addClass("col cor-ans").text(answ);
     corAnsCont.append(corAns);
     corCon.append(corTitle, corAnsCont);
     $(".qa").append(corCon);
@@ -201,7 +202,7 @@ function makeButt(value, answ) {
 // ** Prompt User If They WAnt to Play Again or Save the Quiz
 function saveQuiz() {
   // Update Final Score
-  $("#scr")[0].children[0].textContent = "Final Score: " + score;
+  $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
   const saveCont = $("<section>").addClass("row cont sv-cont");
   // *** Containers for Text and Append to saveCont
@@ -274,7 +275,7 @@ $("#sub").click((event) => {
     return;
   }
   $("#settings").addClass("hide");
-  $("#scr").removeClass("hide");
+  $("#score-cont").removeClass("hide");
   testSelect();
 });
 

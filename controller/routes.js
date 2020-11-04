@@ -193,7 +193,7 @@ router.post("/api/newScore/:quizID", (req, res) => {
 });
 
 // get scores for specific quiz
-router.get("api/hiScores/:quizID", (req, res) => {
+router.get("/api/hiScores/:quizID", (req, res) => {
   db.Score.findAll({
     where: {
       quizID: req.params.quizID,
