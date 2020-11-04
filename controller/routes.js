@@ -40,7 +40,7 @@ router.get("/create", (req, res) => {
 router.get("/playGlobal", (req, res) => {
   db.Quiz.findAll({
     where: {
-      id: "1",
+      accountID: "1",
     },
   }).then((results) => {
     const data = [];
@@ -119,6 +119,7 @@ router.get("/api/questions/:quizID", (req, res) => {
     },
     include: [db.Quiz],
   }).then((questions) => {
+    // console.log(questions);
     const questionArr = [];
     questions.forEach((question) => {
       const qObj = {};
@@ -131,7 +132,8 @@ router.get("/api/questions/:quizID", (req, res) => {
       qObj.question = question.question;
       questionArr.push(qObj);
     });
-    console.log(questionArr);
+    // const quizname = questions[0].Quiz.dataValues.quizName;
+    // console.log(quizname);
     res.json(questionArr);
   });
 });
