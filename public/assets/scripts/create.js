@@ -85,21 +85,6 @@ $(() => {
     });
   }
 
-  // ** Test API Res
-  // function testAPI() {
-  //   const url =
-  //     "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-  //   // "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
-  //   $.ajax({
-  //     url: url,
-  //     method: "GET",
-  //   }).then((res) => {
-  //     // Push res to quizRes then run renderQuiz to update DOM
-  //     quizRes = res.results;
-  //     renderQuiz();
-  //   });
-  // }
-
   function testSelect() {
     const url =
       "https://opentdb.com/api.php?amount=" +
@@ -109,32 +94,15 @@ $(() => {
       "&difficulty=" +
       difValue[userDif] +
       "&type=multiple";
-    console.log(url);
     $.ajax({
       url: url,
       method: "GET",
     }).then((res) => {
-      console.log(res);
-      console.log(res.results);
       quizRes = res.results;
       renderQuiz();
     });
   }
 
-  // ** Test API Res
-  // function testAPI() {
-  //   const url =
-  //     "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-  //   // "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
-  //   $.ajax({
-  //     url: url,
-  //     method: "GET",
-  //   }).then((res) => {
-  //     // Push res to quizRes then run renderQuiz to update DOM
-  //     quizRes = res.results;
-  //     renderQuiz();
-  //   });
-  // }
   // ** Display API Res to DOM (This depends on children elements. Any adding additional elements to the makeQuestCont() will break this!)
   function renderQuiz() {
     // *** Loop through the Length of the quizRes array
@@ -213,11 +181,11 @@ $(() => {
       // console.log(domPath);
       // Get Question
       const question = domPath[1].children[1].children[0];
-      console.log("question: ", question);
+      // console.log("question: ", question);
       validator(question);
       // Get Correct
       const correct = domPath[2].children[1].children[0];
-      console.log("Correct: ", correct);
+      // console.log("Correct: ", correct);
       validator(correct);
       // Get Incorrect
       validator(domPath[3].children[1].children[0]);
@@ -251,11 +219,11 @@ $(() => {
       questions: questions,
     };
     // ONCE WE ARE SERVER CONNECTED, WE CAN PASS THIS OBJECT TO AN API REQ
-    $.post("/api/quiz", apiObj).then(() => {
-      console.log("work??");
-    });
     console.log("-- Obj for API --");
     console.log(apiObj);
+    $.post("/api/quiz", apiObj).then(() => {
+      console.log();
+    });
   }
 
   // * Click Listeners
