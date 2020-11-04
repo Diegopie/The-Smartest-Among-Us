@@ -1,6 +1,8 @@
 // * Global Variables
 let score = 0;
 let curQuest = 0;
+let catSelect = false;
+let difSelect = false;
 // ** Store User Selection for API Req
 let userCat;
 const catValue = {
@@ -39,20 +41,17 @@ function checkLocal() {
   localStorage.removeItem("saved-quiz");
   parseRes();
 }
-// ** Test API Res
-// function testAPI() {
-//   const url = "https://opentdb.com/api.php?amount=3&type=multiple";
-//   $.ajax({
-//     url: url,
-//     method: "GET",
-//   }).then((res) => {
-//     // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
-//     trivApi = res.results;
-//     quizRes.push(res.results);
-//     parseRes();
-//   });
-// }
-// Test API Res with Category and Difficulty
+// ** Adds Class When User Click and API Option and Removes Class For Any Previous Click
+function userSelect(elem) {
+  const path = elem.parentElement.children;
+  for (let i = 0; i < path.length; i++) {
+    if ($(path[i]).hasClass("selected")) {
+      $(path[i]).removeClass("selected");
+    }
+  }
+  $(elem).addClass("selected");
+}
+// ** Make API Req Directly to Their Site
 function testSelect() {
   const url =
     "https://opentdb.com/api.php?amount=10&category=" +
@@ -66,9 +65,7 @@ function testSelect() {
   }).then((res) => {
     // :)  So, if I had stored res.results in a variable rather than push to an array to begin with, I would have had to deal with index 0 all the time
     trivApi = res.results;
-    console.log(res.results);
     quizRes.push(res.results);
-    console.log(quizRes);
     parseRes();
   });
 }
@@ -91,7 +88,6 @@ function parseRes() {
     // *** Check Where Correct Answer is in the Array
     curA.forEach((item, v) => {
       if (item === curQ.correct_answer) {
-        // console.log(v);
         correctA = v;
         return v;
       }
@@ -104,7 +100,6 @@ function parseRes() {
       correct: correctA,
     };
     parsedQuiz.push(curObj);
-    console.log(parsedQuiz);
   }
   // *** With parsedQuiz Fully Populated, render data to DOM
   renderQuizBetter();
@@ -187,9 +182,11 @@ function makeButt(value, answ) {
   // *** If User is Wrong, Display the Correct Answer
   if (answ !== undefined) {
     const corCon = $("<article>").addClass("col-7 col-md-4");
-    const corTitle = $("<h4>").text("Correct Answer:");
+    const corTitle = $("<h4>").addClass("spacer").text("Correct Answer:");
+    const corAnsCont = $("<div>").addClass("row");
     const corAns = $("<h5>").addClass("cor-ans").text(answ);
-    corCon.append(corTitle, corAns);
+    corAnsCont.append(corAns);
+    corCon.append(corTitle, corAnsCont);
     $(".qa").append(corCon);
   }
   // Increase the Value of curQuest So Next Question Will Load When User Clicks
@@ -256,47 +253,39 @@ function shuffleArray(array) {
 $(".cat").click((event) => {
   event.preventDefault();
   userCat = event.target.innerText;
-  console.log(userCat);
+  userSelect(event.target);
+  catSelect = true;
+  console.log("User Category: ", userCat);
 });
+
 // ** Store User Difficulty
 $(".dif").click((event) => {
   event.preventDefault();
   userDif = event.target.innerText;
-  console.log(userDif);
+  userSelect(event.target);
+  difSelect = true;
+  console.log("User Difficulty: ", userDif);
 });
 
 $("#sub").click((event) => {
   event.preventDefault();
+  if (!catSelect || !difSelect) {
+    window.alert("Choose Something, fool");
+    return;
+  }
   $("#settings").addClass("hide");
   $("#scr").removeClass("hide");
-  // testAPI();
   testSelect();
 });
 
-// * Code I wrote but don't want to delete 😅
-// ** v1 of rendering a quiz, the html was coded with 10 q containers
-// function renderQuiz() {
-//   // *** Variables
-//   let domQues = $("#quiz")[0].children;
-//   // console.dir(domQues);
-//   // console.log(parsedQuiz);
-//   // *** Loop Through parsedQuiz To Update DOM
-//   for (let i = 0; i < parsedQuiz.length; i++) {
-//     // console.log("-- Quest --");
-//     // **** Update Question DOM Element
-//     let curQPath = domQues[i].children[0];
-//     curQPath.innerText = parsedQuiz[i].question;
-//     // **** Update Each li Answer in the DOM
-//     let curAnsAr = domQues[i].children[1].children.length
-//     for (let j = 0; j < curAnsAr; j++) {
-//           // console.log("-- Ans --");
-//       let curAnsPath = domQues[i].children[1].children[j];
-//           // console.log(curAnsPath);
-//       curAnsPath.innerText = parsedQuiz[i].answers[j];
-//     }
+// function selectCheck() {
+//   if (!catSelect || !difSelect) {
+//     window.alert("Choose Something, fool");
+//     return;
 //   }
-//   $("#quiz").removeClass("hide");
 // }
+
+// * Code I wrote but don't want to delete 😅
 
 // USE THIS FOR THE PLAY SCRIPT 😂
 // const testHigh = [
