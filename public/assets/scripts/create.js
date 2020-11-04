@@ -201,15 +201,15 @@ $(() => {
       validator(domPath[3].children[1].children[1]);
       validator(domPath[3].children[1].children[2]);
       const wrong = [
-        domPath[3].children[1].children[0].value,
-        domPath[3].children[1].children[1].value,
-        domPath[3].children[1].children[2].value,
+        domPath[3].children[1].children[0].value.trim(),
+        domPath[3].children[1].children[1].value.trim(),
+        domPath[3].children[1].children[2].value.trim(),
       ];
       // Create question object
       const curQuest = {
         questionNum: questionNum,
-        question: question.value,
-        correctAnswer: correct.value,
+        question: question.value.trim(),
+        correctAnswer: correct.value.trim(),
         wrongAnswers: wrong,
       };
       // Push to questions array and increment questionNum
@@ -222,9 +222,9 @@ $(() => {
     }
     // *** Create Object for Our Server API
     const apiObj = {
-      quizName: quizName.value,
+      quizName: quizName.value.trim(),
       randomize: randomize,
-      accountID: 1,
+      accountID: 2,
       questions: questions,
     };
     // ONCE WE ARE SERVER CONNECTED, WE CAN PASS THIS OBJECT TO AN API REQ
