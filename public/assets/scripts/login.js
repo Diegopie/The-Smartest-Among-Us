@@ -29,9 +29,11 @@ $(document).ready(() => {
       email: email,
       password: password,
     })
-      .then(() => {
+      .then((res) => {
+        console.log(res.id);
+        localStorage.setItem("currentUserId", res.id);
+        console.log(localStorage.getItem("currentUserId"));
         window.location.replace("/account");
-        // If there's an error, log the error
       })
       .catch((err) => {
         console.log(err);

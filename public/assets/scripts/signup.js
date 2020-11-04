@@ -29,9 +29,14 @@ $(document).ready(() => {
       email: email,
       password: password,
     })
+      // .then(() => {
+      //   console.log(email);
+      //   localStorage.setItem("email", email);
+      //   localStorage.getItem("email");
+      // })
       .then(() => {
-        console.log(window.location);
-        console.log(window.location.pathname);
+        // console.log(window.location);
+        // console.log(window.location.pathname);
         window.location.replace("/account");
         // If there's an error, handle it by throwing up a bootstrap alert
       })

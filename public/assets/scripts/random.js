@@ -4,7 +4,7 @@ let curQuest = 0;
 // ** Store User Selection for API Req
 let userCat;
 const catValue = {
-  Art: 25,
+  Mythology: 20,
   Film: 11,
   Games: 15,
   Sports: 21,
