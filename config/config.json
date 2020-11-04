@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "@OfficerPie419",
+    "password": null,
     "database": "quizApp",
     "host": "127.0.0.1",
     "dialect": "mysql"

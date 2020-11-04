@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("../config/passport");
 const router = express.Router();
 const db = require("../models");
 
@@ -39,7 +40,7 @@ router.get("/create", (req, res) => {
 router.get("/playGlobal", (req, res) => {
   db.Quiz.findAll({
     where: {
-      accountID: "1",
+      id: "1",
     },
   }).then((results) => {
     const data = [];
@@ -200,6 +201,51 @@ router.get("api/hiScores/:quizID", (req, res) => {
   }).then((result) => {
     res.json(result);
   });
+});
+
+// route for login
+router.post("/api/login", passport.authenticate("local"), (req, res) => {
+  // Sending back a password, even a hashed password, isn't a good idea
+  res.json({
+    username: req.user.email,
+    id: req.user.id,
+  });
+});
+
+// route for signing up a user
+router.post("/api/signup", (req, res) => {
+  db.User.create({
+    username: req.body.email,
+    password: req.body.password,
+  })
+    .then(() => {
+      res.redirect(307, "/api/login");
+    })
+    .catch((err) => {
+      res.status(401).json(err);
+    });
+  return;
+});
+
+// route for logging user out
+router.post("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+// route for getting some data about our user to be used client side
+router.get("/api/user_data", (req, res) => {
+  if (!req.user) {
+    // The user is not logged in, send back an empty object
+    res.json({});
+  } else {
+    // otherwise send back the user's email and id
+    // sending back a password, even a hashed password, isn't a good idea
+    res.json({
+      username: req.user.email,
+      id: req.user.id,
+    });
+  }
 });
 
 module.exports = router;
