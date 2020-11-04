@@ -12,7 +12,7 @@ header {
 /* Gives background color for section/article containers and padding between them */
 .cont {
   /* width: 100%; */
-  margin-top: 10%;
+  margin-top: 16px;
   background-color: #2b2b2b;
   padding: 1rem;
   display: flex;
@@ -23,22 +23,12 @@ header {
 
 /* Create spacing between containers */
 header {
-  margin-bottom: 12%;
+  margin-bottom: 8px;
 }
-
-/* fieldset {
-  padding-top: 8%;
-  margin-bottom: 8%;
-} */
-
-/* article {
-  margin-top: 10%;
-} */
 
 .spacer {
   margin-top: 12px;
 }
-
 
 /* For Buttons */
 .button {
@@ -55,19 +45,11 @@ header {
 .button:hover {
   color: #1BEF0C !important;
 }
-.q-rmv {
-  background-color: #2b2b2b;
-  border: solid;
-  color: red;
-  border-radius: 8px;
-  padding: 2px 12px 2px 12px;
-  text-align: center;
-  display: inline-block;
-  margin: 3px 1px;
-}
 
-.q-rmv:hover {
-  color: #1BEF0C !important;
+.q-rmv {
+  color: red;
+  padding: 2px 12px;
+  margin: 3px 1px;
 }
 
 /* For Hamburger Menu */
@@ -149,4 +131,8 @@ p {
 
 .valid {
     background-color: red;
+}
+
+.selected {
+  color: green;
 }
