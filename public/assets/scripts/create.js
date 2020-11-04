@@ -122,20 +122,19 @@ $(() => {
   }
 
   // ** Test API Res
-  function testAPI() {
-    const url =
-      "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
-    // "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
-    $.ajax({
-      url: url,
-      method: "GET",
-    }).then((res) => {
-      // Push res to quizRes then run renderQuiz to update DOM
-      quizRes = res.results;
-      renderQuiz();
-    });
-  }
-  
+  // function testAPI() {
+  //   const url =
+  //     "https://opentdb.com/api.php?amount=" + strQuestions + "&type=multiple";
+  //   // "https://opentdb.com/api.php?amount=" + 2 + "&type=multiple";
+  //   $.ajax({
+  //     url: url,
+  //     method: "GET",
+  //   }).then((res) => {
+  //     // Push res to quizRes then run renderQuiz to update DOM
+  //     quizRes = res.results;
+  //     renderQuiz();
+  //   });
+  // }
   // ** Display API Res to DOM (This depends on children elements. Any adding additional elements to the makeQuestCont() will break this!)
   function renderQuiz() {
     // *** Loop through the Length of the quizRes array
