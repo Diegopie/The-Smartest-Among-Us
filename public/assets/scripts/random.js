@@ -143,7 +143,7 @@ function renderQuizBetter() {
     answers.append(curAns);
   }
   $("#quiz").append(contain);
-  $("#quiz").removeClass("hide")
+  $("#quiz").removeClass("hide");
   // *** Click Listener to Check Correct Answer
   console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {

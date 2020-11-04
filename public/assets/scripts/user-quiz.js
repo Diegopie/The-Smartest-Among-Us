@@ -7,8 +7,7 @@ let highScores;
 // ** Store API Res
 
 const quizRes = [];
-// I originally pushed the trivia api res to quizRes, rather than setting it equal to a variable like with trivia API. This meant I had to add [0] anytime I wanted to use the api res but this caused issus when I was trying to store quizRes in local storage and play the same quiz. It would keep adding an empty index. I solved it by doing what I should have from the start and sending trivAPi (stores api.res) so local storage, so it would behave the same way as doing an actual api call. It just more effort than I want to put in to fix it
-let trivApi;
+
 const parsedQuiz = [];
 
 // * Functions
@@ -244,7 +243,7 @@ function makeHigh() {
       username: userName,
       score: score,
       quizID: quizID,
-    }
+    };
     console.log(scoreAPI);
     $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
       window.alert("Great Success");
