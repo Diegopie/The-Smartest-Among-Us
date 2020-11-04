@@ -11,7 +11,7 @@ $(document).ready(() => {
       email: emailInputCreate.val().trim(),
       password: passwordInputCreate.val().trim(),
     };
-    console.log("SUCCESS");
+    console.log(userData);
 
     if (!userData.email || !userData.password) {
       return;
@@ -30,6 +30,8 @@ $(document).ready(() => {
       password: password,
     })
       .then(() => {
+        console.log(window.location);
+        console.log(window.location.pathname);
         window.location.replace("/account");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
