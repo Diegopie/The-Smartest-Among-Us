@@ -14,26 +14,29 @@ const parsedQuiz = [];
 // * Functions
 // ** Check Local Storage If User Wanted to Play a Quiz Again
 
-
 function getScores() {
   $.get("/api/hiScores/" + quizID).then((res) => {
     // console.log(res);
     if (res[0] === undefined) {
-      highScores = {
-        username: "Be the fist to add a score!",
-        score: "",
-      };
-      return;
+      highScores = [
+        {
+          username: "Be the fist to add a score",
+          score: "",
+        },
+      ];
+      console.log(highScores);
+      // return;
+    } else {
+      const parsedHigh = [];
+      for (let i = 0; i < res.length; i++) {
+        const newObj = {
+          username: res[i].username,
+          score: res[i].score,
+        };
+        parsedHigh.push(newObj);
+      }
+      highScores = parsedHigh;
     }
-    const parsedHigh = [];
-    for (let i = 0; i < res.length; i++) {
-      const newObj = {
-        username: res[i].username,
-        score: res[i].score,
-      };
-      parsedHigh.push(newObj);
-    }
-    highScores = parsedHigh;
   });
 }
 
@@ -182,24 +185,70 @@ function makeButt(value, answ) {
   });
 }
 
-// ** Prompt User If They WAnt to Play Again or Save the Quiz
-function saveQuiz() {
-  // Update Final Score
+// ** Creat Container to Display High Scores
+function makeHigh() {
   $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
-  // *** Create Container for User Options
-  const plyAgnCont = $("<section>").addClass("row sv-cont");
-  // *** Create Container for Buttons and Append to plyAgnCont
-  const btnCont = $("<article>").addClass("row");
+  // *** Create Container for High Score
+  const highCont = $("<section>").addClass("row cont high");
+  const article = $("<article>").addClass("col-12");
+  const title = $("<h3>").addClass("spacer").text("High Scores");
+  const div = $("<div>").addClass("row");
+  article.append(title, div);
+  highCont.append(article);
+  const ul = $("<ul>").addClass("");
+  console.log(highScores);
+  for (let i = 0; i < highScores.length; i++) {
+    const li = $("<li>").text(
+      highScores[i].username + ": " + highScores[i].score
+    );
+    ul.append(li);
+  }
+  div.append(ul);
+  // *** Create Container for Submitting a High Score
+  const subHighCont = $("<article>").addClass("col-12 spacer");
+  const inpCont = $("<div>").addClass("row");
+  const inp = $("<input>").attr({
+    id: "high-val",
+    type: "text",
+    placeholder: "Enter a name to Save!",
+  });
+  const butt = $("<button>").addClass("button sv-high").text("Save");
+  inpCont.append(inp, butt);
+  subHighCont.append(inpCont);
+  highCont.append(subHighCont);
+  // Create Container for Play Again
+  const btnCont = $("<article>").addClass("col-12 spacer");
+  const butNoCont = $("<div>").addClass("row");
   const butNo = $("<button>").addClass("button ply-again").text("Play Again");
-  btnCont.append(butNo);
-  plyAgnCont.append(btnCont);
-  // *** Append New Elements to DOM
-  $("#quiz").append(plyAgnCont);
-  // *** Click Listeners for New Button
-  // Quiz Is Stored In Local Storage to Play Again
+  butNoCont.append(butNo);
+  btnCont.append(butNoCont);
+  highCont.append(btnCont);
+  // *** Append to DOM
+  $("#main").append(highCont);
+
+  // saveQuiz();
   $(".ply-again").click((event) => {
     event.preventDefault();
     location.reload();
+  });
+
+  $(".sv-high").click((event) => {
+    event.preventDefault();
+    const userName = $("#high-val")[0].value.trim();
+    console.log($("#high-val"));
+    if (userName === "") {
+      window.alert("Get rekt");
+      return;
+    }
+    const scoreAPI = {
+      username: userName,
+      score: score,
+      quizID: quizID,
+    }
+    console.log(scoreAPI);
+    $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
+      window.alert("Great Success");
+    });
   });
 }
 
@@ -225,87 +274,5 @@ $("#play").click((event) => {
   event.preventDefault();
   console.log("fuck you");
   $("#quiz").removeClass("hide");
-  $("#play-cont").addClass("hide");
+  $("#play-cont").remove();
 });
-
-function makeHigh() {
-  const highCont = $("<section>").addClass("row cont high");
-  const article = $("<article>").addClass("");
-  const title = $("<h3>").addClass("spacer").text("High Scores");
-  const div = $("<div>").addClass("row");
-  article.append(title, div);
-  highCont.append(article);
-  const ul = $("<ul>").addClass("");
-  for (let i = 0; i < highScores.length; i++) {
-    const li = $("<li>").text(
-      highScores[i].username + ": " + highScores[i].score
-    );
-    ul.append(li);
-  }
-  div.append(ul);
-
-  const subHighCont = $("<article>");
-  const inp = $("<input>").attr({
-    id: "high-val",
-    type: "text",
-    placeholder: "Enter a name to Save!",
-  });
-
-  const butt = $("<button>").addClass("button sv-high").text("Save");
-  // <input type="text" id="q1" name="q1"></input>
-  subHighCont.append(inp, butt);
-  highCont.append(subHighCont);
-  $("#main").append(highCont);
-  saveQuiz();
-  // $("#quiz").append(highCont);
-  $(".sv-high").click((event) => {
-    event.preventDefault();
-    const userName = $("#high-val")[0].value.trim();
-    console.log($("#high-val"));
-    if (userName === "") {
-      window.alert("Get rekt");
-      return;
-    }
-    const scoreAPI = {
-      username: userName,
-      score: score,
-      quizID: quizID,
-    }
-    console.log(scoreAPI);
-    $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
-      window.alert("Great Success");
-    });
-  });
-}
-
-// makeHigh();
-// function makeHigh(check) {
-//   const highCont = $("<section>").addClass("row cont");
-//   const article = $("<article>").addClass("");
-//   const title = $("<h3>").addClass("spacer").text("High Scores");
-//   const div = $("<div>").addClass("col-12");
-//   article.append(title, div);
-//   highCont.append(article);
-//   const table = $("<table>").addClass("row cont");
-//   for (let i = 0; i < testHigh.length; i++) {
-//     const tr = $("<tr>").addClass("col-12");
-//     const user = $("<th>").text(testHigh[i].username + " :");
-//     console.log(user);
-//     const score = $("<th>").text(testHigh[i].score);
-//     console.log(score);
-//     tr.append(user, score);
-//     console.log(tr);
-//     table.append(tr);
-//   }
-//   div.append(table);
-//   // if (check === "yes") {
-//   //   let subHighCont = $("<article>");
-//   //   let inp = $("<input>").attr("type", "text").text("Enter a Username to Save!");
-//   //   let butt = $("<button>").addClass("button").text("Submit");
-//   //   // <input type="text" id="q1" name="q1"></input>
-//   //   subHighCont.append(inp, butt);
-//   //   highCont.append(subHighCont);
-//   // }
-//   $("#main").append(highCont);
-//   // $("#quiz").append(highCont);
-// }
