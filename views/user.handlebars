@@ -31,16 +31,4 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/scripts/login.js"></script>
   <script type="text/javascript" src="assets/scripts/signup.js"></script>
-  <script>
-  $(".quizStart").on("click", (event) => {
-    event.preventDefault();
-    const quizID = event.target.getAttribute("data-id");
-    const quizName = event.target.getAttribute("data-name");
-    console.log(quizID);
-    $("#btns").empty();
-    $("#rubbish").text("'s");
-    $("#title").text(quizName + ' quiz');
-    const url = `/api/questions/${quizID}`;
-    $.get(url);
-  })
-</script>
+  <script type="text/javascript" src="assets/scripts/user-quiz.js"></script>

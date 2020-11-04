@@ -224,7 +224,7 @@ $(() => {
     const apiObj = {
       quizName: quizName.value,
       randomize: randomize,
-      accountID: 1,
+      accountID: 2,
       questions: questions,
     };
     // ONCE WE ARE SERVER CONNECTED, WE CAN PASS THIS OBJECT TO AN API REQ

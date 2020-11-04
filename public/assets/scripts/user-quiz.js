@@ -11,6 +11,7 @@ const parsedQuiz = [];
 
 // * Functions
 // ** Check Local Storage If User Wanted to Play a Quiz Again
+
 checkLocal();
 function checkLocal() {
   const localQuiz = JSON.parse(localStorage.getItem("saved-quiz"));
@@ -22,6 +23,18 @@ function checkLocal() {
   quizRes.push(localQuiz);
   localStorage.removeItem("saved-quiz");
   parseRes();
+}
+
+// ** Make GET Req Based on User Selection and Push Res to quizRes[]
+function renderQuiz(id, name) {
+  $("#btns").empty();
+  $("#rubbish").text("'s");
+  $("#title").text(name + " quiz");
+  const url = `/api/questions/${id}`;
+  $.get(url).then((res) => {
+    console.log(res);
+    quizRes.push(res);
+  });
 }
 
 // ** Parse API Res To Work Better With Updating the DOM and Store in parsedQuiz
@@ -191,6 +204,15 @@ $("#play").click((event) => {
   // testAPI();
   testSelect();
 });
+
+$(".quizStart").on("click", (event) => {
+  event.preventDefault();
+  const quizID = event.target.getAttribute("data-id");
+  const quizName = event.target.getAttribute("data-name");
+  // console.log(quizID);
+  renderQuiz(quizID, quizName);
+});
+console.log("fuck");
 
 // USE THIS FOR THE PLAY SCRIPT 😂
 // const testHigh = [
