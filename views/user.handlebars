@@ -2,17 +2,23 @@
 <header>
   <section class="container cont">
     <article class="row">
-      <h2 class="col-12" id="user">{{ username }}'s Quizzes</h2>
+      <h2 class="col-12" id="user">{{ username }}<span id="rubbish">'s Quizzes</span></h2>
+      <h3 id="title"></h3>
     </article>
   </section>
 </header>
 <!-- Page Content -->
 <main class="container">
   <!-- Display User Quizzes -->
-  <section class="row">
+  <section class="row" id="btns">
     {{#each quizzes}}
-      {{> quizName}}
+    {{> quizName}}
     {{/each}}
+    <article id="scr" class="cont col-12 hide">
+      <h3>Score: <span id="score">0</span></h3>
+    </article>
+    <article id="quiz" class="">
+    </article>
   </section>
   <!-- Display Create Account If Not Logged In -->
 </main>
@@ -25,3 +31,16 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/scripts/login.js"></script>
   <script type="text/javascript" src="assets/scripts/signup.js"></script>
+  <script>
+  $(".quizStart").on("click", (event) => {
+    event.preventDefault();
+    const quizID = event.target.getAttribute("data-id");
+    const quizName = event.target.getAttribute("data-name");
+    console.log(quizID);
+    $("#btns").empty();
+    $("#rubbish").text("'s");
+    $("#title").text(quizName + ' quiz');
+    const url = `/api/questions/${quizID}`;
+    $.get(url);
+  })
+</script>
