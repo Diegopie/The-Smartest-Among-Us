@@ -32,35 +32,55 @@ $(() => {
     for (let i = 0; i < value; i++) {
       // *** Create Elements
       const qNum = $("#quiz-cont")[0].children.length + 1;
-      const qCont = $("<article>").addClass("row cont question");
-      const qTitle = $("<h3>")
+      // Contain All Elements
+      const qCont = $("<section>").addClass("row cont question");
+      // Contain X Button
+      const xCont = $("<article>").addClass("col-12");
+      const xDiv = $("<div>").addClass("row");
+      const btn = $("<button>").addClass("q-rmv").text("X");
+      xDiv.append(btn);
+      xCont.append(xDiv);
+      // Contain Question
+      const quesCont = $("<article>").addClass("col-7 col-md-4 spacer");
+      const quesTitle = $("<h3>")
         .text("Question " + qNum)
-        .addClass("col-8");
-      const btn = $("<button>").addClass("col-1 q-rmv").text("X");
-      const qInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
+        .addClass("col-12");
+      const queInpCont = $("<div>").addClass("row");
+      const quesInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
+      queInpCont.append(quesInpt);
+      quesCont.append(quesTitle, queInpCont);
+      // Correct Question
+      const corCont = $("<article>").addClass("col-7 col-md-4 spacer");
       const corTitle = $("<h3>").text("Correct Answer");
-      const cInpt = $("<input>").attr({
+      const corInpCont = $("<div>").addClass("row");
+      const corInpt = $("<input>").attr({
         type: "text",
         name: "q" + qNum + "-crt",
       });
-      const inTitle = $("<h3>").text("Imposter Answers");
-      // *** Append to qCont
-      qCont.append(qTitle, btn, qInpt, corTitle, cInpt, inTitle);
-      // *** Loop to Create the Three Imposter Question Elements and Append to qCont
+      corInpCont.append(corInpt);
+      corCont.append(corTitle, corInpCont);
+      // Incorrect Answers
+      const incCont = $("<article>").addClass("col-7 col-md-4 spacer");
+      const incTitle = $("<h3>").text("Imposter Answers");
+      const incInpCont = $("<div>").addClass("row");
+      // Loop to Create the Three Imposter Question Elements and Append to qCont (To account for true/false, this loop needs to be based on the question amount for a corresponding quiz index)
       for (let j = 1; j < 4; j++) {
-        const iInpt = $("<input>").attr({
+        const incInp = $("<input>").attr({
           type: "text",
           name: "q" + qNum + "-wrg" + j,
         });
-        qCont.append(iInpt);
+        incInpCont.append(incInp);
       }
+      incCont.append(incTitle, incInpCont);
+      // *** All Containers to qCont
+      qCont.append(xCont, quesCont, corCont, incCont);
       // *** Append to DOM
       $("#quiz-cont").append(qCont);
     }
     $(".q-rmv").click((event) => {
       event.preventDefault();
-      // console.dir(event.target.parentElement);
-      event.target.parentElement.remove();
+      console.log(event.target.parentElement.parentElement.parentElement);
+      event.target.parentElement.parentElement.parentElement.remove();
       updateQuesTitles();
     });
   }
@@ -115,7 +135,7 @@ $(() => {
       renderQuiz();
     });
   }
-
+  
   // ** Display API Res to DOM (This depends on children elements. Any adding additional elements to the makeQuestCont() will break this!)
   function renderQuiz() {
     // *** Loop through the Length of the quizRes array
@@ -125,13 +145,13 @@ $(() => {
       const domPath = $(".question")[i].children;
       // console.dir(domPath);
       // *** Update Question
-      domPath[2].value = resPath.question;
+      domPath[1].children[1].children[0].value = resPath.question;
       // *** Update Correct Answer
-      domPath[4].value = resPath.correct_answer;
+      domPath[2].children[1].children[0].value = resPath.correct_answer;
       // *** Update Incorrect Answer
-      domPath[6].value = resPath.incorrect_answers[0];
-      domPath[7].value = resPath.incorrect_answers[1];
-      domPath[8].value = resPath.incorrect_answers[2];
+      domPath[3].children[1].children[0].value = resPath.incorrect_answers[0];
+      domPath[3].children[1].children[1].value = resPath.incorrect_answers[1];
+      domPath[3].children[1].children[2].value = resPath.incorrect_answers[2];
     }
     // *** Display Quiz Container, New Q Container Button, and Submit Button
     $("#quiz-cont").removeClass("hide");
@@ -146,10 +166,11 @@ $(() => {
     let questionNum = 1;
     // *** Loop Through the Amount of Question Containers Currently on the DOM and Update Them From 1
     for (let i = 0; i < quizLength; i++) {
-      const domPath = $(".question")[i].children;
+      const domPath = $(".question")[i].children[1].children[0];
+      console.log(domPath);
       // console.log(domPath);
       // console.log(domPath[0].textContent);
-      domPath[0].textContent = "Question " + questionNum;
+      domPath.textContent = "Question " + questionNum;
       questionNum++;
     }
   }
