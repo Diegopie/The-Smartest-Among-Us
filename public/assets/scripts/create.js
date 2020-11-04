@@ -185,7 +185,7 @@ $(() => {
       $(elem).removeClass("valid");
     }
   }
-
+  // console.dir($(".question")[0].children);
   // ** Store Questions In Obj for Our API
   function parseUser() {
     // *** Variables
@@ -212,16 +212,22 @@ $(() => {
       const domPath = $(".question")[i].children;
       // console.log(domPath);
       // Get Question
-      const question = domPath[2];
+      const question = domPath[1].children[1].children[0];
+      console.log("question: ", question);
       validator(question);
       // Get Correct
-      const correct = domPath[4];
+      const correct = domPath[2].children[1].children[0];
+      console.log("Correct: ", correct);
       validator(correct);
       // Get Incorrect
-      validator(domPath[6]);
-      validator(domPath[7]);
-      validator(domPath[8]);
-      const wrong = [domPath[6].value, domPath[7].value, domPath[8].value];
+      validator(domPath[3].children[1].children[0]);
+      validator(domPath[3].children[1].children[1]);
+      validator(domPath[3].children[1].children[2]);
+      const wrong = [
+        domPath[3].children[1].children[0].value,
+        domPath[3].children[1].children[1].value,
+        domPath[3].children[1].children[2].value,
+      ];
       // Create question object
       const curQuest = {
         questionNum: questionNum,
