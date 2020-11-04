@@ -58,9 +58,9 @@ header {
 .q-rmv {
   background-color: #2b2b2b;
   border: solid;
-  color: white;
+  color: red;
   border-radius: 8px;
-  padding: 2px 18px 2px 12px;
+  padding: 2px 12px 2px 12px;
   text-align: center;
   display: inline-block;
   margin: 3px 1px;
@@ -91,6 +91,10 @@ color: #1BEF0C;
 }
 
 /* For Quiz and Dropdown Options */
+ul {
+  padding-left: 0px;
+}
+
 li a{
   color: white;
 }

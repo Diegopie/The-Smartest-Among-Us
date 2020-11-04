@@ -15,20 +15,22 @@
           <article class="col-12 spacer" id="amnt">
             <h3 class="spacer">How Many Questions Would You Like to Start With?</h3>
             <p>You can add or remove questions later</p>
-            <select class="col-5" id="amnt-val">
-              {{!-- <option selected disabled>Questions</option> --}}
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-            </select>
-            <button class="button col-6" id="amnt-sbt">Yes</button>
+            <div class="row">
+              <select class="col-3 col-md-2" id="amnt-val">
+                {{!-- <option selected disabled>Questions</option> --}}
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+                <option>05</option>
+                <option>06</option>
+                <option>07</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+              </select>
+              <button class="button col-6" id="amnt-sbt">Yes</button>
+            </div>
           </article>
           <article class ="spacer hide" id="rand">
             <h3 class="spacer">Would You Like Your Quiz to Be Played in a Random Order?</h3>
@@ -48,7 +50,7 @@
           </article>
           <article class="spacer hide" id="settings">
             <article class="row">
-              <h3>Choose A Category</h3>
+              <h3 class="col-12 spacer">Choose A Category</h3>
               <button class="col-4 cat button">Art</button>
               <button class="col-4 cat button">Film</button>
               <button class="col-4 cat button">Games</button>
@@ -59,7 +61,7 @@
               <button class="col-4 cat button">Math</button>
             </article>
             <article class="row spacer">
-              <h3>Choose A Difficulty</h3>
+              <h3 class="col-12 spacer">Choose A Difficulty</h3>
               <button class="col-4 dif button">Easy</button>
               <button class="col-4 dif button">Medium</button>
               <button class="col-4 dif button">Hard</button>
@@ -71,7 +73,42 @@
         </fieldset>
         <!-- For Questions -->
         <fieldset id="quiz-cont" class="hide">
-          
+
+
+          {{!-- <section class="row cont question">
+
+            <article class="col-12">
+              <div class="row">
+                <button class="q-rmv">X</button>
+              </div>
+            </article>
+
+            <article class="col-7 col-md-4 spacer">
+              <h3>Question 1</h3>
+              <div class="row">
+                <input type="text" name="q1"> 
+              </div>
+            </article>
+
+            <article class="col-7 col-md-4 spacer">
+              <h3>Correct Answer</h3>
+              <div class="row">
+                <input type="text" name="q1-crt">
+              </div>
+            </article>
+
+            <article class="col-7 col-md-4 spacer">
+              <h3>Imposter Answers</h3>
+              <div class="row">
+                <input type="text" name="q1-wrg1">
+                <input type="text" name="q1-wrg2">
+                <input type="text" name="q1-wrg3">
+              </div>
+            </article>
+
+          </section> --}}
+
+
         </fieldset>
         <article class="row spacer hide" id="btns">
           <button id="new-btn" class="button">Add A New Question</button>
