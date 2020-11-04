@@ -2,7 +2,7 @@ const opentdb = require("opentdb-api");
 
 const test = {
   amount: 10,
-  category: "any",
+  category: "art",
   difficulty: "medium",
   type: "multiple",
 };
