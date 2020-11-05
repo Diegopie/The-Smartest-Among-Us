@@ -32,8 +32,9 @@ $(document).ready(() => {
       .then((res) => {
         console.log(res.id);
         localStorage.setItem("currentUserId", res.id);
+        const accountURL = "/account=" + email;
         console.log(localStorage.getItem("currentUserId"));
-        window.location.replace("/account");
+        window.location.replace(accountURL);
       })
       .catch((err) => {
         console.log(err);
