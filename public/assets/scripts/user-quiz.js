@@ -16,7 +16,6 @@ const parsedQuiz = [];
 
 function getScores(check) {
   $.get("/api/hiScores/" + quizID).then((res) => {
-    console.log(res);
     if (res[0] === undefined) {
       highScores = [
         {
@@ -24,7 +23,6 @@ function getScores(check) {
           score: "",
         },
       ];
-      console.log(highScores);
       // return;
     } else {
       const parsedHigh = [];
@@ -135,7 +133,7 @@ function renderQuizBetter() {
   $("#quiz").append(contain);
   $("#play-cont").removeClass("hide");
   // *** Click Listener to Check Correct Answer
-  console.log("Correct", curQaArr.correct);
+  // console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {
     // disable click listener if user has already clicked
     if ($("#answers").hasClass("check")) {
@@ -240,7 +238,6 @@ function makeHigh() {
   $(".sv-high").click((event) => {
     event.preventDefault();
     const userName = $("#high-val")[0].value.trim();
-    console.log($("#high-val"));
     if (userName === "") {
       $("#valText")[0].textContent = "Please Enter a Username";
       $("#validateModal").modal();
@@ -251,7 +248,7 @@ function makeHigh() {
       score: score,
       quizID: quizID,
     };
-    console.log(scoreAPI);
+    // console.log(scoreAPI);
     $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
       getScores(true);
       $("#valText")[0].textContent = "Your Score Has Been Saved!";
