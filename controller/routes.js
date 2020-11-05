@@ -255,8 +255,8 @@ router.delete("/api/quizID/:quizID", (req, res) => {
     where: {
       quizID: req.params.quizID,
     },
-  }).then((result) => {
-    console.log(result);
+  }).then(() => {
+    res.redirect(`/account=${req.body.accountName}`);
   });
 });
 

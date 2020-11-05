@@ -20,6 +20,10 @@ $(".deleteQuiz").on("click", (event) => {
   $.ajax({
     method: "DELETE",
     url: url,
+    data: {
+      accountName: localStorage.getItem("accountName"),
+    },
+  }).then(() => {
+    location.reload();
   });
-  location.reload();
 });
