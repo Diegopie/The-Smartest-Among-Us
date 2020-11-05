@@ -140,17 +140,7 @@ bootstrap time to load in...? --}}
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/scripts/login.js"></script>
   <script type="text/javascript" src="assets/scripts/signup.js"></script> --}}
-  <script>
-    const accountEl = document.getElementById("accountLink");
-    if (localStorage.getItem('accountName')) {
-      const email = localStorage.getItem("accountName");
-      const accountURL = "/account=" + email;
-      accountEl.setAttribute("href", accountURL);
-      // const parent = $("#dropdown");
-      // const sibling = $("#loginButt");
-      // parent.insertBefore(accountEl, sibling);
-    } 
-  </script>
+  <script type="text/javascript" src="assets/scripts/main.js"></script>
 </body>
 
 </html>
