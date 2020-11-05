@@ -44,13 +44,28 @@ function login() {
   }
 }
 
-$(".quizStart").on("click", (event) => {
+// $(".quizStart").on("click", (event) => {
+//   event.preventDefault();
+//   const quizID = event.target.getAttribute("data-id");
+//   const quizName = event.target.getAttribute("data-name");
+//   console.log(quizID);
+//   $("#btns").empty();
+//   $("#title").text(quizName);
+//   const url = `/api/questions/${quizID}`;
+//   $.get(url);
+
+$("#createButt").click((event) => {
+  // console.log(localStorage.getItem("currentUserId"));
+  if (localStorage.getItem("currentUserId")) {
+    event.preventDefault();
+    window.location.replace("/create");
+  } else {
+    $("#signUpModal").modal("show");
+  }
+});
+
+$("#alreadyHaveAccount").click((event) => {
   event.preventDefault();
-  const quizID = event.target.getAttribute("data-id");
-  const quizName = event.target.getAttribute("data-name");
-  console.log(quizID);
-  $("#btns").empty();
-  $("#title").text(quizName);
-  const url = `/api/questions/${quizID}`;
-  $.get(url);
+  $("#signUpModal").modal("hide");
+  $("#loginModal").modal("show");
 });

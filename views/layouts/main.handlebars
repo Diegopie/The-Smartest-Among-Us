@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="assets/fontawesome/css/all.css">
   <link rel="stylesheet" href="assets/styles/index.css">
   <link rel="stylesheet" href="assets/styles/animate.css">
+  <link rel="icon" href="assets/img/tab-icon.png">
   <title>The Smartest Among Us</title>
 </head>
 
@@ -75,15 +76,15 @@
       <div class="modal-dialog">
         <div class="modal-content cont modals">
           <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+          
           <div class="modal-header cont">
             <h3 class="modal-title">Login</h3>
           </div>
+          
           <div class="modal-body cont">
-
             <div class="form-group">
-              <input type="text" name="" class="form-control" id="username-input" placeholder="Username">
+              <input type="text" name="" class="form-control" id="username-input" placeholder="Email">
             </div>
-
             <div class="form-group">
               <input type="password" name="" class="form-control" id="password-input" placeholder="Password">
             </div>
@@ -105,15 +106,15 @@
       <div class="modal-dialog">
         <div class="modal-content cont modals">
           <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+
           <div class="modal-header cont">
             <h3 class="modal-title">Sign Up</h3>
           </div>
+
           <div class="modal-body cont">
-
             <div class="form-group">
-              <input type="text" name="" class="form-control" id="username-input-create" placeholder="Username">
+              <input type="text" name="" class="form-control" id="username-input-create" placeholder="Email">
             </div>
-
             <div class="form-group">
               <input type="password" name="" class="form-control" id="password-input-create" placeholder="Password">
             </div>
@@ -121,6 +122,10 @@
 
           <div class="modal-footer cont">
             <button type="submit" class="button" id="modSignButt">Sign Up</button>
+          </div>
+
+          <div class="modal-basement cont">
+            <a type="submit" id="alreadyHaveAccount">Already Signed Up? Login</a>
           </div>
         </div>
       </div>
@@ -135,7 +140,7 @@
       <article class="modal-dialog">
         <div class="modal-content cont modals">
           <h3 id="valText"></h3>
-          <button class="button hide link">Play Your Quiz!</button>
+          <button class="button link hide">Play Your Quiz!</button>
         </div>
       </article>
     </section>
