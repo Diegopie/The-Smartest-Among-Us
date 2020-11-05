@@ -49,14 +49,14 @@
             aria-expanded="false">
             <i class="fas fa-bars" id="hamburger"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu dropdown-menu-right" id="dropdown" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/play">Play</a>
             <a class="dropdown-item" href="/create">Create Quiz</a>
             <a class="dropdown-item" href="/account" id="accountLink">Account</a>
-            <button class="dropdown-item" data-toggle="modal" data-target="#loginModal">Login</button>
+            <button class="dropdown-item" data-toggle="modal" data-target="#loginModal" id="loginButt">Login</button>
             <button class="dropdown-item" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
             <form action="/logout" method="POST">
-              <button class="dropdown-item" type="submit">Log Out</button>
+              <button class="dropdown-item" type="submit" id="logout">Log Out</button>
             </form>
           </div>
         </li>
@@ -140,6 +140,17 @@ bootstrap time to load in...? --}}
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/scripts/login.js"></script>
   <script type="text/javascript" src="assets/scripts/signup.js"></script> --}}
+  <script>
+    const accountEl = document.getElementById("accountLink");
+    if (localStorage.getItem('accountName')) {
+      const email = localStorage.getItem("accountName");
+      const accountURL = "/account=" + email;
+      accountEl.setAttribute("href", accountURL);
+      // const parent = $("#dropdown");
+      // const sibling = $("#loginButt");
+      // parent.insertBefore(accountEl, sibling);
+    } 
+  </script>
 </body>
 
 </html>
