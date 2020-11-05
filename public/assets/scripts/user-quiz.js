@@ -2,6 +2,7 @@
 let score = 0;
 let curQuest = 0;
 let quizID;
+let quizName;
 let highScores;
 
 // ** Store API Res
@@ -13,9 +14,8 @@ const parsedQuiz = [];
 // * Functions
 // ** Check Local Storage If User Wanted to Play a Quiz Again
 
-function getScores() {
+function getScores(check) {
   $.get("/api/hiScores/" + quizID).then((res) => {
-    // console.log(res);
     if (res[0] === undefined) {
       highScores = [
         {
@@ -23,7 +23,6 @@ function getScores() {
           score: "",
         },
       ];
-      console.log(highScores);
       // return;
     } else {
       const parsedHigh = [];
@@ -35,6 +34,10 @@ function getScores() {
         parsedHigh.push(newObj);
       }
       highScores = parsedHigh;
+    }
+    if (check) {
+      $(".high").remove();
+      makeHigh(false);
     }
   });
 }
@@ -97,7 +100,7 @@ function renderQuizBetter() {
   // console.log("current question index: ", curQuest);
   // *** Check If No More Questions Remain then Display UI Prompt in saveQuiz()
   if (curQuest === parsedQuiz.length) {
-    makeHigh();
+    makeHigh(true);
     return;
   }
   // *** Variables to Create Quiz DOM
@@ -130,7 +133,7 @@ function renderQuizBetter() {
   $("#quiz").append(contain);
   $("#play-cont").removeClass("hide");
   // *** Click Listener to Check Correct Answer
-  console.log("Correct", curQaArr.correct);
+  // console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {
     // disable click listener if user has already clicked
     if ($("#answers").hasClass("check")) {
@@ -185,7 +188,7 @@ function makeButt(value, answ) {
 }
 
 // ** Creat Container to Display High Scores
-function makeHigh() {
+function makeHigh(check) {
   $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for High Score
   const highCont = $("<section>").addClass("row cont high");
@@ -195,7 +198,7 @@ function makeHigh() {
   article.append(title, div);
   highCont.append(article);
   const ul = $("<ul>").addClass("");
-  console.log(highScores);
+  // console.log(highScores);
   for (let i = 0; i < highScores.length; i++) {
     const li = $("<li>").text(
       highScores[i].username + ": " + highScores[i].score
@@ -204,17 +207,19 @@ function makeHigh() {
   }
   div.append(ul);
   // *** Create Container for Submitting a High Score
-  const subHighCont = $("<article>").addClass("col-12 spacer");
-  const inpCont = $("<div>").addClass("row");
-  const inp = $("<input>").attr({
-    id: "high-val",
-    type: "text",
-    placeholder: "Enter a name to Save!",
-  });
-  const butt = $("<button>").addClass("button sv-high").text("Save");
-  inpCont.append(inp, butt);
-  subHighCont.append(inpCont);
-  highCont.append(subHighCont);
+  if (check) {
+    const subHighCont = $("<article>").addClass("col-12 spacer");
+    const inpCont = $("<div>").addClass("row");
+    const inp = $("<input>").attr({
+      id: "high-val",
+      type: "text",
+      placeholder: "Enter a name to Save!",
+    });
+    const butt = $("<button>").addClass("button sv-high").text("Save");
+    inpCont.append(inp, butt);
+    subHighCont.append(inpCont);
+    highCont.append(subHighCont);
+  }
   // Create Container for Play Again
   const btnCont = $("<article>").addClass("col-12 spacer");
   const butNoCont = $("<div>").addClass("row");
@@ -228,13 +233,13 @@ function makeHigh() {
   // saveQuiz();
   $(".ply-again").click((event) => {
     event.preventDefault();
+    // getQuiz(quizID, quizName);  // This works but score containers need to be reset and high score needs to be remove()
     location.reload();
   });
 
   $(".sv-high").click((event) => {
     event.preventDefault();
     const userName = $("#high-val")[0].value.trim();
-    console.log($("#high-val"));
     if (userName === "") {
       $("#valText")[0].textContent = "Please Enter a Username";
       $("#validateModal").modal();
@@ -245,8 +250,9 @@ function makeHigh() {
       score: score,
       quizID: quizID,
     };
-    console.log(scoreAPI);
+    // console.log(scoreAPI);
     $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
+      getScores(true);
       $("#valText")[0].textContent = "Your Score Has Been Saved!";
       $("#validateModal").modal();
     });
@@ -265,7 +271,7 @@ function shuffleArray(array) {
 $(".quizStart").on("click", (event) => {
   event.preventDefault();
   quizID = event.target.getAttribute("data-id");
-  const quizName = event.target.getAttribute("data-name");
+  quizName = event.target.getAttribute("data-name");
   // console.log(quizID);
   getScores();
   getQuiz(quizID, quizName);
@@ -273,7 +279,6 @@ $(".quizStart").on("click", (event) => {
 
 $("#play").click((event) => {
   event.preventDefault();
-  console.log("fuck you");
   $("#quiz").removeClass("hide");
   $("#play-cont").remove();
 });

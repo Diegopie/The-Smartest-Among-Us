@@ -158,7 +158,7 @@ function renderQuizBetter() {
   $("#quiz").append(contain);
   $("#quiz").removeClass("hide");
   // *** Click Listener to Check Correct Answer
-  console.log("Correct", curQaArr.correct);
+  // console.log("Correct", curQaArr.correct);
   $(".ans").click((event) => {
     // disable click listener if user has already clicked
     if ($("#answers").hasClass("check")) {
@@ -274,7 +274,7 @@ function shuffleArray(array) {
 $("#amnt-sbt").click((event) => {
   event.preventDefault();
   strQuestions = parseInt($("#amnt-val").val());
-  console.log("How Many Q: " + strQuestions);
+  // console.log("How Many Q: " + strQuestions);
   $("#amnt").addClass("hide");
   $("#cat-cont").removeClass("hide");
 });
@@ -284,7 +284,7 @@ $(".cat").click((event) => {
   userCat = event.target.innerText;
   userSelect(event.target);
   catSelect = true;
-  console.log("User Category: ", userCat);
+  // console.log("User Category: ", userCat);
 });
 
 // ** Store User Difficulty
@@ -293,7 +293,7 @@ $(".dif").click((event) => {
   userDif = event.target.innerText;
   userSelect(event.target);
   difSelect = true;
-  console.log("User Difficulty: ", userDif);
+  // console.log("User Difficulty: ", userDif);
 });
 
 $("#sub").click((event) => {
