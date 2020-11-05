@@ -54,7 +54,7 @@ function userSelect(elem) {
 // ** Make API Req Directly to Their Site
 function testSelect() {
   const url =
-    "https://opentdb.com/api.php?amount=1&category=" +
+    "https://opentdb.com/api.php?amount=10&category=" +
     catValue[userCat] +
     "&difficulty=" +
     difValue[userDif] +

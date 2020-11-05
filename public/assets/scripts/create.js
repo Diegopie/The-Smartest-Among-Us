@@ -31,12 +31,12 @@ $(() => {
   let userID;
 
   // * Functions
+  // ** Get Value of Logged in User
   checkLocal();
   function checkLocal() {
-    console.log(localStorage.getItem("currentUserId"));
     userID = localStorage.getItem("currentUserId");
-
   }
+
   // ** Create Question Containers Based Off User Selection
   function makeQuesCont(value) {
     // Loop For As Many Times The User Wants To Create A Question
