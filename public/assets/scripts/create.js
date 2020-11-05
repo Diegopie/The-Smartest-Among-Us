@@ -127,6 +127,14 @@ $(() => {
     });
   }
 
+  // ** parse text to make nonsense reaadable
+  function decode(text) {
+    const el = document.createElement("div");
+    el.innerHTML = text;
+    text = el.innerText;
+    return text;
+  }
+
   // ** Display API Res to DOM (This depends on children elements. Any adding additional elements to the makeQuestCont() will break this!)
   function renderQuiz() {
     // *** Loop through the Length of the quizRes array
@@ -135,13 +143,19 @@ $(() => {
       const resPath = quizRes[i];
       const domPath = $(".question")[i].children;
       // *** Update Question
-      domPath[1].children[1].children[0].value = resPath.question;
+      domPath[1].children[1].children[0].value = decode(resPath.question);
       // *** Update Correct Answer
-      domPath[2].children[1].children[0].value = resPath.correct_answer;
+      domPath[2].children[1].children[0].value = decode(resPath.correct_answer);
       // *** Update Incorrect Answer
-      domPath[3].children[1].children[0].value = resPath.incorrect_answers[0];
-      domPath[3].children[1].children[1].value = resPath.incorrect_answers[1];
-      domPath[3].children[1].children[2].value = resPath.incorrect_answers[2];
+      domPath[3].children[1].children[0].value = decode(
+        resPath.incorrect_answers[0]
+      );
+      domPath[3].children[1].children[1].value = decode(
+        resPath.incorrect_answers[1]
+      );
+      domPath[3].children[1].children[2].value = decode(
+        resPath.incorrect_answers[2]
+      );
     }
     // *** Display Quiz Container, New Q Container Button, and Submit Button
     $("#quiz-cont").removeClass("hide");
