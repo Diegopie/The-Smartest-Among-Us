@@ -37,7 +37,7 @@ function getScores(check) {
     }
     if (check) {
       $(".high").remove();
-      makeHigh();
+      makeHigh(false);
     }
   });
 }
@@ -100,7 +100,7 @@ function renderQuizBetter() {
   // console.log("current question index: ", curQuest);
   // *** Check If No More Questions Remain then Display UI Prompt in saveQuiz()
   if (curQuest === parsedQuiz.length) {
-    makeHigh();
+    makeHigh(true);
     return;
   }
   // *** Variables to Create Quiz DOM
@@ -188,7 +188,7 @@ function makeButt(value, answ) {
 }
 
 // ** Creat Container to Display High Scores
-function makeHigh() {
+function makeHigh(check) {
   $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for High Score
   const highCont = $("<section>").addClass("row cont high");
@@ -207,17 +207,19 @@ function makeHigh() {
   }
   div.append(ul);
   // *** Create Container for Submitting a High Score
-  const subHighCont = $("<article>").addClass("col-12 spacer");
-  const inpCont = $("<div>").addClass("row");
-  const inp = $("<input>").attr({
-    id: "high-val",
-    type: "text",
-    placeholder: "Enter a name to Save!",
-  });
-  const butt = $("<button>").addClass("button sv-high").text("Save");
-  inpCont.append(inp, butt);
-  subHighCont.append(inpCont);
-  highCont.append(subHighCont);
+  if (check) {
+    const subHighCont = $("<article>").addClass("col-12 spacer");
+    const inpCont = $("<div>").addClass("row");
+    const inp = $("<input>").attr({
+      id: "high-val",
+      type: "text",
+      placeholder: "Enter a name to Save!",
+    });
+    const butt = $("<button>").addClass("button sv-high").text("Save");
+    inpCont.append(inp, butt);
+    subHighCont.append(inpCont);
+    highCont.append(subHighCont);
+  }
   // Create Container for Play Again
   const btnCont = $("<article>").addClass("col-12 spacer");
   const butNoCont = $("<div>").addClass("row");
