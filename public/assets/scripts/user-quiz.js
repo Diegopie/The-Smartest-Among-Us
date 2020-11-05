@@ -236,7 +236,8 @@ function makeHigh() {
     const userName = $("#high-val")[0].value.trim();
     console.log($("#high-val"));
     if (userName === "") {
-      window.alert("Get rekt");
+      $("#valText")[0].textContent = "Please Enter a Username";
+      $("#validateModal").modal();
       return;
     }
     const scoreAPI = {
@@ -246,7 +247,8 @@ function makeHigh() {
     };
     console.log(scoreAPI);
     $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
-      window.alert("Great Success");
+      $("#valText")[0].textContent = "Your Score Has Been Saved!";
+      $("#validateModal").modal();
     });
   });
 }

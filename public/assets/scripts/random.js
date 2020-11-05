@@ -54,7 +54,7 @@ function userSelect(elem) {
 // ** Make API Req Directly to Their Site
 function testSelect() {
   const url =
-    "https://opentdb.com/api.php?amount=10&category=" +
+    "https://opentdb.com/api.php?amount=1&category=" +
     catValue[userCat] +
     "&difficulty=" +
     difValue[userDif] +
@@ -271,20 +271,14 @@ $(".dif").click((event) => {
 $("#sub").click((event) => {
   event.preventDefault();
   if (!catSelect || !difSelect) {
-    window.alert("Choose Something, fool");
+    $("#valText")[0].textContent = "Please Select a Category and Difficulty";
+    $("#validateModal").modal();
     return;
   }
   $("#settings").addClass("hide");
   $("#score-cont").removeClass("hide");
   testSelect();
 });
-
-// function selectCheck() {
-//   if (!catSelect || !difSelect) {
-//     window.alert("Choose Something, fool");
-//     return;
-//   }
-// }
 
 // * Code I wrote but don't want to delete 😅
 
