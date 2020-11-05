@@ -10,7 +10,7 @@ $(() => {
   let randomize = Boolean;
   let userCat;
   const catValue = {
-    Mythology: 20,
+    Animals: 27,
     Film: 11,
     Games: 15,
     Sports: 21,
