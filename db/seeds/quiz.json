@@ -1,0 +1,107 @@
+{
+  "quizName": "",
+  "randomize": true,
+  "accountID": 1,
+  "questions": [
+      {
+          "questionNum": 1,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 2,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 3,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 4,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 5,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 6,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 7,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 8,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 9,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      },
+      {
+          "questionNum": 10,
+          "question": "",
+          "correctAnswer": "",
+          "wrongAnswers": [
+              "",
+              "",
+              ""
+          ]
+      }
+  ]
+}
