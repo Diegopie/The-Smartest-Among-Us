@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
   Score.associate = (models) => {
     Score.belongsTo(models.Quiz, {
       foreignKey: "quizID",
-      allowNull: false,
+      onDelete: "cascade",
     });
   };
   return Score;
