@@ -40,3 +40,13 @@ function login() {
     start();
   }
 }
+
+$("#createButt").click((event) => {
+  console.log(localStorage.getItem("currentUserId"));
+  if (localStorage.getItem("currentUserId")) {
+    event.preventDefault();
+    window.location.replace("/create");
+  } else {
+    $("#signUpModal").modal("show");
+  }
+});
