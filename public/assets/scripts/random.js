@@ -4,6 +4,7 @@ let score = 0;
 let curQuest = 0;
 let catSelect = false;
 let difSelect = false;
+let strQuestions;
 // ** Store User Selection for API Req
 let userCat;
 const catValue = {
@@ -55,7 +56,9 @@ function userSelect(elem) {
 // ** Make API Req Directly to Their Site
 function testSelect() {
   const url =
-    "https://opentdb.com/api.php?amount=10&category=" +
+    "https://opentdb.com/api.php?amount=" +
+    strQuestions +
+    "&category=" +
     catValue[userCat] +
     "&difficulty=" +
     difValue[userDif] +
@@ -208,11 +211,12 @@ function makeButt(value, answ) {
     renderQuizBetter();
   });
 }
+// console.dir($("#score-cont")[0].children[0]);
 
 // ** Prompt User If They WAnt to Play Again or Save the Quiz
 function saveQuiz() {
   // Update Final Score
-  $("#score-cont").children[0].textContent = "Final Score: " + score;
+  $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
   const saveCont = $("<section>").addClass("row cont sv-cont");
   // *** Containers for Text and Append to saveCont
@@ -240,6 +244,7 @@ function saveQuiz() {
       localStorage.setItem("saved-quiz", JSON.stringify(trivApi));
       window.location.replace("/create");
     } else {
+      localStorage.setItem("saved-quiz", JSON.stringify(trivApi));
       $("#signUpModal").modal("show");
     }
   });
@@ -265,6 +270,14 @@ function shuffleArray(array) {
 }
 
 // * Click Listeners
+// ** Store Value for Quiz Length
+$("#amnt-sbt").click((event) => {
+  event.preventDefault();
+  strQuestions = parseInt($("#amnt-val").val());
+  console.log("How Many Q: " + strQuestions);
+  $("#amnt").addClass("hide");
+  $("#cat-cont").removeClass("hide");
+});
 // ** Store the Category A User Clicks
 $(".cat").click((event) => {
   event.preventDefault();
@@ -294,44 +307,3 @@ $("#sub").click((event) => {
   $("#score-cont").removeClass("hide");
   testSelect();
 });
-
-// * Code I wrote but don't want to delete 😅
-
-// USE THIS FOR THE PLAY SCRIPT 😂
-// const testHigh = [
-//   {
-//     username: "Hello",
-//     score: 30,
-//   },
-//   {
-//     username: "Biitch",
-//     score: 100,
-//   },
-// ];
-// function makeHigh(check) {
-//   const highCont = $("<section>").addClass("cont");
-//   const titlesCont = $("<article>");
-//   const title = $("<h3>").text("High Scores");
-//   highCont.append(titlesCont, title);
-//   const table = $("<table>").addClass("cont");
-//   for (let i = 0; i < testHigh.length; i++) {
-//     const tr = $("<tr>");
-//     const user = $("<th>").text(testHigh[i].username);
-//     console.log(user);
-//     const score = $("<th>").text(testHigh[i].score);
-//     console.log(score);
-//     tr.append(user, score);
-//     console.log(tr);
-//     table.append(tr);
-//   }
-//   highCont.append(table);
-//   if (check === "yes") {
-//     let subHighCont = $("<article>");
-//     let inp = $("<input>").attr("type", "text").text("Enter a Username to Save!");
-//     let butt = $("<button>").addClass("button").text("Submit");
-//     // <input type="text" id="q1" name="q1"></input>
-//     subHighCont.append(inp, butt);
-//     highCont.append(subHighCont);
-//   }
-//   $("#quiz").append(highCont);
-// }

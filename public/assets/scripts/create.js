@@ -29,12 +29,38 @@ $(() => {
   let quizRes;
   // ** Store User ID
   let userID;
+  let accountPage;
 
   // * Functions
-  // ** Get Value of Logged in User
-  checkLocal();
-  function checkLocal() {
+  // ** Get Value of Logged in User; Stop Page if not logged in; Get Quiz From Local if there, else load normally
+  pageChecks();
+  function pageChecks() {
+    const username = localStorage.getItem("accountName");
+    console.log(username);
+    if (username === null) {
+      $("#name").addClass("hide");
+      $("#valText")[0].textContent =
+        "You Must Login or Create an account to continue";
+      $("#validateModal").modal();
+      return;
+    }
+
     userID = localStorage.getItem("currentUserId");
+    // $("#acntLink").attr("href", "/account=" + username);
+    accountPage = "/account=" + username;
+    // ** Check for Quiz From Play Random
+    const localQuiz = JSON.parse(localStorage.getItem("saved-quiz"));
+    // Display Settings elements if local storage is empty
+    if (localQuiz === null) {
+      $("#amnt").removeClass("hide");
+      return;
+    }
+    quizRes = localQuiz;
+    localStorage.removeItem("saved-quiz");
+    console.log(quizRes.length);
+    // $("#rand").removeClass("hide");
+    makeQuesCont(quizRes.length);
+    renderQuiz();
   }
 
   // ** Create Question Containers Based Off User Selection
@@ -343,8 +369,8 @@ $(() => {
     makeQuesCont(1);
   });
   // ** Send to Create Page
-  $(".link").on((event) => {
+  $(".link").click((event) => {
     event.preventDefault();
-    location.href = "/account";
+    location.href = accountPage;
   });
 });
