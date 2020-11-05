@@ -208,11 +208,12 @@ function makeButt(value, answ) {
     renderQuizBetter();
   });
 }
+// console.dir($("#score-cont")[0].children[0]);
 
 // ** Prompt User If They WAnt to Play Again or Save the Quiz
 function saveQuiz() {
   // Update Final Score
-  $("#score-cont").children[0].textContent = "Final Score: " + score;
+  $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
   const saveCont = $("<section>").addClass("row cont sv-cont");
   // *** Containers for Text and Append to saveCont

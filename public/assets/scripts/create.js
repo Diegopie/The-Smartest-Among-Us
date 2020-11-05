@@ -29,6 +29,7 @@ $(() => {
   let quizRes;
   // ** Store User ID
   let userID;
+  let acountPage;
 
   // * Functions
   // ** Get Value of Logged in User
@@ -36,7 +37,21 @@ $(() => {
   function pageChecks() {
     const username = localStorage.getItem("accountName");
     userID = localStorage.getItem("currentUserId");
-    $("#acntLink").attr("href", "/account=" + username);
+    // $("#acntLink").attr("href", "/account=" + username);
+    accountPage = "/account=" + username;
+    // ** Check for Quiz From Play Random
+    const localQuiz = JSON.parse(localStorage.getItem("saved-quiz"));
+    // Display Settings elements if local storage is empty
+    if (localQuiz === null) {
+      $("#amnt").removeClass("hide");
+      return;
+    }
+    quizRes = localQuiz;
+    localStorage.removeItem("saved-quiz");
+    console.log(quizRes.length);
+    // $("#rand").removeClass("hide");
+    makeQuesCont(quizRes.length);
+    renderQuiz();
   }
 
   // ** Create Question Containers Based Off User Selection
@@ -345,8 +360,9 @@ $(() => {
     makeQuesCont(1);
   });
   // ** Send to Create Page
-  // $(".link").on((event) => {
-  //   event.preventDefault();
-  //   location.href = "/account";
-  // });
+  $(".link").click((event) => {
+    event.preventDefault();
+    location.href = accountPage;
+  });
+
 });
