@@ -54,11 +54,3 @@ $(".quizStart").on("click", (event) => {
   const url = `/api/questions/${quizID}`;
   $.get(url);
 });
-
-$(".deleteQuiz").on("click", (event) => {
-  event.preventDefault();
-  const quizID = event.target.getAttribute("data-id");
-  const url = `/api/${quizID}`;
-  $.delete(url);
-  location.reload();
-});

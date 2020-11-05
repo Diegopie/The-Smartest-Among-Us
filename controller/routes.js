@@ -66,14 +66,14 @@ router.get("/account=:username", (req, res) => {
     include: [db.Quiz],
   }).then((result) => {
     result = result.dataValues;
-    console.log(result);
+    // console.log(result);
     const hbsObj = {
       username: req.params.username,
       quizzes: [],
     };
     result.Quizzes.forEach((quiz) => {
       quiz = quiz.dataValues;
-      console.log(quiz);
+      // console.log(quiz);
       hbsObj.quizzes.push(quiz);
     });
     res.render("user", hbsObj);
@@ -250,17 +250,13 @@ router.get("/api/user_data", (req, res) => {
   }
 });
 
-router.delete("/api/:quizID", (req, res) => {
-  db.Question.destroy({
+router.delete("/api/quizID/:quizID", (req, res) => {
+  db.Quiz.destroy({
     where: {
       quizID: req.params.quizID,
     },
-  }).then(() => {
-    db.Quiz.destroy({
-      where: {
-        quizID: req.params.quizID,
-      },
-    });
+  }).then((result) => {
+    console.log(result);
   });
 });
 
