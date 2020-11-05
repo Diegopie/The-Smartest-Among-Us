@@ -271,20 +271,14 @@ $(".dif").click((event) => {
 $("#sub").click((event) => {
   event.preventDefault();
   if (!catSelect || !difSelect) {
-    window.alert("Choose Something, fool");
+    $("#valText")[0].textContent = "Please Select a Category and Difficulty";
+    $("#validateModal").modal();
     return;
   }
   $("#settings").addClass("hide");
   $("#score-cont").removeClass("hide");
   testSelect();
 });
-
-// function selectCheck() {
-//   if (!catSelect || !difSelect) {
-//     window.alert("Choose Something, fool");
-//     return;
-//   }
-// }
 
 // * Code I wrote but don't want to delete 😅
 

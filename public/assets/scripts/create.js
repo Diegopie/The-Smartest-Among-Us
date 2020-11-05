@@ -27,8 +27,16 @@ $(() => {
   };
   // ** Store API Res
   let quizRes;
+  // ** Store User ID
+  let userID;
 
   // * Functions
+  // ** Get Value of Logged in User
+  checkLocal();
+  function checkLocal() {
+    userID = localStorage.getItem("currentUserId");
+  }
+
   // ** Create Question Containers Based Off User Selection
   function makeQuesCont(value) {
     // Loop For As Many Times The User Wants To Create A Question
@@ -217,20 +225,23 @@ $(() => {
       questionNum++;
     }
     if (valCheck) {
-      window.alert("Get rekt");
+      $("#valText")[0].textContent = "You missed some fields!";
+      $("#validateModal").modal();
       return;
     }
     // *** Create Object for Our Server API
     const apiObj = {
       quizName: quizName.value.trim(),
       randomize: randomize,
-      accountID: 2,
+      accountID: userID,
       questions: questions,
     };
     // ONCE WE ARE SERVER CONNECTED, WE CAN PASS THIS OBJECT TO AN API REQ
     $.post("/api/quiz", apiObj).then(() => {
-      console.log("-- Obj for API --");
-      console.log(apiObj);
+      // console.log(apiObj);
+      $("#valText")[0].textContent = "Your Quiz Is Saved!";
+      $(".link").removeClass("hide");
+      $("#validateModal").modal();
     });
   }
 
@@ -298,11 +309,11 @@ $(() => {
   $("#sub").click((event) => {
     event.preventDefault();
     if (!catSelect || !difSelect) {
-      window.alert("Choose Something, fool");
+      $("#valText")[0].textContent = "Please Select a Category and Difficulty";
+      $("#validateModal").modal();
       return;
     }
     $("#settings").addClass("hide");
-    // testAPI();
     testSelect();
   });
 
@@ -316,5 +327,10 @@ $(() => {
   $("#new-btn").click((event) => {
     event.preventDefault();
     makeQuesCont(1);
+  });
+  // ** Send to Create Page
+  $(".link").on((event) => {
+    event.preventDefault();
+    location.href = "/account";
   });
 });
