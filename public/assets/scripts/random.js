@@ -235,8 +235,13 @@ function saveQuiz() {
   // *** Click Listeners for New Button
   // ?? Save Quiz Will Either Require a Login or Creating Account, data can be saved to local storage or sent to the db
   $(".sv-yes").click((event) => {
-    event.preventDefault();
-    localStorage.setItem("saved-quiz", JSON.stringify(trivApi));
+    if (localStorage.getItem("currentUserId")) {
+      event.preventDefault();
+      localStorage.setItem("saved-quiz", JSON.stringify(trivApi));
+      window.location.replace("/create");
+    } else {
+      $("#signUpModal").modal("show");
+    }
   });
   // Quiz Is Stored In Local Storage to Play Again
   $(".sv-again").click((event) => {
