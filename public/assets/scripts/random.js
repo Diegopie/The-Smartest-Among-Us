@@ -1,4 +1,5 @@
 // * Global Variables
+// score-cont
 let score = 0;
 let curQuest = 0;
 let catSelect = false;
@@ -69,6 +70,15 @@ function testSelect() {
     parseRes();
   });
 }
+
+// ** parse text to make nonsense reaadable
+function decode(text) {
+  const el = document.createElement("div");
+  el.innerHTML = text;
+  text = el.innerText;
+  return text;
+}
+
 // ** Parse API Res To Work Better With Updating the DOM and Store in parsedQuiz
 function parseRes() {
   // *** Loop Through All Questions in QuizRes
@@ -78,10 +88,10 @@ function parseRes() {
     const curA = [];
     let correctA;
     // *** Sort Questions into a Single Array of curA
-    curA.push(curQ.correct_answer);
+    curA.push(decode(curQ.correct_answer));
     // Loop through incorrect_answers res to add each index to curA;
     for (let j = 0; j < curQ.incorrect_answers.length; j++) {
-      curA.push(curQ.incorrect_answers[j]);
+      curA.push(decode(curQ.incorrect_answers[j]));
     }
     // *** Randomize the all questions array
     shuffleArray(curA);
@@ -95,7 +105,7 @@ function parseRes() {
 
     // *** Create Parsed Object and Push to parsedQuiz
     const curObj = {
-      question: curQ.question,
+      question: decode(curQ.question),
       answers: curA,
       correct: correctA,
     };
@@ -202,7 +212,7 @@ function makeButt(value, answ) {
 // ** Prompt User If They WAnt to Play Again or Save the Quiz
 function saveQuiz() {
   // Update Final Score
-  $("#score-cont")[0].children[0].textContent = "Final Score: " + score;
+  $("#score-cont").children[0].textContent = "Final Score: " + score;
   // *** Create Container for User Options
   const saveCont = $("<section>").addClass("row cont sv-cont");
   // *** Containers for Text and Append to saveCont
