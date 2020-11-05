@@ -14,6 +14,7 @@ loggedIn();
 $(".deleteQuiz").on("click", (event) => {
   event.preventDefault();
   const quizID = event.target.getAttribute("data-id");
+  
   // console.log(quizID);
   const url = `/api/quizID/${quizID}`;
   // console.log(url);
@@ -23,7 +24,7 @@ $(".deleteQuiz").on("click", (event) => {
     data: {
       accountName: localStorage.getItem("accountName"),
     },
-    // }).done(() => {
-    //   window.location.reload();
+  }).done(() => {
+    $("#buttonOptions").addClass("d-none");
   });
 });
