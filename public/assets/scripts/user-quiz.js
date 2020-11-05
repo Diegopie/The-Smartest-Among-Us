@@ -2,6 +2,7 @@
 let score = 0;
 let curQuest = 0;
 let quizID;
+let quizName;
 let highScores;
 
 // ** Store API Res
@@ -13,9 +14,9 @@ const parsedQuiz = [];
 // * Functions
 // ** Check Local Storage If User Wanted to Play a Quiz Again
 
-function getScores() {
+function getScores(check) {
   $.get("/api/hiScores/" + quizID).then((res) => {
-    // console.log(res);
+    console.log(res);
     if (res[0] === undefined) {
       highScores = [
         {
@@ -35,6 +36,10 @@ function getScores() {
         parsedHigh.push(newObj);
       }
       highScores = parsedHigh;
+    }
+    if (check) {
+      $(".high").remove();
+      makeHigh();
     }
   });
 }
@@ -195,7 +200,7 @@ function makeHigh() {
   article.append(title, div);
   highCont.append(article);
   const ul = $("<ul>").addClass("");
-  console.log(highScores);
+  // console.log(highScores);
   for (let i = 0; i < highScores.length; i++) {
     const li = $("<li>").text(
       highScores[i].username + ": " + highScores[i].score
@@ -228,6 +233,7 @@ function makeHigh() {
   // saveQuiz();
   $(".ply-again").click((event) => {
     event.preventDefault();
+    // getQuiz(quizID, quizName);  // This works but score containers need to be reset and high score needs to be remove()
     location.reload();
   });
 
@@ -247,6 +253,7 @@ function makeHigh() {
     };
     console.log(scoreAPI);
     $.post("/api/newScore/" + quizID, scoreAPI).then(() => {
+      getScores(true);
       $("#valText")[0].textContent = "Your Score Has Been Saved!";
       $("#validateModal").modal();
     });
@@ -265,7 +272,7 @@ function shuffleArray(array) {
 $(".quizStart").on("click", (event) => {
   event.preventDefault();
   quizID = event.target.getAttribute("data-id");
-  const quizName = event.target.getAttribute("data-name");
+  quizName = event.target.getAttribute("data-name");
   // console.log(quizID);
   getScores();
   getQuiz(quizID, quizName);
@@ -273,7 +280,6 @@ $(".quizStart").on("click", (event) => {
 
 $("#play").click((event) => {
   event.preventDefault();
-  console.log("fuck you");
   $("#quiz").removeClass("hide");
   $("#play-cont").remove();
 });
