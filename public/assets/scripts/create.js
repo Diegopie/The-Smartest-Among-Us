@@ -29,13 +29,22 @@ $(() => {
   let quizRes;
   // ** Store User ID
   let userID;
-  let acountPage;
+  let accountPage;
 
   // * Functions
-  // ** Get Value of Logged in User
+  // ** Get Value of Logged in User; Stop Page if not logged in; Get Quiz From Local if there, else load normally
   pageChecks();
   function pageChecks() {
     const username = localStorage.getItem("accountName");
+    console.log(username);
+    if (username === null) {
+      $("#name").addClass("hide");
+      $("#valText")[0].textContent =
+        "You Must Login or Create an account to continue";
+      $("#validateModal").modal();
+      return;
+    }
+
     userID = localStorage.getItem("currentUserId");
     // $("#acntLink").attr("href", "/account=" + username);
     accountPage = "/account=" + username;
@@ -364,5 +373,4 @@ $(() => {
     event.preventDefault();
     location.href = accountPage;
   });
-
 });
