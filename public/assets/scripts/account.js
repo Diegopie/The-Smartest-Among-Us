@@ -14,6 +14,9 @@ loggedIn();
 $(".deleteQuiz").on("click", (event) => {
   event.preventDefault();
   const quizID = event.target.getAttribute("data-id");
+  const element = event.target.parentElement.parentElement;
+  // I wanted to run the remove after a successful api call but it doesn't work within .done()
+  $(element).remove();
   // console.log(quizID);
   const url = `/api/quizID/${quizID}`;
   // console.log(url);
