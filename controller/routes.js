@@ -226,7 +226,7 @@ router.post("/api/signup", (req, res) => {
     .catch((err) => {
       res.status(401).json(err);
     });
-  return;
+  return res;
 });
 
 // route for logging user out

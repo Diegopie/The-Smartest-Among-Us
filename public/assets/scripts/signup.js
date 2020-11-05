@@ -29,15 +29,13 @@ $(document).ready(() => {
       email: email,
       password: password,
     })
-      // .then(() => {
-      //   console.log(email);
-      //   localStorage.setItem("email", email);
-      //   localStorage.getItem("email");
-      // })
-      .then(() => {
-        // console.log(window.location);
-        // console.log(window.location.pathname);
-        window.location.replace("/account");
+      .then((res) => {
+        console.log(res.id);
+        localStorage.setItem("currentUserId", res.id);
+        localStorage.setItem("accountName", email);
+        const accountURL = "/account=" + email;
+        console.log(localStorage.getItem("currentUserId"));
+        window.location.replace(accountURL);
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
