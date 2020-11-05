@@ -1,6 +1,11 @@
 {{!-- <article class="col-12 col-md cont"> --}}
-  <div class="card-body col-12 col-md-4 col-lg-3 d-flex">
-    <button class="button flex-fill quizStart" data-name="{{ quizName }}" data-id={{ quizID }}>{{ quizName }}</button>
-    <button class="button flex-fill deleteQuiz" data-name="{{ quizName }}" data-id={{ quizID }}>Delete</button>
+<div class="card-body col-12 col-md-4 col-lg-3" id="buttonOptions">
+  <div class="row d-flex">
+    <button class="button flex-fill quizStart" data-name="{{ quizName }}"
+      data-id={{ quizID }}>{{ quizName }}</button>
   </div>
+  <div class="row d-flex">
+    <button class="button q-rmv flex-fill deleteQuiz d-none" data-name="{{ quizName }}" data-id={{ quizID }}>Delete</button>
+  </div>
+</div>
 {{!-- </article> --}}

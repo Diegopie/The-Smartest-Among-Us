@@ -43,3 +43,22 @@ function login() {
     start();
   }
 }
+
+$(".quizStart").on("click", (event) => {
+  event.preventDefault();
+  const quizID = event.target.getAttribute("data-id");
+  const quizName = event.target.getAttribute("data-name");
+  console.log(quizID);
+  $("#btns").empty();
+  $("#title").text(quizName);
+  const url = `/api/questions/${quizID}`;
+  $.get(url);
+});
+
+$(".deleteQuiz").on("click", (event) => {
+  event.preventDefault();
+  const quizID = event.target.getAttribute("data-id");
+  const url = `/api/${quizID}`;
+  $.delete(url);
+  location.reload();
+});

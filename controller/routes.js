@@ -250,6 +250,20 @@ router.get("/api/user_data", (req, res) => {
   }
 });
 
+router.delete("/api/:quizID", (req, res) => {
+  db.Question.destroy({
+    where: {
+      quizID: req.params.quizID,
+    },
+  }).then(() => {
+    db.Quiz.destroy({
+      where: {
+        quizID: req.params.quizID,
+      },
+    });
+  });
+});
+
 module.exports = router;
 
 // // return all quizzes owned by this user
