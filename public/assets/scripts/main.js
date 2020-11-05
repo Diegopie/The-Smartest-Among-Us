@@ -42,11 +42,17 @@ function login() {
 }
 
 $("#createButt").click((event) => {
-  console.log(localStorage.getItem("currentUserId"));
+  // console.log(localStorage.getItem("currentUserId"));
   if (localStorage.getItem("currentUserId")) {
     event.preventDefault();
     window.location.replace("/create");
   } else {
     $("#signUpModal").modal("show");
   }
+});
+
+$("#alreadyHaveAccount").click((event) => {
+  event.preventDefault();
+  $("#signUpModal").modal("hide");
+  $("#loginModal").modal("show");
 });
