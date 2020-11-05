@@ -51,6 +51,10 @@ header {
   color: #1BEF0C !important;
 }
 
+#alreadyHaveAccount:hover {
+  color: #1BEF0C !important;
+}
+
 .q-rmv {
   color: red;
   padding: 2px 12px;
