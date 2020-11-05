@@ -23,7 +23,7 @@ $(".deleteQuiz").on("click", (event) => {
     data: {
       accountName: localStorage.getItem("accountName"),
     },
-  }).then(() => {
-    location.reload();
+    // }).done(() => {
+    //   window.location.reload();
   });
 });

@@ -33,12 +33,10 @@ module.exports = function (sequelize, DataTypes) {
     });
     Quiz.hasMany(models.Question, {
       foreignKey: "quizID",
-      sourceKey: "quizID",
       onDelete: "cascade",
     });
     Quiz.hasMany(models.Score, {
       foreignKey: "quizID",
-      sourceKey: "quizID",
       onDelete: "cascade",
     });
   };
