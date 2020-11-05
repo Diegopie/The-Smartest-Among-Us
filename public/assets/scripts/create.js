@@ -32,9 +32,11 @@ $(() => {
 
   // * Functions
   // ** Get Value of Logged in User
-  checkLocal();
-  function checkLocal() {
+  pageChecks();
+  function pageChecks() {
+    const username = localStorage.getItem("accountName");
     userID = localStorage.getItem("currentUserId");
+    $("#acntLink").attr("href", "/account=" + username);
   }
 
   // ** Create Question Containers Based Off User Selection
@@ -343,8 +345,8 @@ $(() => {
     makeQuesCont(1);
   });
   // ** Send to Create Page
-  $(".link").on((event) => {
-    event.preventDefault();
-    location.href = "/account";
-  });
+  // $(".link").on((event) => {
+  //   event.preventDefault();
+  //   location.href = "/account";
+  // });
 });
