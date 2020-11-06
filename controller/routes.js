@@ -247,6 +247,16 @@ router.get("/api/user_data", (req, res) => {
   }
 });
 
+router.delete("/api/quizID/:quizID", (req) => {
+  db.Quiz.destroy({
+    where: {
+      quizID: req.params.quizID,
+    },
+    // }).then(() => {
+    //   res.redirect(`/account=${req.body.accountName}`);
+  });
+});
+
 module.exports = router;
 
 // // return all quizzes owned by this user

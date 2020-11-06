@@ -42,6 +42,7 @@ module.exports = function (sequelize, DataTypes) {
     Question.belongsTo(models.Quiz, {
       foreignKey: "quizID",
       targetKey: "quizID",
+      onDelete: "cascade",
     });
   };
   return Question;
