@@ -250,7 +250,7 @@ router.get("/api/user_data", (req, res) => {
   }
 });
 
-router.delete("/api/quizID/:quizID", (req, res) => {
+router.delete("/api/quizID/:quizID", (req) => {
   db.Quiz.destroy({
     where: {
       quizID: req.params.quizID,
