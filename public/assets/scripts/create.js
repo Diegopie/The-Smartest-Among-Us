@@ -83,7 +83,8 @@ $(() => {
         .text("Question " + qNum)
         .addClass("col-12");
       const queInpCont = $("<div>").addClass("row");
-      const quesInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
+      const quesInpt = $("<textarea>").attr({ type: "text", name: "q" + qNum, rows: "4", cols: "50" });
+      // const quesInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
       queInpCont.append(quesInpt);
       quesCont.append(quesTitle, queInpCont);
       // Correct Question
