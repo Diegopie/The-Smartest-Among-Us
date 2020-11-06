@@ -7,12 +7,12 @@
   <section>
     <form class="container">
       <!-- For Quiz Name and Choose Auto -->
-      <fieldset class="row cont">
-        <article class="col-12">
+      <fieldset  class="row cont">
+        <article id="name" class="col-12">
           <h3 class="">Name Your Quiz</h3>
           <input class="col-12" type="text" id="qname" name="qname">
         </article>
-        <article class="col-12 spacer" id="amnt">
+        <article id="amnt" class="col-12 spacer hide" >
           <h3 class="spacer">How Many Questions Would You Like to Start With?</h3>
           <p>You can add or remove questions later</p>
           <div class="row">
@@ -29,7 +29,7 @@
               <option>09</option>
               <option>10</option>
             </select>
-            <button class="button col-6" id="amnt-sbt">Yes</button>
+            <button class="button col-6" id="amnt-sbt">Submit</button>
           </div>
         </article>
         <article class="spacer hide" id="rand">
@@ -51,7 +51,7 @@
         <article class="spacer hide" id="settings">
           <article class="row">
             <h3 class="col-12 spacer">Choose A Category</h3>
-            <button class="col-4 cat button">Mythology</button>
+            <button class="col-4 cat button">Animals</button>
             <button class="col-4 cat button">Film</button>
             <button class="col-4 cat button">Games</button>
             <button class="col-4 cat button">Sports</button>
