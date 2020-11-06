@@ -41,7 +41,7 @@ function login() {
   }
 }
 
-$("#createButt").click((event) => {
+$("#createButton").click((event) => {
   if (localStorage.getItem("currentUserId")) {
     event.preventDefault();
     window.location.replace("/create");
