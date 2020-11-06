@@ -1,3 +1,4 @@
+const createButt = $("#createButt");
 const accountEl = $("#accountLink");
 const loginButt = $("#loginButt");
 const signButt = $("#signButt");
@@ -13,6 +14,7 @@ logoutButt.on("click", () => {
   localStorage.clear();
   // localStorage.setItem("accountName", null);
   // localStorage.setItem("currentUserId", null);
+  createButt.addClass("d-none");
   accountEl.addClass("d-none");
   logoutButt.addClass("d-none");
   loginButt.removeClass("d-none");
@@ -28,6 +30,7 @@ function start() {
     const email = localStorage.getItem("accountName");
     const accountURL = "/account=" + email;
     accountEl.attr("href", accountURL);
+    createButt.removeClass("d-none");
     accountEl.removeClass("d-none");
     logoutButt.removeClass("d-none");
   }
@@ -40,6 +43,16 @@ function login() {
     start();
   }
 }
+
+// $(".quizStart").on("click", (event) => {
+//   event.preventDefault();
+//   const quizID = event.target.getAttribute("data-id");
+//   const quizName = event.target.getAttribute("data-name");
+//   console.log(quizID);
+//   $("#btns").empty();
+//   $("#title").text(quizName);
+//   const url = `/api/questions/${quizID}`;
+//   $.get(url);
 
 $("#createButt").click((event) => {
   if (localStorage.getItem("currentUserId")) {
