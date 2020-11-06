@@ -66,14 +66,12 @@ router.get("/account=:username", (req, res) => {
     include: [db.Quiz],
   }).then((result) => {
     result = result.dataValues;
-    // console.log(result);
     const hbsObj = {
       username: req.params.username,
       quizzes: [],
     };
     result.Quizzes.forEach((quiz) => {
       quiz = quiz.dataValues;
-      // console.log(quiz);
       hbsObj.quizzes.push(quiz);
     });
     res.render("user", hbsObj);
@@ -119,7 +117,6 @@ router.get("/api/questions/:quizID", (req, res) => {
     },
     include: [db.Quiz],
   }).then((questions) => {
-    // console.log(questions);
     const questionArr = [];
     questions.forEach((question) => {
       const qObj = {};

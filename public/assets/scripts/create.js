@@ -36,7 +36,6 @@ $(() => {
   pageChecks();
   function pageChecks() {
     const username = localStorage.getItem("accountName");
-    console.log(username);
     if (username === null) {
       $("#name").addClass("hide");
       $("#valText")[0].textContent =
@@ -57,7 +56,6 @@ $(() => {
     }
     quizRes = localQuiz;
     localStorage.removeItem("saved-quiz");
-    console.log(quizRes.length);
     // $("#rand").removeClass("hide");
     makeQuesCont(quizRes.length);
     renderQuiz();
@@ -83,7 +81,13 @@ $(() => {
         .text("Question " + qNum)
         .addClass("col-12");
       const queInpCont = $("<div>").addClass("row");
-      const quesInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
+      const quesInpt = $("<textarea>").attr({
+        type: "text",
+        name: "q" + qNum,
+        rows: "4",
+        cols: "50",
+      });
+      // const quesInpt = $("<input>").attr({ type: "text", name: "q" + qNum });
       queInpCont.append(quesInpt);
       quesCont.append(quesTitle, queInpCont);
       // Correct Question
@@ -290,7 +294,7 @@ $(() => {
   $("#amnt-sbt").click((event) => {
     event.preventDefault();
     strQuestions = parseInt($("#amnt-val").val());
-    console.log("How Many Q: " + strQuestions);
+    // console.log("How Many Q: " + strQuestions);
     $("#amnt").addClass("hide");
     $("#rand").removeClass("hide");
     makeQuesCont(strQuestions);
@@ -333,7 +337,7 @@ $(() => {
     userCat = event.target.innerText;
     userSelect(event.target);
     catSelect = true;
-    console.log("User Category: ", userCat);
+    // console.log("User Category: ", userCat);
   });
 
   // ** Store User Difficulty
@@ -342,7 +346,7 @@ $(() => {
     userDif = event.target.innerText;
     userSelect(event.target);
     difSelect = true;
-    console.log("User Difficulty: ", userDif);
+    // console.log("User Difficulty: ", userDif);
   });
 
   //** Make Trivia API Req

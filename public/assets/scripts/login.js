@@ -11,7 +11,6 @@ $(document).ready(() => {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim(),
     };
-    console.log(userData);
 
     if (!userData.email || !userData.password) {
       return;
@@ -30,7 +29,6 @@ $(document).ready(() => {
       password: password,
     })
       .then((res) => {
-        console.log(res.id);
         localStorage.setItem("currentUserId", res.id);
         localStorage.setItem("accountName", email);
         const accountURL = "/account=" + email;
