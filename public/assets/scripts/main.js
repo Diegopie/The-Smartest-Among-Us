@@ -44,17 +44,7 @@ function login() {
   }
 }
 
-// $(".quizStart").on("click", (event) => {
-//   event.preventDefault();
-//   const quizID = event.target.getAttribute("data-id");
-//   const quizName = event.target.getAttribute("data-name");
-//   console.log(quizID);
-//   $("#btns").empty();
-//   $("#title").text(quizName);
-//   const url = `/api/questions/${quizID}`;
-//   $.get(url);
-
-$("#createButt").click((event) => {
+$("#createButton").click((event) => {
   if (localStorage.getItem("currentUserId")) {
     event.preventDefault();
     window.location.replace("/create");
